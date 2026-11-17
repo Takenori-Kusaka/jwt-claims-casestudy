@@ -2,6 +2,19 @@
 
 「JWT クレーム設計ガイド」の対になる実測です。どの組織でも外せない**共通の基準**が何を防ぎ、題材ごとの**重点**が何を足し、**見送り**が何を残すかを、攻撃と正規の要求、要素を 1 つずつ外す**除去実験**、大きさ、遅延、反映までの時間、変更で壊れる受け手の数で測ります。LLM は使わず、同じ手順で何度でも同じ判定になります（時刻は仮想の時計で進めます。試算は乱数の種を固定）。
 
+- ガイド（前提編、149 枚）: https://takenori-kusaka.github.io/jwt-claims-guide/ （[リポジトリ](https://github.com/Takenori-Kusaka/jwt-claims-guide)）
+- 付録：JWT クレーム一覧（xlsx、805 行）: [catalog/jwt-claims-catalog.xlsx](catalog/jwt-claims-catalog.xlsx)
+
+## 付録：JWT クレーム一覧（xlsx）
+
+IANA の JWT クレーム登録簿の全件、標準と草案、5 つの IdP（Entra ID・Keycloak・Auth0・Okta・Cognito）、プラットフォーム（GitHub Actions・GitLab・Kubernetes・AWS・Hasura・Supabase・Firebase など）と属性の語彙（SCIM・eduPerson・inetOrgPerson・NIST IR 8112）、JOSE ヘッダー、このケーススタディで定義した組織の独自クレームを、**定義した出典ごとに 1 行**で集めた一覧です（805 行、約 200 の同義グループ）。
+
+- 列：分類、クレーム名、意味（表すこと／表さないこと）、値の型・値の数、載るトークン、出典の種別・出典（節）・URL、**書籍の該当箇所**、状態・変更管理者、**IdP での扱い**（5 社）、値を書ける主体、可変性、鮮度、認可に使ってよいか、個人情報の区分、ログ方針、上限、比較規則、一意の範囲、値の語彙、同義グループ、ガイドの該当 Part。
+- ケース A（マルチテナント SaaS）・B（社内業務システム）・C（AI エージェントの委任）ごとに、**判定**（必須・採用・条件付き採用・不採用・代替あり／不要／禁止・対象外）、条件、**代替クレーム**、用途／失うこと、見直し条件、検証 ID。
+- 原典（RFC は節まで）、書籍の出版社ページ、代替クレームの行、実験結果、ガイドの該当スライドにリンクしています。
+- 作り方：[catalog/SCHEMA.md](catalog/SCHEMA.md)（行の形式）、[catalog/DECISION_POLICY.md](catalog/DECISION_POLICY.md)（判定の方針）、[catalog/scripts/](catalog/scripts/)（生成・統合・検証）。列の設計と判定の中身は、作成とは別の担当がレビューし、指摘を反映しました（[catalog/reviews/](catalog/reviews/)）。
+- 判定はこのケーススタディの前提での結論で、2026-11-17 時点のものです。どの組織にもそのまま当てはまる答えではありません。
+
 ## 構成と要素
 
 構成は「要素の集合」です。N は要素なし（よくある誤り）、B は共通の基準の 9 要素、BE は B に題材の重点を足したものです。除去実験では、B から基準の要素を 1 つ、BE から重点の要素を 1 つずつ外し、どの攻撃が再び通るか、どの正規の要求が拒否されるかを記録します。
@@ -53,3 +66,7 @@ python -m venv .venv && .venv/Scripts/python -m pip install "pyjwt[crypto]==2.10
 - 鍵（`keys/`、リポジトリには含めない）、パスワード、クライアントシークレットはすべて試験用です。
 - 要素を外した構成は、過去にライブラリやアプリが実際にしていた誤りを手で再現したものです。現在の PyJWT 2.10 は数値の sub などいくつかを自分で拒否します（G14）。
 - 模擬の IdP は、2026 年 11 月時点の公式文書にある形を再現したもので、実際のサービスの挙動のすべてではありません。
+
+## ライセンス
+
+文章・データ・一覧表は CC BY 4.0、コードは MIT です（[LICENSE-CONTENT.md](LICENSE-CONTENT.md)、[LICENSE](LICENSE)）。本資料は生成AI（Claude）を使って作成し、筆者が確認して公開しています。
