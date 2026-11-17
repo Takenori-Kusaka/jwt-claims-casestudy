@@ -34,7 +34,7 @@ IANA の JWT クレーム登録簿の全件、標準と草案、5 つの IdP（E
 | 重点 B | normalize_gw／header_strip／freshness／overage_resolve | 入口での正規化（内部トークン）、x-user-* の変種と重複の除去、重要な操作の鮮度確認、groups 超過の解決 |
 | 重点 C | act_chain／aud_exchange／approval_bind／short_task／depth_rule | 今の行為者と呼び出し元の照合、単一の宛先への交換、承認（金額と相手先）の束縛、タスク単位 300 秒と取り消しの再確認、深さ 3 の規則 |
 
-## 題材（全 72 ケース）
+## 題材（全 67 ケース：攻撃と正規の要求）
 
 - **汎用の攻撃（Part 1、15 件）**：alg none、RS256→HS256、kid 注入、jku、jwk、exp なし、期限切れ、宛先違い、別の発行者、別の発行者の鍵で iss を偽る（Storm-0558 の型）、typ、必須クレームの欠落、型の揺れ、数値の sub。
 - **A マルチテナント SaaS（14 件、Keycloak のレルム t1・t2 と Postgres の RLS）**：テナントの出どころ、BOLA、接続プールの文脈の残り、他テナントの管理者のマッパー、連携先に渡した鍵、軽量アクセストークンで落ちるテナント、配列になったテナント、ID トークン、期限切れ。
