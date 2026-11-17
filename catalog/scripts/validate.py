@@ -42,7 +42,7 @@ for i in ids:
             problems.append((i, c, 'condition empty'))
         if j != '対象外' and not x.get('use_or_loss'):
             problems.append((i, c, 'use_or_loss empty'))
-        if (j.startswith('不採用') or j == '条件付き採用') and not x.get('revisit'):
+        if not x.get('revisit'):
             problems.append((i, c, 'revisit empty'))
         if j == '不採用・代替あり':
             if not x.get('alt'):

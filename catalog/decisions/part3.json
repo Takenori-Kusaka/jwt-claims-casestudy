@@ -8,17 +8,19 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。テナントの連携先に渡したトークンが漏れても、鍵を持たない第三者は使えない。入れ物の cnf の中で使うメンバーは jkt だけにする。",
    "revisit": "テナントの利用者のブラウザ向けトークンにも盗用の兆候が出たら対象を広げる。連携先が mTLS を求めたら cnf.x5t#S256 を加える。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "送信者制約を見送るので、漏れたトークンを別の端末からそのまま再送されると防げない（B23 で通ることを確認）。社内の閉じた経路と短い寿命で受け入れる。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "条件付き採用",
@@ -26,7 +28,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。エージェントの実行基盤やツールの経路からトークンが漏れても、鍵がなければ 300 秒の寿命の間にも使えない。宛先に束縛した交換に重ねる防御になる。",
    "revisit": "エージェントの実行基盤が鍵を安全に保管できない（鍵ごと盗まれうる）と分かったとき、または標準のエージェント ID の仕組みが鍵の束縛を提供したとき。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -34,27 +37,40 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT（選択的開示の資格情報）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431",
+    "CLM-0439"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT（選択的開示の資格情報）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT（選択的開示の資格情報）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -66,17 +82,19 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。連携先の要求に付いた DPoP 証明の公開鍵のサムプリントと照合し、鍵の持ち主の要求だけを受ける。証明は 498 バイト、検証は p50 約 97 µs（実測）で負担は小さい。",
    "revisit": "テナントの利用者のブラウザ向けトークンにも盗用の兆候が出たら対象を広げる。連携先が mTLS を求めたら cnf.x5t#S256 を加える。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "DPoP を使わないので、トークンを持つ者は誰でも使える（B23）。実測の費用（証明 498 バイト・検証 p50 約 97 µs）は小さく、見送りの理由はクライアントの鍵管理の手間。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "条件付き採用",
@@ -84,7 +102,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。交換で得たタスク単位のトークンを、エージェントの鍵の持ち主だけが使えるようにする。ツールがトークンを横取りしても、鍵がなければ使えない。",
    "revisit": "エージェントの実行基盤が鍵を安全に保管できない（鍵ごと盗まれうる）と分かったとき、または標準のエージェント ID の仕組みが鍵の束縛を提供したとき。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -92,32 +111,42 @@
   "guide_part": "Part 1・9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "受け手が URL から鍵を取りに行く形は、攻撃者が用意した鍵を読まされる余地を作る（ヘッダーの jku と同じ型）。連携先の束縛はサムプリントの cnf.jkt で行う。",
    "revisit": "外部の仕様が jku 形式の cnf しか出せず、取得先を許可リストに固定できる場合に限り再検討する。",
    "checks": [
     "G4"
+   ],
+   "related": [
+    "CLM-0429",
+    "CLM-0431",
+    "CLM-0439"
    ]
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "送信者制約自体を見送っているうえ、URL から鍵を取る形は攻撃者の鍵を読まされる余地を作る（ヘッダーの jku と同じ型）。",
    "revisit": "送信者制約を導入するときも jku 形式は使わない。取得先を許可リストに固定できる外部の仕様に限り再検討する。",
    "checks": [
     "G4"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "ツールや上流が URL から鍵を取りに行く形は、エージェントの経路に攻撃者の鍵を差し込む余地を作る。束縛はサムプリントの cnf.jkt で行う。",
    "revisit": "外部の仕様が jku 形式の cnf しか出せず、取得先を許可リストに固定できる場合に限り再検討する。",
    "checks": [
     "G4"
+   ],
+   "related": [
+    "CLM-0429",
+    "CLM-0431"
    ]
   }
  },
@@ -126,31 +155,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "対称の PoP 鍵を JWE で運ぶ方式は使えない。連携先の束縛は公開鍵の DPoP（cnf.jkt）で行うので、鍵の配布や復号が要らない。",
    "revisit": "公開鍵の処理が重すぎる端末（組み込み機器など）を連携先として受けるようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "送信者制約を見送るので使い道がない。対称鍵を配る運用も持たない。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "対称の PoP 鍵を JWE で運ぶ方式は使えない。エージェントの束縛は公開鍵の DPoP（cnf.jkt）で行い、ツールごとに対称鍵を配らずに済む。",
    "revisit": "公開鍵の処理ができない実行環境でエージェントを動かすようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -158,31 +191,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "鍵そのものをトークンに載せないので、トークンが大きくならない。束縛は鍵のサムプリント cnf.jkt で同じことができる。",
    "revisit": "DPoP 以外の PoP（独自の署名つき要求など）を導入し、受け手が鍵をあらかじめ知らない場合。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "送信者制約を見送るので使い道がない。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "鍵そのものをトークンに載せず、交換を重ねてもトークンが大きくならない。束縛はサムプリントの cnf.jkt で表せる。",
    "revisit": "DPoP 以外の PoP をエージェントの経路に導入し、受け手が鍵をあらかじめ知らない場合。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -190,31 +227,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "鍵 ID で受け手の登録簿を引く方式は使えない。DPoP では証明に公開鍵が付くので、cnf.jkt と照合すれば足り、受け手が連携先の鍵の登録簿を持たずに済む。",
    "revisit": "連携先の鍵を事前登録して管理する運用（登録済み鍵や mTLS）に移ったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "送信者制約を見送るので使い道がない。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "鍵 ID でツール側の登録簿を引く方式は使えない。DPoP の証明に付く公開鍵を cnf.jkt と照合すれば、ツールがエージェントの鍵を事前に知る必要がない。",
    "revisit": "エージェントの鍵を中央の登録簿で管理し、ツールがそこを引く運用に移ったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -222,33 +263,36 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "証明書に束縛するアクセストークン（mTLS）は使えない。連携先の束縛は DPoP（cnf.jkt）で行い、テナントごとのクライアント証明書の発行・更新を背負わない。",
    "revisit": "連携先が金融系のプロファイル（FAPI など）で mTLS を求めたとき、またはクライアント証明書を既に配っている取引先を受けるとき。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "mTLS で証明書に束縛しないので、漏れたトークンの再送を防げない（B23）。社内のサービスにクライアント証明書を配る運用も持たない。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "エージェントとツールの間を証明書（mTLS）で束縛しない。束縛は DPoP（cnf.jkt）で行う。",
    "revisit": "社内のサービスメッシュで全ワークロードに証明書が配られ、エージェントの実行基盤も対象になったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -256,27 +300,40 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT VC（草案）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431",
+    "CLM-0439"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT VC（草案）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT VC（草案）の保有者の鍵で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -284,27 +341,40 @@
   "guide_part": "Part 6・10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "信頼ドメインをまたぐ連鎖で鍵の束縛を相手の認可サーバーに引き継げない。A はテナントのレルムから自社の入口への一段だけで、ドメインをまたがない。",
    "revisit": "RFC になり、取引先の認可サーバーと連携してトークンを引き継ぐようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431",
+    "CLM-0439"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "送信者制約を見送っており、ドメインをまたぐ連鎖もないので使い道がない。",
    "revisit": "RFC になり、かつトークンが社外の認可サーバーへ渡るようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントが社外の信頼ドメインの API を呼ぶとき、DPoP の鍵の束縛を相手の認可サーバーに引き継げない。今の C は社内の宛先だけを呼ぶ。",
    "revisit": "RFC になり、エージェントが社外ドメインの API を呼ぶようになったら（その際は cnf.jkt を引き継ぐ）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -316,27 +386,30 @@
    "alt": [],
    "use_or_loss": "Keycloak が DPoP で束縛したトークンを入口で受けるとき、証明の鍵と照合したうえで内部トークンの cnf.jkt（CLM-0431）に写す。サービスは Keycloak の cnf を読まない。",
    "revisit": "連携先の束縛を入口でなく Keycloak の発行に一本化したとき、または DPoP の対象を広げたとき。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Keycloak の DPoP・mTLS の束縛を有効にしないので、このクレームは出ない。漏れたトークンの再送は防げない（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0431"
    ],
    "use_or_loss": "Keycloak の cnf をそのまま読ませない。エージェント用トークンは入口の交換で作り直し、束縛は内部トークンの cnf.jkt で表す。",
    "revisit": "Keycloak の標準トークン交換をエージェント用に直接使うようになったら（実測では act を出さないため今は使わない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -344,29 +417,41 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A の IdP は Keycloak のレルムで、Auth0 を使わないので出ない。",
    "revisit": "Auth0 を使うテナントを受け入れたら（入口で読み、内部トークンの cnf に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431",
+    "CLM-0439"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Auth0 の mTLS 束縛を有効にしないので出ない。Auth0 経由のトークンも盗まれれば再送できる（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "C のエージェント用トークンは Auth0 から直接受けないので出ない。",
    "revisit": "Auth0 の機能でエージェントに直接トークンを出すようになったら（入口で読み、cnf.jkt に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0429",
+    "CLM-0431"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -374,27 +459,33 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Kerberos の委任資格情報をトークンに入れると、トークンが漏れたときに資格情報ごと奪われる。A のテナントは Kerberos で入らない。",
    "revisit": "使わない前提。Kerberos の委任が要るテナントが現れても、入口の背後で制約付き委任など別の仕組みで扱う。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "社内に Kerberos があっても、委任資格情報を内部トークンに入れると、トークンを受けたどのサービスでも利用者に成り代われる。",
    "revisit": "Kerberos 委任が必須の旧システムを入口につなぐときも、トークンでなく制約付き委任など別の仕組みで扱う。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに利用者の Kerberos 資格情報を渡すことになり、委任の範囲を絞れない。",
    "revisit": "使わない前提。エージェントが Kerberos の資源を使う必要が出ても、交換で絞ったトークンと別の仕組みで扱う。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -406,17 +497,19 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が今提示されたアクセストークンのためのものか（ハッシュの一致）を確かめ、別のトークンへの証明の使い回しを防ぐ。",
    "revisit": "cnf.jkt の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "DPoP を見送るので証明を検証せず、ath も読まない。漏れたトークンの再送は防げない（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "条件付き採用",
@@ -424,7 +517,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が今提示されたアクセストークンのためのものか（ハッシュの一致）を確かめ、別のトークンへの証明の使い回しを防ぐ。",
    "revisit": "cnf.jkt の判断と一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -436,17 +530,19 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が付いた要求のメソッドと一致するかを確かめ、GET 用の証明で POST させない。",
    "revisit": "cnf.jkt の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "DPoP を見送るので証明を検証せず、htm も読まない。漏れたトークンの再送は防げない（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "条件付き採用",
@@ -454,7 +550,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が付いたツールへの要求のメソッドと一致するかを確かめ、GET 用の証明で POST させない。",
    "revisit": "cnf.jkt の判断と一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -466,17 +563,19 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が付いた要求の URI と一致するかを確かめ、別のエンドポイントへの証明の使い回しを防ぐ。",
    "revisit": "cnf.jkt の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "DPoP を見送るので証明を検証せず、htu も読まない。漏れたトークンの再送は防げない（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "条件付き採用",
@@ -484,7 +583,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。証明が付いたツールへの要求の URI と一致するかを確かめ、別のエンドポイントへの証明の使い回しを防ぐ。",
    "revisit": "cnf.jkt の判断と一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -492,27 +592,33 @@
   "guide_part": "Part 1",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティの鍵の集合で、ケースは連合の信頼の連鎖を使わない（発行者と鍵は許可リストで固定する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティの鍵の集合で、ケースは連合の信頼の連鎖を使わない（発行者と鍵は許可リストで固定する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティの鍵の集合で、ケースは連合の信頼の連鎖を使わない（発行者と鍵は許可リストで固定する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -520,27 +626,33 @@
   "guide_part": "Part 1",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティステートメントの鍵の配列で、ケースは連合を使わない（鍵は発行者ごとに登録する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティステートメントの鍵の配列で、ケースは連合を使わない（鍵は発行者ごとに登録する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "OpenID Federation のエンティティステートメントの鍵の配列で、ケースは連合を使わない（鍵は発行者ごとに登録する）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "OpenID Federation に参加し、信頼チェーンを検証するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -548,27 +660,33 @@
   "guide_part": "Part 1・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "自己発行の OP（ウォレットなど）の ID トークンを受けられない。利用者のキーは発行者が決める sub と user_id（ORG-02）だけにする。",
    "revisit": "テナントの利用者がウォレットでログインする要件が出たら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "本人が鍵を名乗る形の ID トークンで、社内の IdP の外から来るので使い道がない。社員の識別は IdP と user_id で行う。",
    "revisit": "社員証のウォレットなど自己発行の OP でのログインを社内で採用したら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は交換で作るトークンで表し、自己発行の ID トークンは受けない。",
    "revisit": "エージェントや利用者が自己発行の OP で名乗る仕組みが標準化され、採用するとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -576,27 +694,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の通話（PASSporT）のメディア鍵の指紋で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の通話（PASSporT）のメディア鍵の指紋で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の通話（PASSporT）のメディア鍵の指紋で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -604,27 +728,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "秘密鍵を含みうる PKCS #12 をトークンに写すと、トークンが漏れたときに鍵ごと漏れる。",
    "revisit": "使わない前提。テナントのディレクトリから取り込む属性マッピングの対象からも外しておく。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "秘密鍵を含みうる PKCS #12 を社内ディレクトリから内部トークンに写すと、受けた全サービスとログに鍵が広がる。",
    "revisit": "使わない前提。ディレクトリの属性マッピングで誤って写さないよう、許可リストで外しておく。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに利用者の秘密鍵を渡すことになる。",
    "revisit": "使わない前提。署名が要る処理は、鍵を持つサービスに承認つきで依頼する形にする。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -632,27 +762,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "利用者の証明書をトークンで配れない。証明書が要る処理は API で取り、鍵の束縛は cnf で表す。トークンが数 KB 大きくなるのを避ける。",
    "revisit": "クライアント証明書でのログインを受けるようになったら（その場合も指紋を cnf.x5t#S256 で扱う）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "利用者の証明書は社内ディレクトリから都度取り、トークンには載せない。暗号化メールなどの処理はディレクトリを引く。",
    "revisit": "トークンを受けたサービスが利用者の証明書を毎回使う処理（暗号化して送るなど）が増え、引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントは利用者の証明書を必要としないので使い道がない。",
    "revisit": "エージェントが利用者に代わって署名・暗号化する業務を任されたら（その場合も鍵を持つサービスに依頼する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -660,27 +796,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "S/MIME の証明書をトークンで配れない。証明書が要る処理は API で取り、鍵の束縛は cnf で表す。トークンが数 KB 大きくなるのを避ける。",
    "revisit": "クライアント証明書でのログインを受けるようになったら（その場合も指紋を cnf.x5t#S256 で扱う）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "S/MIME の証明書は社内ディレクトリから都度取り、トークンには載せない。暗号化メールなどの処理はディレクトリを引く。",
    "revisit": "トークンを受けたサービスが利用者の証明書を毎回使う処理（暗号化して送るなど）が増え、引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントは S/MIME の証明書を必要としないので使い道がない。",
    "revisit": "エージェントが利用者に代わって署名・暗号化する業務を任されたら（その場合も鍵を持つサービスに依頼する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -688,27 +830,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SCIM の X.509 証明書をトークンで配れない。証明書が要る処理は API で取り、鍵の束縛は cnf で表す。トークンが数 KB 大きくなるのを避ける。",
    "revisit": "クライアント証明書でのログインを受けるようになったら（その場合も指紋を cnf.x5t#S256 で扱う）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SCIM の X.509 証明書は社内ディレクトリから都度取り、トークンには載せない。暗号化メールなどの処理はディレクトリを引く。",
    "revisit": "トークンを受けたサービスが利用者の証明書を毎回使う処理（暗号化して送るなど）が増え、引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントは SCIM の X.509 証明書を必要としないので使い道がない。",
    "revisit": "エージェントが利用者に代わって署名・暗号化する業務を任されたら（その場合も鍵を持つサービスに依頼する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -716,27 +864,37 @@
   "guide_part": "Part 3・6",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "AWS のワークロードが出す JWT を受けないので使い道がない。source identity は呼び出し元が設定する値で、認可には使えない。",
    "revisit": "AWS 上のワークロードから GetWebIdentityToken のトークンを受けるようになったら（監査の補助としてだけ記録する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムは AWS の外向きのトークンを受けないので使い道がない。",
    "revisit": "AWS 上の社内バッチなどから GetWebIdentityToken のトークンを受けるようになったら（監査の補助としてだけ記録する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの実行基盤が AWS の外向きトークンで名乗る形を使わないので出ない。呼び出し元の申告値なので、使う場合も認可には使わない。",
    "revisit": "AWS 上のエージェント基盤から GetWebIdentityToken のトークンで呼ばれるようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0369",
+    "CLM-0370",
+    "CLM-0371"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -744,27 +902,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の分析用の不透明な値で、ケースの組織は学術機関ではない（認可にも使えない）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の分析用の不透明な値で、ケースの組織は学術機関ではない（認可にも使えない）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の分析用の不透明な値で、ケースの組織は学術機関ではない（認可にも使えない）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -772,27 +936,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "認証の保証レベルの変化の通知をテナントの IdP から押し出しで受けられない。保証レベルの低下は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "認証の保証レベルの変化を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "認証の保証レベルの変化をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -800,27 +970,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "資格情報の変更（失効・削除など）の通知をテナントの IdP から押し出しで受けられない。パスワードや鍵の失効は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "資格情報の変更（失効・削除など）を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "資格情報の変更（失効・削除など）をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -828,27 +1004,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "端末のコンプライアンスの変化の通知をテナントの IdP から押し出しで受けられない。端末の非準拠化は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "端末のコンプライアンスの変化を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "端末のコンプライアンスの変化をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -856,27 +1038,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "主体のリスクレベルの変化の通知をテナントの IdP から押し出しで受けられない。リスクの上昇は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "主体のリスクレベルの変化を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "主体のリスクレベルの変化をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -884,27 +1072,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "新しいセッションの確立の通知をテナントの IdP から押し出しで受けられない。セッションの確立は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "新しいセッションの確立を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "新しいセッションの確立をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -912,27 +1106,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "既存セッションの提示の通知をテナントの IdP から押し出しで受けられない。セッションの提示は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "既存セッションの提示を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "既存セッションの提示をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -940,31 +1140,35 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "セッションの失効の通知をテナントの IdP から押し出しで受けられない。ログアウトやセッションの失効は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "セッションの失効を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
    "checks": [
     "B12"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "セッションの失効をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
    "checks": [
     "C9"
-   ]
+   ],
+   "related": []
   }
  },
  {
@@ -972,31 +1176,35 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "トークンのクレームの変化の通知をテナントの IdP から押し出しで受けられない。異動などのクレームの変化は、次の発行までアクセストークンの寿命の間は反映されない。",
    "revisit": "テナントの IdP が Shared Signals（CAEP）の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "トークンのクレームの変化を IdP から押し出しで受けない。重要な操作は鮮度確認（属性とセッションの引き直し）で補い（B11・B12）、それ以外は寿命の間は古いまま判断する。",
    "revisit": "Entra などの IdP から Shared Signals を受信できる体制になり、重要な操作以外も即時に反映したくなったら。",
    "checks": [
     "B11"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "トークンのクレームの変化をエージェントの交換に反映できるのは、交換時の取り消しの再確認だけになる。タスク単位 300 秒のトークンなので、残る窓は短い。",
    "revisit": "エージェントのタスクが長時間化し、300 秒の窓と交換時の再確認だけでは足りなくなったら。",
    "checks": [
     "C9"
-   ]
+   ],
+   "related": []
   }
  },
  {
@@ -1004,27 +1212,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けないので、event_timestamp も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（event_timestamp でイベントの発生時刻で順序を判定する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、失効の反映は重要な操作の鮮度確認で行うので、event_timestamp も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（event_timestamp でイベントの発生時刻で順序を判定する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、委任の取り消しは交換時の再確認で反映するので、event_timestamp も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（event_timestamp でイベントの発生時刻で順序を判定する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1032,27 +1246,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けないので、initiating_entity も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（initiating_entity でイベントを起こした主体の種別（管理者・利用者・ポリシー）で扱いを分ける）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、失効の反映は重要な操作の鮮度確認で行うので、initiating_entity も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（initiating_entity でイベントを起こした主体の種別（管理者・利用者・ポリシー）で扱いを分ける）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、委任の取り消しは交換時の再確認で反映するので、initiating_entity も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（initiating_entity でイベントを起こした主体の種別（管理者・利用者・ポリシー）で扱いを分ける）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1060,27 +1280,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けないので、reason_admin も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_admin で管理者向けの理由を監査に残す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、失効の反映は重要な操作の鮮度確認で行うので、reason_admin も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_admin で管理者向けの理由を監査に残す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、委任の取り消しは交換時の再確認で反映するので、reason_admin も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_admin で管理者向けの理由を監査に残す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1088,27 +1314,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けないので、reason_user も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_user で利用者に理由を表示する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、失効の反映は重要な操作の鮮度確認で行うので、reason_user も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_user で利用者に理由を表示する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "CAEP のイベントを受けず、委任の取り消しは交換時の再確認で反映するので、reason_user も使い道がない。",
    "revisit": "CAEP のイベントを受信するようになったら（reason_user で利用者に理由を表示する）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1116,27 +1348,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1144,27 +1382,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1172,27 +1416,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1200,27 +1450,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1228,27 +1484,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1256,27 +1518,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1284,27 +1552,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1312,27 +1586,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1340,27 +1620,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1368,27 +1654,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1396,27 +1688,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1424,27 +1722,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1452,27 +1756,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1480,11 +1790,13 @@
   "guide_part": "Part 3・6",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Cognito を使わないので出ない。",
    "revisit": "Cognito を IdP とするテナントを受け入れたら（入口で読んで監査ログに残す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -1492,15 +1804,18 @@
    "alt": [],
    "use_or_loss": "Cognito で認証した要求について、入口の監査ログに認証イベントの ID を残し、内部トークンの jti と対応させる。サービスは読まない。",
    "revisit": "Cognito をやめたとき、または監査で認証イベントまで追う必要がなくなったとき。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "C のエージェント用トークンは Cognito から直接受けないので出ない。",
    "revisit": "Cognito のトークン交換（act つき）をエージェントの委任に使うようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1508,27 +1823,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けないので、イベントの発生時刻も使い道がない。",
    "revisit": "テナントの IdP から SET（CAEP・RISC）を受信するようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けず、失効の反映は鮮度確認で行うので使い道がない。",
    "revisit": "IdP から SET を受信する体制になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けず、委任の取り消しは交換時の再確認で反映するので使い道がない。",
    "revisit": "委任の取り消しを SET で各ツールに配るようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1536,31 +1857,39 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "セキュリティイベントを SET で受け取れないので、テナント側の侵害やセッション失効は寿命の間反映されない。",
    "revisit": "テナントの IdP から SET を受信し、即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0483"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けない。失効の反映は重要な操作の鮮度確認で補う（B12）。",
    "revisit": "IdP から SET を受信する体制になり、重要な操作以外も即時に反映したくなったら。",
    "checks": [
     "B12"
+   ],
+   "related": [
+    "CLM-0483"
    ]
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けない。委任の取り消しは交換時の再確認と 300 秒の寿命で反映する（C9）。",
    "revisit": "委任の取り消しを SET で各ツールに配るようになったら。",
    "checks": [
     "C9"
-   ]
+   ],
+   "related": []
   }
  },
  {
@@ -1572,7 +1901,8 @@
    "alt": [],
    "use_or_loss": "テナントのレルムでログアウトした利用者の Web セッションを即時に終わらせる。アクセストークン自体は寿命まで残るので、API の失効は別に扱う。",
    "revisit": "Web 画面を持たなくなったとき、またはセッションをレルム側で一元管理するようになったとき。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -1586,13 +1916,14 @@
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントは利用者のブラウザのセッションを持たないので使い道がない。委任の取り消しは交換時の再確認で反映する（C9）。",
    "revisit": "エージェントのアプリが利用者のログインセッションを持ち、ログアウトで委任も止めたくなったら。",
    "checks": [
     "C9"
-   ]
+   ],
+   "related": []
   }
  },
  {
@@ -1600,32 +1931,40 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の SET を受けないので、テナントの IdP からの失効・リスクの通知を即時に反映できない。",
    "revisit": "テナントの IdP が SSF の送信に対応し、テナントから即時の反映を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0483"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の受信者を持たない。失効の反映は重要な操作の鮮度確認で補う（B11・B12）。",
    "revisit": "Entra などの IdP から SSF を受信できる体制になったら。",
    "checks": [
     "B11",
     "B12"
+   ],
+   "related": [
+    "CLM-0483"
    ]
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の受信者を持たない。委任の取り消しは交換時の再確認で反映する（C9）。",
    "revisit": "エージェント基盤が SSF で取り消しを受け取れるようになり、交換時の再確認より早く止めたくなったら。",
    "checks": [
     "C9"
-   ]
+   ],
+   "related": []
   }
  },
  {
@@ -1633,27 +1972,33 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SaaS の前段に Cloudflare Access を置かないので出ない。",
    "revisit": "SaaS の前段に Cloudflare Access を置いたら（入口でだけ読み、内部トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内アプリの前段に Cloudflare Access を置かないので出ない。",
    "revisit": "社内アプリの前段に Cloudflare Access を置いたら（入口でだけ読み、内部トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの経路に Cloudflare Access を置かないので出ない。",
    "revisit": "ツールの前段に Cloudflare Access を置いたら（入口でだけ読む）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1665,16 +2010,22 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。サーバーが出した nonce を証明に入れさせ、証明の事前作成や長期の使い回しを防ぐ。連携先の時計がずれていても iat に頼らず鮮度を確かめられる。",
    "revisit": "証明の再送が問題にならない（寿命が十分短い）と分かったら外す。cnf.jkt の判断と一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "DPoP を見送るので nonce も使わない。漏れたトークンの再送は防げない（B23）。",
    "revisit": "トークンが社外・取引先へ渡るようになったとき、または盗用の兆候が見えたとき。",
    "checks": [
     "B23"
+   ],
+   "related": [
+    "CLM-0488",
+    "CLM-0489",
+    "CLM-0687"
    ]
   },
   "C": {
@@ -1683,7 +2034,8 @@
    "alt": [],
    "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。ツールが出した nonce を証明に入れさせ、エージェントが事前に作った証明の使い回しを防ぐ。",
    "revisit": "cnf.jkt の判断と一緒に見直す。タスクの寿命（300 秒）だけで十分と分かったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -1691,27 +2043,45 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT の提示（KB-JWT）での鮮度の値で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0486",
+    "CLM-0488",
+    "CLM-0489"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT の提示（KB-JWT）での鮮度の値で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0488",
+    "CLM-0489",
+    "CLM-0687"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SD-JWT の提示（KB-JWT）での鮮度の値で、ケースは資格情報の提示を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "検証可能な資格情報（VC）を発行または受け入れるようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0486",
+    "CLM-0488",
+    "CLM-0688"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1723,7 +2093,8 @@
    "alt": [],
    "use_or_loss": "SaaS の Web 画面がログイン要求に nonce を付け、返った ID トークンの nonce と照合して、ID トークンの再送や差し替えを防ぐ。",
    "revisit": "Web 画面が ID トークンを受けないログイン方式に変わったら外す",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -1731,7 +2102,8 @@
    "alt": [],
    "use_or_loss": "社内ポータルなど ID トークンを受けるクライアントが、ログインのたびに nonce を照合する。API 側はそもそも ID トークンを受けない（B2）。",
    "revisit": "社内ポータルが ID トークンを受けないログイン方式に変わったら外す",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "条件付き採用",
@@ -1739,7 +2111,8 @@
    "alt": [],
    "use_or_loss": "利用者がエージェントのアプリにログインするとき、ID トークンの再送を防ぐ。エージェントに渡すトークンは交換で作るので nonce は関係しない。",
    "revisit": "エージェントのアプリがログインを別のアプリに任せるようになったら（そのアプリ側で照合する）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -1751,7 +2124,8 @@
    "alt": [],
    "use_or_loss": "ログアウトトークンに nonce があれば拒否し、ID トークンをログアウトトークンとして送り込まれるのを防ぐ。",
    "revisit": "バックチャネルログアウトを使わなくなったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -1759,15 +2133,22 @@
    "alt": [],
    "use_or_loss": "ログアウトトークンに nonce があれば拒否し、ID トークンの取り違えによる誤ったログアウトを防ぐ。",
    "revisit": "バックチャネルログアウトを使わなくなったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "C はログアウトトークンを受けないので使い道がない。",
    "revisit": "C でバックチャネルログアウトを受けるようになったら（nonce があれば拒否する）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0486",
+    "CLM-0488",
+    "CLM-0688"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1775,27 +2156,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話網の SHAKEN（PASSporT）の発信元の識別子で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話網の SHAKEN（PASSporT）の発信元の識別子で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話網の SHAKEN（PASSporT）の発信元の識別子で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1803,11 +2190,13 @@
   "guide_part": "Part 3・8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Cognito を使わないので出ない。",
    "revisit": "Cognito を IdP とするテナントを受け入れたら（入口で失効の照合に使う）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -1815,15 +2204,18 @@
    "alt": [],
    "use_or_loss": "Cognito のリフレッシュトークンが取り消されたかを入口で照合する手がかりにし、取り消し済みなら内部トークンに交換しない。内部トークンには載せない。",
    "revisit": "Cognito をやめたとき、または入口の交換で毎回イントロスペクションするようになったとき。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "C のエージェント用トークンは Cognito から直接受けないので出ない。",
    "revisit": "Cognito のトークン交換をエージェントの委任に使うようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1831,27 +2223,33 @@
   "guide_part": "Part 8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "テナントの IdP でアカウントが侵害・無効化されても、その通知を受けられず、寿命の間はトークンが通る。",
    "revisit": "テナントの IdP が RISC の送信に対応し、テナントから即時の停止を求められたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "IdP 側でアカウントが無効化されても通知を受けない。重要な操作は鮮度確認で止まるが、それ以外は寿命の間通る。",
    "revisit": "IdP から RISC を受信できる体制になったとき、またはアカウント侵害の事故が起きたとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "利用者のアカウント侵害の通知を受けない。委任は交換時の再確認で止まり、それまでの最大 300 秒は残る。",
    "revisit": "エージェントのタスクが長時間化したとき、またはエージェントの ID 自体の侵害通知を受ける仕組みが整ったとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -1859,27 +2257,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1887,27 +2291,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1915,27 +2325,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1943,27 +2359,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1971,27 +2393,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP 事業者間のルーティング情報を守る JWS のクレームで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -1999,27 +2427,35 @@
   "guide_part": "Part 6・8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けないので、SET の取引 ID も使い道がない。要求の相関はトレース ID（ヘッダー）とログの jti で行う。",
    "revisit": "テナントの IdP から SET を受信するようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けないので使い道がない。",
    "revisit": "IdP から SET を受信する体制になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SET を受けないので使い道がない。タスク内の相関は task_id（ORG-09）で行う。",
    "revisit": "委任の取り消しを SET で配るようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0500"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2027,27 +2463,35 @@
   "guide_part": "Part 6・8",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の SET を受けないので使い道がない。",
    "revisit": "テナントの IdP から SSF を受信するようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の SET を受けないので使い道がない。",
    "revisit": "IdP から SSF を受信する体制になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SSF の SET を受けないので使い道がない。",
    "revisit": "エージェント基盤が SSF を受信するようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0500"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2055,19 +2499,23 @@
   "guide_part": "Part 6・10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "1 つの要求の中のサービス間の呼び出しを、トークンの txn で結べない。相関はトレース ID（ヘッダー）とログの jti で行う。",
    "revisit": "Transaction Tokens が RFC になり、テナントの要求をサービス間で伝える仕組みに採り入れるとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムのサービス間の呼び出しを、トークンの txn で結べない。相関はトレース ID とログで行う。",
    "revisit": "Transaction Tokens が RFC になり、入口の内部トークンを Txn-Token に置き換えるとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "条件付き採用",
@@ -2075,7 +2523,8 @@
    "alt": [],
    "use_or_loss": "エージェント → ツール → 上流 API と交換を重ねても、どのホップが同じ取引かを監査で追える。task_id（ORG-09）がタスクを、txn がその中の 1 回の取引を表す。",
    "revisit": "RFC になったら正式に採用する。task_id だけで相関が足りると分かったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   }
  },
  {
@@ -2083,27 +2532,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Acceptable Uses）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Acceptable Uses）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Acceptable Uses）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2111,27 +2566,33 @@
   "guide_part": "Part 9・10",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Consent Type）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Consent Type）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Consent Type）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2139,27 +2600,33 @@
   "guide_part": "Part 9・10",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Date of Consent）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Date of Consent）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "NIST IR 8112 の属性メタデータ（Date of Consent）。トークンには載せず、台帳（この一覧表）の列として使う。",
-   "revisit": "",
-   "checks": []
+   "revisit": "見直さない（台帳の列として使う）。ただし、属性の出どころや鮮度を受け手に送る必要が出たら、トークンでの伝え方を検討する",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2167,23 +2634,27 @@
   "guide_part": "Part 3・10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は細かい認可をトークンに載せず PDP で都度判定する（実測：許可 1000 件で 6563 バイト）。Auth0 も使わない。",
    "revisit": "Auth0 を使うテナントを受け入れ、かつ RAR を使う連携が出たら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "B は RAR を使わず、Auth0 からこのクレームが来ても入口で捨てる。",
    "revisit": "B で承認つきの操作（経費の支払いなど）をトークンで束縛するようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0256",
     "ORG-08"
@@ -2202,23 +2673,27 @@
   "guide_part": "Part 10",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "英国オープンバンキングの同意（intent）の ID で、ケース A は銀行 API の提供者でも利用者でもない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "金融機関の API（Open Banking・FAPI）と接続するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "英国オープンバンキングの同意（intent）の ID で、社内システムは銀行 API を扱わない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "金融機関の API（Open Banking・FAPI）と接続するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "ORG-10"
    ],
@@ -2234,27 +2709,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）での追跡拒否の扱いで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）での追跡拒否の扱いで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）での追跡拒否の扱いで、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2262,23 +2743,27 @@
   "guide_part": "Part 10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの意図を表すクレームで、A はエージェントからの委任を扱わないので使い道がない。",
    "revisit": "A の SaaS がエージェントからの API 利用を受け入れたら（C の判断に合わせる）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムはエージェントの委任を扱わないので使い道がない。",
    "revisit": "社内業務にエージェントを入れたら（C の判断に合わせる）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "ORG-09",
     "CLM-0300"
@@ -2295,27 +2780,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の着信の理由（PASSporT）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の着信の理由（PASSporT）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の着信の理由（PASSporT）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2323,27 +2814,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）の照会目的で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）の照会目的で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "RDAP（ドメイン登録データの照会）の照会目的で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "ドメイン登録データの照会（RDAP）サービスを提供するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -2351,23 +2848,27 @@
   "guide_part": "Part 6・10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "呼び出しの連鎖全体で変わらない取引の文脈を運べない。A の要求の文脈（テナント・利用者）は内部トークンの tenant_id・user_id で足りる。",
    "revisit": "Transaction Tokens が RFC になり、サービス間の伝搬に採り入れるとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムのサービス間で取引の文脈を運べない。文脈は入口の内部トークンで足りる。",
    "revisit": "Transaction Tokens が RFC になり、入口の内部トークンを置き換えるとき。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0256",
     "ORG-08"
@@ -2385,27 +2886,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "SCIM の住所をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "SCIM の住所を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに SCIM の住所が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2413,27 +2920,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "自宅住所をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "自宅住所を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに自宅住所が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2441,27 +2954,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに住所が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2469,27 +2988,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の国名をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "地域ごとの提供可否をトークンで判定する必要が出たら、本人が書けない発行者の値（国コード）として別に検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の国名を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "地域ごとの提供可否をトークンで判定する必要が出たら、本人が書けない発行者の値（国コード）として別に検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに住所の国名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2497,27 +3022,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "整形済みの住所をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "整形済みの住所を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに整形済みの住所が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2525,27 +3056,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の市区町村をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の市区町村を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに住所の市区町村が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2553,27 +3090,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "郵便番号をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "郵便番号を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに郵便番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2581,27 +3124,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の都道府県・州をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "住所の都道府県・州を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに住所の都道府県・州が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2609,27 +3158,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "番地・建物名をトークンに載せると、受けた全サービスとログに広がる。請求書の宛先などはテナントのデータとして DB に持つ。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "番地・建物名を内部トークンにも ID トークンにも載せない。社員の住所は人事システムが持ち、必要な業務がその API で取る。",
    "revisit": "住所に基づく判定（地域による提供可否など）が要るようになったら、住所でなく派生した値（国コードなど）を検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに番地・建物名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2637,27 +3192,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "法的氏名以外の別名をトークンに載せると、受けた全サービスとログに広がる。本人確認（KYC）の属性で、A は本人確認の結果を扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "法的氏名以外の別名を内部トークンにも ID トークンにも載せない。社員の本人確認は人事の手続きで行い、トークンでは扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに法的氏名以外の別名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2665,27 +3226,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "生年月日を載せると、受けた全サービスとログに広がる。年齢で分ける機能が要るなら「18 歳以上か」のような派生した値を API で判定する。",
    "revisit": "年齢確認が法令で必要になったら、派生した真偽値を検討する（生年月日そのものは載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "社員の生年月日は人事システムだけが持ち、トークンには載せない。",
    "revisit": "年齢で可否を分ける社内手続きが出たら、派生した真偽値を人事の API で判定する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに生年月日が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2693,27 +3260,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "車両のナンバーをトークンに写すと、全サービスとログに広がる。SaaS の機能にも使い道がない。",
    "revisit": "使わない前提。テナントのディレクトリから取り込む属性マッピングで写さないよう許可リストで外す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "社員駐車場などの用途があっても、その業務システムが総務の DB から取る。トークンに写すと全サービスに広がる。",
    "revisit": "車両を扱う業務システムが入口の内部トークンを使うようになっても、その業務の API で取る（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに車両のナンバーが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2721,31 +3294,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "SCIM の表示名をそのまま写さない。表示は ID トークンの name（CLM-0559）で、値は IdP がディレクトリから作る。",
    "revisit": "テナントから SCIM で利用者を取り込み、表示名を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "社内ディレクトリの SCIM の表示名は、IdP で name（CLM-0559）に写し、ID トークンでだけ出す。",
    "revisit": "ポータルが社内ディレクトリの API から直接プロフィールを取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2753,31 +3330,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "LDAP の表示名をそのまま写さない。表示は ID トークンの name（CLM-0559）で、値は IdP がディレクトリから作る。",
    "revisit": "テナントから SCIM で利用者を取り込み、表示名を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "社内ディレクトリの LDAP の表示名は、IdP で name（CLM-0559）に写し、ID トークンでだけ出す。",
    "revisit": "ポータルが社内ディレクトリの API から直接プロフィールを取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2785,31 +3366,35 @@
   "guide_part": "Part 4・9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0527"
    ],
    "use_or_loss": "SCIM のメールアドレスをそのまま写さない。表示は ID トークンの email（CLM-0527）で行い、照合には使わない。",
    "revisit": "テナントから SCIM で利用者を取り込み、連絡先を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0527"
    ],
    "use_or_loss": "社内ディレクトリの SCIM のメールアドレスは、IdP で email（CLM-0527）に写し、ID トークンでだけ出す。社員の照合には使わない。",
    "revisit": "ポータルが社内ディレクトリの API から直接連絡先を取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2817,31 +3402,35 @@
   "guide_part": "Part 4・9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0527"
    ],
    "use_or_loss": "LDAP のメールアドレスをそのまま写さない。表示は ID トークンの email（CLM-0527）で行い、照合には使わない。",
    "revisit": "テナントから SCIM で利用者を取り込み、連絡先を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0527"
    ],
    "use_or_loss": "社内ディレクトリの LDAP のメールアドレスは、IdP で email（CLM-0527）に写し、ID トークンでだけ出す。社員の照合には使わない。",
    "revisit": "ポータルが社内ディレクトリの API から直接連絡先を取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2853,7 +3442,8 @@
    "alt": [],
    "use_or_loss": "ログイン後の画面にメールアドレスを表示する。本人が変えられる値なので、利用者のキーにもテナントの判定にも使わない（nOAuth の型）。",
    "revisit": "画面がプロフィールを UserInfo か API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -2861,15 +3451,18 @@
    "alt": [],
    "use_or_loss": "ポータルの画面にメールアドレスを表示する。社員の照合は不変の ID で行い、メールは使わない。",
    "revisit": "ポータルがプロフィールを UserInfo か社内ディレクトリの API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2877,27 +3470,39 @@
   "guide_part": "Part 4・10",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "ID-JAG（アプリ間の認可グラント）を使わないので出ない。",
    "revisit": "RFC になり、テナントの IdP からアプリ間のアクセスを受けるようになったら（照合は sub で行う）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内アプリ間の連携に ID-JAG を使わないので出ない。",
    "revisit": "RFC になり、社内 IdP を起点に SaaS 間の連携を組むようになったら（照合は sub で行う）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントに渡るグラントにメールを載せると、相手のアプリで利用者のキーにされうる。照合は sub と user_id（ORG-02）で行う。",
    "revisit": "RFC になり、相手のアプリがメールでしか利用者を特定できない場合に限り再検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2905,11 +3510,15 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -2917,15 +3526,18 @@
    "alt": [],
    "use_or_loss": "Entra の email は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンには写さない。可変で正しさも保証されないので照合には使わない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0527 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2933,11 +3545,15 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Okta を使わないので出ない。",
    "revisit": "Okta を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -2945,15 +3561,18 @@
    "alt": [],
    "use_or_loss": "Okta の email は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンには写さない。一意性に依存しない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0527 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2961,11 +3580,15 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Cognito を使わないので出ない。",
    "revisit": "Cognito を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -2979,11 +3602,13 @@
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -2991,27 +3616,39 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "SaaS の前段に Cloudflare Access を置かないので出ない。",
    "revisit": "SaaS の前段に Cloudflare Access を置いたら（入口でだけ読み、内部トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内アプリの前段に Cloudflare Access を置かないので出ない。",
    "revisit": "社内アプリの前段に Cloudflare Access を置いたら（入口で email に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの経路に Cloudflare Access を置かないので出ない。置く場合もエージェント用トークンには写さない。",
    "revisit": "ツールの前段に Cloudflare Access を置いたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3019,27 +3656,39 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Sign in with Apple を入口の IdP にしないので出ない。",
    "revisit": "消費者向けに Apple でのログインを受けるようになったら（入口で email に写す。プロキシアドレスがあるので識別子にしない）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムは Apple でのログインを受けないので出ない。",
    "revisit": "社員の個人アカウントでのログインを認めたら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は Apple のログインを起点にしないので出ない。",
    "revisit": "消費者向けのエージェントで Apple でのログインを受けるようになったら（エージェント用トークンには写さない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3047,11 +3696,15 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3059,15 +3712,18 @@
    "alt": [],
    "use_or_loss": "Entra の verified_primary_email は、ポータルが ID トークンから読んで表示用のメールとして画面に出すだけに使う。入口は ID トークンを受けないので、内部トークンには写さない。照合には使わない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0527 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3075,27 +3731,39 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。副のメールアドレスを表示する画面がない。",
    "revisit": "副のメールアドレスで連絡する業務がポータルに加わったら（ディレクトリの API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにメールアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3103,27 +3771,39 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。",
    "revisit": "Supabase Auth を採用したら（アクセストークンに必ず載るメールをサービスに読ませないよう、入口で落とす）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。",
    "revisit": "社内システムに Supabase Auth を採用したら（入口で落とす）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。使う場合もエージェント用トークンには写さない。",
    "revisit": "エージェントのアプリに Supabase Auth を採用したら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3131,27 +3811,39 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブが出すワークロードのトークンで、ケース A は利用者の API を扱いデプロイ基盤は扱わない（実験のサービスを配る基盤を作るなら別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0527"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のワークロード属性で、ケース B はデプロイ基盤を扱わないので対象外。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [
+    "CLM-0527",
+    "CLM-0529",
+    "CLM-0530"
+   ],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "CI/CD のジョブのトークンで、ケース C はエージェントの委任を扱いデプロイ基盤は扱わない（エージェントがデプロイを担う場合も別の題材になる）。",
-   "revisit": "",
-   "checks": []
+   "revisit": "CI/CD のワークロード ID（OIDC のフェデレーション）でデプロイ基盤を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -3163,7 +3855,8 @@
    "alt": [],
    "use_or_loss": "表示するメールが検証済みかを画面で示す。検証済みでも利用者のキーにはしない。",
    "revisit": "画面がプロフィールを UserInfo か API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3171,15 +3864,18 @@
    "alt": [],
    "use_or_loss": "表示するメールが検証済みかを示す。社内の IdP では管理者が登録した値なので、照合には使わない。",
    "revisit": "ポータルがプロフィールを UserInfo か社内ディレクトリの API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "メールアドレスをエージェント用トークンに載せないので、その検証の有無も要らない。ポータルの ID トークンでも、このケースでは使い道がない。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3187,27 +3883,37 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Google のログインを入口の IdP にしないので出ない。",
    "revisit": "消費者向けに Google でのログインを受けるようになったら（入口で email_verified に写す。Apple は文字列と真偽値の揺れを正規化する）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0538"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムは Google のログインを受けないので出ない。",
    "revisit": "社員の Google アカウントでのログインを認めたら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0538"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は Google のログインを起点にしないので出ない。",
    "revisit": "消費者向けのエージェントで Google のログインを受けるようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3215,27 +3921,37 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Apple のログインを入口の IdP にしないので出ない。",
    "revisit": "消費者向けに Apple でのログインを受けるようになったら（入口で email_verified に写す。Apple は文字列と真偽値の揺れを正規化する）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0538"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムは Apple のログインを受けないので出ない。",
    "revisit": "社員の Apple アカウントでのログインを認めたら。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0538"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は Apple のログインを起点にしないので出ない。",
    "revisit": "消費者向けのエージェントで Apple のログインを受けるようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3243,27 +3959,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "性別は機微な個人情報で、SaaS の機能にも使い道がない。載せると全サービスとログに広がる。",
    "revisit": "性別で表示を切り替える機能などが要るようになったら、トークンでなく本人の設定としてテナントの DB で持つ形で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "性別は機微な個人情報で、人事システムだけが持つ。トークンに載せると全サービスとログに広がる。",
    "revisit": "人事以外の業務で性別が要るようになったら、トークンでなく人事システムの API で取る形で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに性別が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3271,27 +3993,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "インスタントメッセージのアドレスをトークンに載せると、受けた全サービスとログに広がる。連絡が要る機能はテナントの DB か API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "インスタントメッセージのアドレスを内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにインスタントメッセージのアドレスが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3299,27 +4027,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の着信拒否を行った仲介者の連絡先（jCard）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の着信拒否を行った仲介者の連絡先（jCard）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "SIP の着信拒否を行った仲介者の連絡先（jCard）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -3327,29 +4061,34 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0547"
    ],
    "use_or_loss": "SCIM のロケールをそのまま写さない。表示の初期値は ID トークンの locale（CLM-0547）で行う。",
    "revisit": "画面の設定を自社の DB に持つようになったら、取り込み時の初期値としてだけ使う。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンの値で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語や地域で処理を変える業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3357,29 +4096,34 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0547"
    ],
    "use_or_loss": "SCIM の希望言語をそのまま写さない。表示の初期値は ID トークンの locale（CLM-0547）で行う。",
    "revisit": "画面の設定を自社の DB に持つようになったら、取り込み時の初期値としてだけ使う。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンの値で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語や地域で処理を変える業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3387,29 +4131,34 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0547"
    ],
    "use_or_loss": "LDAP の希望言語をそのまま写さない。表示の初期値は ID トークンの locale（CLM-0547）で行う。",
    "revisit": "画面の設定を自社の DB に持つようになったら、取り込み時の初期値としてだけ使う。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンの値で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語や地域で処理を変える業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3421,23 +4170,28 @@
    "alt": [],
    "use_or_loss": "テナントの利用者ごとに画面の言語を初期設定する。本人が編集できる値なので、表示だけに使う。",
    "revisit": "画面の設定を自社の DB に持つようになったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示言語を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンのみで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語で文書を作る業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3445,27 +4199,35 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0547"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示言語を利用者ごとに変えないので、Entra の優先言語も使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら（入口で locale に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語で文書を作る業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3473,27 +4235,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "携帯電話番号をトークンに載せると、受けた全サービスとログに広がる。SMS の通知などで要るなら、テナントの DB か API で取る。",
    "revisit": "電話番号で可否を判定する機能（SMS による追加認証の結果など）が要るようになっても、番号でなく認証の結果（amr など）で表す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "携帯電話番号を内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "電話番号で可否を判定する機能（SMS による追加認証の結果など）が要るようになっても、番号でなく認証の結果（amr など）で表す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに携帯電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3501,31 +4269,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "LDAP の名をそのまま写さない。表示は ID トークンの name（CLM-0559）で、値は IdP がディレクトリから作る。",
    "revisit": "テナントから SCIM で利用者を取り込み、表示名を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "社内ディレクトリの LDAP の名は、IdP で name（CLM-0559）に写し、ID トークンでだけ出す。",
    "revisit": "ポータルが社内ディレクトリの API から直接プロフィールを取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3533,27 +4305,39 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。イニシャルを出す画面がない。表示は name で足りる。",
    "revisit": "アバターの代わりにイニシャルを出す画面が加わったら（name から作れるかを先に検討）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。イニシャルを出す社内の画面がない。",
    "revisit": "社内の画面でイニシャルを出す要件が出たら（name から作れるかを先に検討）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにイニシャルが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3561,31 +4345,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "SCIM の氏名の構成要素をそのまま写さない。表示は ID トークンの name（CLM-0559）で、値は IdP がディレクトリから作る。",
    "revisit": "テナントから SCIM で利用者を取り込み、表示名を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "社内ディレクトリの SCIM の氏名の構成要素は、IdP で name（CLM-0559）に写し、ID トークンでだけ出す。",
    "revisit": "ポータルが社内ディレクトリの API から直接プロフィールを取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3593,27 +4381,39 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時の姓をトークンに載せると、受けた全サービスとログに広がる。本人確認（KYC）の属性で、A は本人確認の結果を扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時の姓を内部トークンにも ID トークンにも載せない。社員の本人確認は人事の手続きで行い、トークンでは扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに出生時の姓が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3621,27 +4421,39 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時の名をトークンに載せると、受けた全サービスとログに広がる。本人確認（KYC）の属性で、A は本人確認の結果を扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時の名を内部トークンにも ID トークンにも載せない。社員の本人確認は人事の手続きで行い、トークンでは扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに出生時の名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3649,27 +4461,39 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時のミドルネームをトークンに載せると、受けた全サービスとログに広がる。本人確認（KYC）の属性で、A は本人確認の結果を扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "出生時のミドルネームを内部トークンにも ID トークンにも載せない。社員の本人確認は人事の手続きで行い、トークンでは扱わない。",
    "revisit": "本人確認済みの属性（verified_claims）を扱う業務が加わったら、その専用の流れ（ID トークンのみ）で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに出生時のミドルネームが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3677,31 +4501,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "姓を分けて表示できない。画面の表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "宛名を姓と名で分けて出す画面（請求書の宛名など）が要るようになったら、API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "姓を分けて表示できない。ポータルの表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "姓と名で並べ替える社員名簿などがポータルに加わったら、ディレクトリの API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに姓が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3709,31 +4537,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "名を分けて表示できない。画面の表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "宛名を姓と名で分けて出す画面（請求書の宛名など）が要るようになったら、API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "名を分けて表示できない。ポータルの表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "姓と名で並べ替える社員名簿などがポータルに加わったら、ディレクトリの API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3741,31 +4573,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "ミドルネームを分けて表示できない。画面の表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "宛名を姓と名で分けて出す画面（請求書の宛名など）が要るようになったら、API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "ミドルネームを分けて表示できない。ポータルの表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "姓と名で並べ替える社員名簿などがポータルに加わったら、ディレクトリの API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにミドルネームが載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3777,7 +4613,8 @@
    "alt": [],
    "use_or_loss": "ログイン後の画面に利用者の表示名を出す。API とログには載せず、利用者の照合は user_id（ORG-02）で行う。",
    "revisit": "画面がプロフィールを UserInfo か API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3785,15 +4622,18 @@
    "alt": [],
    "use_or_loss": "ログイン後のポータル画面に社員の表示名を出す。各サービスへは載せず、照合は user_id（ORG-02）で行う。",
    "revisit": "ポータルがプロフィールを UserInfo か社内ディレクトリの API から取るようになったら、ID トークンからも外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3801,31 +4641,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "通称を分けて表示できない。画面の表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "宛名を姓と名で分けて出す画面（請求書の宛名など）が要るようになったら、API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "通称を分けて表示できない。ポータルの表示は ID トークンの name（CLM-0559）で足りる。",
    "revisit": "姓と名で並べ替える社員名簿などがポータルに加わったら、ディレクトリの API で取る。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに通称が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3833,11 +4677,15 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3845,15 +4693,18 @@
    "alt": [],
    "use_or_loss": "Entra の姓は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンにも各サービスにも載せない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0559 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3861,11 +4712,15 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3873,15 +4728,18 @@
    "alt": [],
    "use_or_loss": "Entra の名は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンにも各サービスにも載せない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0559 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3889,27 +4747,39 @@
   "guide_part": "Part 2・3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Entra の SAML アサーションの名で、A は Entra も SAML も使わないので出ない。",
    "revisit": "SAML で連携するテナントを受け入れたら（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "B は Entra と OIDC で連携し、SAML のアサーションを受けないので出ない。",
    "revisit": "SAML でしか連携できない社内アプリを入口につなぐとき（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は SAML のアサーションを使わないので出ない。",
    "revisit": "SAML の IdP を起点にエージェントへ委任するようになったら（エージェント用トークンには写さない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3917,27 +4787,39 @@
   "guide_part": "Part 2・3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Entra の SAML アサーションの姓で、A は Entra も SAML も使わないので出ない。",
    "revisit": "SAML で連携するテナントを受け入れたら（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "B は Entra と OIDC で連携し、SAML のアサーションを受けないので出ない。",
    "revisit": "SAML でしか連携できない社内アプリを入口につなぐとき（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559",
+    "CLM-0561",
+    "CLM-0562"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は SAML のアサーションを使わないので出ない。",
    "revisit": "SAML の IdP を起点にエージェントへ委任するようになったら（エージェント用トークンには写さない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3945,11 +4827,15 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3957,15 +4843,18 @@
    "alt": [],
    "use_or_loss": "Entra の表示名は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンにも各サービスにも載せない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0559 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -3973,11 +4862,15 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Entra ID を使わないので出ない。",
    "revisit": "Entra ID を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [
+    "CLM-0559"
+   ],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "条件付き採用",
@@ -3985,15 +4878,18 @@
    "alt": [],
    "use_or_loss": "Entra の別名は、ポータルが ID トークンから読んで画面に表示するだけに使う。入口は ID トークンを受けないので、内部トークンにも各サービスにも載せない。",
    "revisit": "IdP を一本化して、このクレームを出す IdP をやめたら外す。CLM-0559 の判断を変えたら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4001,31 +4897,35 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "SCIM の愛称をそのまま写さない。表示は ID トークンの name（CLM-0559）で、値は IdP がディレクトリから作る。",
    "revisit": "テナントから SCIM で利用者を取り込み、表示名を自社の DB で持つようになったら（その場合もトークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0559"
    ],
    "use_or_loss": "社内ディレクトリの SCIM の愛称は、IdP で name（CLM-0559）に写し、ID トークンでだけ出す。",
    "revisit": "ポータルが社内ディレクトリの API から直接プロフィールを取るようになったら。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに氏名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4033,27 +4933,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の愛称で、ケースの組織は学術機関ではない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の愛称で、ケースの組織は学術機関ではない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "学術連合（eduPerson）の愛称で、ケースの組織は学術機関ではない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "学術認証連合に参加するようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -4061,27 +4967,33 @@
   "guide_part": "Part 2",
   "A": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の発信者情報（PASSporT の Rich Call Data）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "B": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の発信者情報（PASSporT の Rich Call Data）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   },
   "C": {
    "judgement": "対象外",
-   "condition": "",
+   "condition": "該当なし（このケースの範囲外）",
    "alt": [],
    "use_or_loss": "電話の発信者情報（PASSporT の Rich Call Data）で、ケースと関係しない。",
-   "revisit": "",
-   "checks": []
+   "revisit": "電話・SIP の発信者認証を扱うようになったら",
+   "checks": [],
+   "related": [],
+   "checks_note": "—（対象外のため検証なし）"
   }
  },
  {
@@ -4089,27 +5001,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "自宅電話番号をトークンに載せると、受けた全サービスとログに広がる。連絡が要る機能はテナントの DB か API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "自宅電話番号を内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに自宅電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4117,27 +5035,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "携帯電話番号をトークンに載せると、受けた全サービスとログに広がる。連絡が要る機能はテナントの DB か API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "携帯電話番号を内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに携帯電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4145,27 +5069,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "電話番号をトークンに載せると、受けた全サービスとログに広がる。連絡が要る機能はテナントの DB か API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "電話番号を内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "連絡先で可否を判定する機能が要るようになっても、連絡先そのものでなく判定の結果を表すクレームで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4173,27 +5103,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "電話番号をトークンに載せると、受けた全サービスとログに広がる。SMS の通知などで要るなら、テナントの DB か API で取る。",
    "revisit": "電話番号で可否を判定する機能（SMS による追加認証の結果など）が要るようになっても、番号でなく認証の結果（amr など）で表す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "電話番号を内部トークンにも ID トークンにも載せない。連絡が要る業務は社内ディレクトリの API で取る。",
    "revisit": "電話番号で可否を判定する機能（SMS による追加認証の結果など）が要るようになっても、番号でなく認証の結果（amr など）で表す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4201,27 +5137,33 @@
   "guide_part": "Part 3・9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "A は Keycloak のレルムだけで Okta を使わないので出ない。",
    "revisit": "Okta を IdP とするテナントを受け入れたら（入口で読み、組織か標準のクレームに写す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Okta の電話番号は入口で落とし、内部トークンにも ID トークンにも写さない。連絡は社内ディレクトリの API で取る。",
    "revisit": "電話番号で可否を判定する機能が要るようになっても、番号でなく認証の結果（amr など）で表す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに電話番号が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4229,27 +5171,33 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。",
    "revisit": "Supabase Auth を採用したら（アクセストークンに載る電話番号を入口で落とす）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。",
    "revisit": "社内システムに Supabase Auth を採用したら（入口で落とす）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Supabase Auth を使わないので出ない。使う場合もエージェント用トークンには写さない。",
    "revisit": "エージェントのアプリに Supabase Auth を採用したら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4257,27 +5205,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。電話番号を載せないので、その検証の有無も使い道がない。",
    "revisit": "電話番号を ID トークンに載せる判断に変わったら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。電話番号を載せないので、その検証の有無も使い道がない。",
    "revisit": "電話番号を ID トークンに載せる判断に変わったら一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "電話番号をエージェント用トークンに載せないので使い道がない。",
    "revisit": "電話番号の扱いを見直すときに一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4285,27 +5239,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "画像そのものをトークンに入れると数十 KB になり、ヘッダーの上限を超えうる。顔写真は直接識別できる個人情報でもある。",
    "revisit": "画面に顔写真を出す要件が出たら、画像でなく許可した配信元の URL を API で渡す形で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "社員の写真をトークンに入れると、トークンが大きくなりヘッダーの上限を超えうる。写真は社内ディレクトリの API で配る。",
    "revisit": "ポータルに社員の写真を出す要件が出たら、社内ディレクトリの API で配る形で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに顔写真が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4313,27 +5273,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。SCIM の写真の URI を画面に出す要件がない。写真を画面に出すことはできない。",
    "revisit": "画面にアバターやプロフィールへのリンクを出す要件が出たら、ID トークンのみの条件付き採用にする（URL は許可した配信元に限る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社員の写真は社内ディレクトリの API で配るので、ポータルに SCIM の写真の URI は要らない。",
    "revisit": "ポータルにアバターを出す要件が出て、ディレクトリの API を引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに SCIM の写真の URI が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4341,27 +5307,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。プロフィール画像の URL を画面に出す要件がない。本人が書ける URL で、画面に出すと外部への読み込みで追跡にも使われうる。",
    "revisit": "画面にアバターやプロフィールへのリンクを出す要件が出たら、ID トークンのみの条件付き採用にする（URL は許可した配信元に限る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社員の写真は社内ディレクトリの API で配るので、ポータルにプロフィール画像の URL は要らない。",
    "revisit": "ポータルにアバターを出す要件が出て、ディレクトリの API を引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにプロフィール画像の URL が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4369,27 +5341,33 @@
   "guide_part": "Part 3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Sign in with Apple を使わないので出ない。",
    "revisit": "消費者向けに Apple でのログインを受けるようになったら（プロキシアドレスへの連絡の扱いを決める）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムは Apple でのログインを受けないので出ない。",
    "revisit": "社員の個人アカウントでのログインを認めたら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は Apple のログインを起点にしないので出ない。",
    "revisit": "消費者向けのエージェントで Apple でのログインを受けるようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4397,27 +5375,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "ディレクトリのラベル付き URI を使う機能がないので使い道がない。",
    "revisit": "利用者ごとのリンクを画面に出す要件が出たら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内ディレクトリのラベル付き URI を使う画面がないので使い道がない。",
    "revisit": "社員ごとのリンクをポータルに出す要件が出たら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントは利用者のリンクを必要としないので使い道がない。",
    "revisit": "エージェントが利用者のページを参照する業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4425,27 +5409,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。SCIM のプロフィールページの URI を画面に出す要件がない。",
    "revisit": "画面にアバターやプロフィールへのリンクを出す要件が出たら、ID トークンのみの条件付き採用にする（URL は許可した配信元に限る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社員のページは社内ディレクトリの API で配るので、ポータルに SCIM のプロフィールページの URI は要らない。",
    "revisit": "ポータルにアバターを出す要件が出て、ディレクトリの API を引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに SCIM のプロフィールページの URI が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4453,27 +5443,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。プロフィールページの URL を画面に出す要件がない。本人が書ける URL で、画面に出すと外部への読み込みで追跡にも使われうる。",
    "revisit": "画面にアバターやプロフィールへのリンクを出す要件が出たら、ID トークンのみの条件付き採用にする（URL は許可した配信元に限る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社員のページは社内ディレクトリの API で配るので、ポータルにプロフィールページの URL は要らない。",
    "revisit": "ポータルにアバターを出す要件が出て、ディレクトリの API を引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにプロフィールページの URL が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4481,27 +5477,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。敬称を画面に出さない。表示は name で足り、宛名に要るならテナントの DB で持つ。",
    "revisit": "請求書の宛名などに敬称をログイン情報から出す要件が出たら（その場合も ID トークンのみ）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社内の画面は敬称を出さない。",
    "revisit": "社外向けの文書を社内システムで作り、敬称をログイン情報から出す要件が出たら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに敬称が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4509,29 +5511,34 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・代替あり",
-   "condition": "",
+   "condition": "該当なし（採用しない。代わりに右の代替クレームを使う）",
    "alt": [
     "CLM-0595"
    ],
    "use_or_loss": "SCIM のタイムゾーンをそのまま写さない。表示の初期値は ID トークンの zoneinfo（CLM-0595）で行う。",
    "revisit": "画面の設定を自社の DB に持つようになったら、取り込み時の初期値としてだけ使う。",
-   "checks": []
+   "checks": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの表示を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンの値で検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の言語や地域で処理を変える業務を任されたら（API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4539,27 +5546,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。肩書（Dr など）を画面に出さない。表示は name で足り、宛名に要るならテナントの DB で持つ。",
    "revisit": "請求書の宛名などに肩書（Dr など）をログイン情報から出す要件が出たら（その場合も ID トークンのみ）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社内の画面は肩書（Dr など）を出さない。",
    "revisit": "社外向けの文書を社内システムで作り、肩書（Dr など）をログイン情報から出す要件が出たら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに肩書（Dr など）が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4567,27 +5580,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "ID トークンのプロフィールがいつ更新されたかで引き直しを判断できない。画面は ID トークンの表示名をそのまま使う。",
    "revisit": "プロフィールを手元にキャッシュし、更新の有無で引き直すようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "ポータルはログインのたびに ID トークンの表示名を使うので、更新時刻は要らない。",
    "revisit": "プロフィールをキャッシュし、更新の有無で引き直すようになったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンにプロフィールを載せないので、その更新時刻も要らない。",
    "revisit": "プロフィールの扱いを見直すときに一緒に見直す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4595,29 +5614,34 @@
   "guide_part": "Part 4",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "利用者本人が書き換えられるので、テナントや権限の判断に使うと自分で権限を足せる。A は Supabase も使わない。",
    "revisit": "Supabase を採用したときも認可には使わず、組織のクレームに写すのは発行者が決める値だけにする（その時点で写し方を見直す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "本人が書き換えられる値で認可すると、本人が管理操作の権限を足せる（B18 の custom 属性と同じ型）。",
    "revisit": "社内システムに Supabase を採用したときも認可には使わず、その時点で入口の写し方を見直す。",
    "checks": [
     "B18"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "本人が書き換えられる値をエージェントの委任の判断に使うと、委任の範囲を本人が広げられる。",
    "revisit": "エージェントのアプリに Supabase を採用したときも委任の判断には使わず、その時点で写し方を見直す。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4625,29 +5649,34 @@
   "guide_part": "Part 4・9",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "本人が変えられる短い名前で、一意でないので利用者のキーにも認可にも使えない。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "ログイン名は再利用されうるので照合に使わない（B13 の型）。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
    "checks": [
     "B13"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにログイン名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4655,27 +5684,33 @@
   "guide_part": "Part 2・3",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "Entra の SAML アサーションの表示名で、A は Entra も SAML も使わないので出ない。",
    "revisit": "SAML で連携するテナントを受け入れたら（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "B は Entra と OIDC で連携し、SAML のアサーションを受けないので出ない。",
    "revisit": "SAML でしか連携できない社内アプリを入口につなぐとき（入口で name に写す）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェントの委任は SAML のアサーションを使わないので出ない。",
    "revisit": "SAML の IdP を起点にエージェントへ委任するようになったら（エージェント用トークンには写さない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4683,29 +5718,34 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Entra の preferred_username はログイン名で、可変で再利用されうる。A は Entra ID を使わないので、いまは出ない。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Entra の preferred_username はログイン名で、可変で認可に使えないので照合に使わない（B13 の型）。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
    "checks": [
     "B13"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにログイン名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4713,29 +5753,34 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Okta のログイン名で、再利用されうる。A は Okta を使わないので、いまは出ない。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Okta のログイン名は再利用されうるので照合に使わない（B13 の型）。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
    "checks": [
     "B13"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにログイン名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4743,29 +5788,34 @@
   "guide_part": "Part 3・4",
   "A": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Entra の unique_name（v1.0）はログイン名で、一意とは限らない。A は Entra ID を使わないので、いまは出ない。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "Entra の unique_name（v1.0）は一意とは限らないので照合に使わない（B13 の型）。アクセストークンには載せない（禁止）。利用者の照合は user_id（ORG-02）、表示は ID トークンか UserInfo の name（CLM-0559）で行う。",
    "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
    "checks": [
     "B13"
-   ]
+   ],
+   "related": []
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンにログイン名が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4773,27 +5823,33 @@
   "guide_part": "Part 9",
   "A": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。Web ページ・ブログの URL を画面に出す要件がない。本人が書ける URL で、画面に出すと外部への読み込みで追跡にも使われうる。",
    "revisit": "画面にアバターやプロフィールへのリンクを出す要件が出たら、ID トークンのみの条件付き採用にする（URL は許可した配信元に限る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。社員のページは社内ディレクトリの API で配るので、ポータルに Web ページ・ブログの URL は要らない。",
    "revisit": "ポータルにアバターを出す要件が出て、ディレクトリの API を引く費用が問題になったら。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・禁止",
-   "condition": "",
+   "condition": "該当なし（載せない。受け取っても使わない）",
    "alt": [],
    "use_or_loss": "エージェントやツールに渡るトークンに Web ページ・ブログの URL が載ると、ツールの先とログに広がる。必要なら UserInfo か API で取る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
    "revisit": "エージェントがこの情報を使う業務を任されたら、その都度 API で取る設計を検討する（トークンには載せない）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  },
  {
@@ -4805,23 +5861,28 @@
    "alt": [],
    "use_or_loss": "テナントの利用者ごとに時刻をその地域のタイムゾーンで表示する。本人が編集できる値なので、表示だけに使う。",
    "revisit": "画面の設定を自社の DB に持つようになったら外す。",
-   "checks": []
+   "checks": [],
+   "checks_note": "未検証（ケーススタディの実験で直接扱っていない）"
   },
   "B": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "社内システムの時刻表示を利用者ごとに変えないので使い道がない。",
    "revisit": "海外拠点の社員が使うようになったら、A と同じく ID トークンのみで検討する。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   },
   "C": {
    "judgement": "不採用・不要",
-   "condition": "",
+   "condition": "該当なし（採用しない）",
    "alt": [],
    "use_or_loss": "エージェント用トークンに表示の設定は要らない。",
    "revisit": "エージェントが利用者の予定を扱う業務を任されたら（タイムゾーンは API で取る）。",
-   "checks": []
+   "checks": [],
+   "related": [],
+   "checks_note": "—（採用しないため検証なし）"
   }
  }
 ]

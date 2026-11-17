@@ -2,6 +2,7 @@
 """Build catalog/jwt-claims-catalog.xlsx from catalog/catalog.json and catalog/decisions/part*.json.
   python catalog/scripts/build_xlsx.py"""
 import collections
+import re
 import sys
 import glob
 import json
@@ -16,13 +17,14 @@ from openpyxl.worksheet.datavalidation import DataValidation
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import links  # noqa: E402
+import fix_blanks  # noqa: E402
 CAT = os.path.dirname(HERE)
 OUT = os.path.join(CAT, 'jwt-claims-catalog.xlsx')
 FONT = 'Meiryo'
 IDPS = [('Entra', 'Entra ID'), ('Keycloak', 'Keycloak'), ('Auth0', 'Auth0'), ('Okta', 'Okta'), ('Cognito', 'Cognito')]
 JUDGE = ['必須（共通基準）', '採用', '条件付き採用', '不採用・代替あり', '不採用・不要', '不採用・禁止', '対象外']
 CASES = [('A', 'ケース A：マルチテナント SaaS'), ('B', 'ケース B：社内業務システム'), ('C', 'ケース C：AI エージェントの委任')]
-CASE_COLS = [('judgement', '判定'), ('condition', '条件'), ('alt', '代替クレーム（ID）'), ('use_or_loss', '用途／失うこと'), ('revisit', '見直し条件'), ('checks', '検証 ID')]
+CASE_COLS = [('judgement', '判定'), ('condition', '条件'), ('alt', '代替・関連クレーム（ID）'), ('use_or_loss', '用途／失うこと'), ('revisit', '見直し条件'), ('checks', '検証 ID')]
 JFILL = {'必須（共通基準）': '1F6F4A', '採用': '3B8458', '条件付き採用': 'D18A0B', '不採用・代替あり': '4E6A86', '不採用・不要': '8A949C', '不採用・禁止': 'C2413B', '対象外': 'C9CED2'}
 
 HEAD_FILL = PatternFill('solid', fgColor='13324A')
@@ -64,19 +66,40 @@ def main_columns():
     return cols
 
 
+ADOPTED = ('必須（共通基準）', '採用', '条件付き採用')
+
+
+def case_value(x, k):
+    j = x.get('judgement', '')
+    if k == 'alt':
+        if x.get('alt'):
+            return '、'.join(x['alt'])
+        if j in ADOPTED:
+            return '—（このクレーム自体を使う）'
+        if x.get('related'):
+            return '、'.join(x['related']) + '（同じ同義グループで採用しているクレーム）'
+        return 'なし（同じ同義グループで採用しているクレームはない）'
+    if k == 'checks':
+        return '、'.join(x.get('checks') or []) or x.get('checks_note') or (
+            '未検証（ケーススタディの実験で直接扱っていない）' if j in ADOPTED else '—（対象外のため検証なし）' if j == '対象外' else '—（採用しないため検証なし）')
+    if k == 'condition' and not x.get('condition'):
+        return fix_blanks.COND.get(j, '')
+    v = x.get(k, '')
+    return '、'.join(v) if isinstance(v, list) else v
+
+
 def value(r, d, key, no):
     if key == 'no':
         return no
     if key.startswith('sup_'):
         return (r.get('support') or {}).get(key[4:], '不明')
     if key == 'book':
-        return links.book_refs(r)[0]
+        return links.book_refs(r)[0] or '対応づけなし（参考書籍 4 冊の対応表に該当なし）'
     if key == 'guide_part':
         return (d or {}).get('guide_part', '')
     if '.' in key and key[0] in 'ABC' and key[1] == '.':
         c, k = key.split('.', 1)
-        v = ((d or {}).get(c) or {}).get(k, '')
-        return '、'.join(v) if isinstance(v, list) else v
+        return case_value((d or {}).get(c) or {}, k)
     v = r.get(key, '')
     if isinstance(v, bool):
         return 'はい' if v else 'いいえ'
@@ -131,7 +154,8 @@ def sheet_main(wb, rows, dec):
             elif key.endswith('.checks') and cell.value:
                 link = links.RESULTS
             elif key.endswith('.alt') and cell.value:
-                first = str(cell.value).split('、')[0]
+                mm = re.match(r'(CLM-\d{4}|ORG-\d{2}|HDR-\d{2})', str(cell.value))
+                first = mm.group(1) if mm else ''
                 if first in rowno:
                     link = "#'クレーム一覧'!D%d" % rowno[first]
             if key == 'name':
@@ -161,7 +185,7 @@ def sheet_main(wb, rows, dec):
 
 def sheet_long(wb, rows, dec):
     ws = wb.create_sheet('判定（縦長）')
-    head = ['ID', 'クレーム名', '出典の種別', 'ケース', '判定', '条件', '代替クレーム（ID）', '用途／失うこと', '見直し条件', '検証 ID']
+    head = ['ID', 'クレーム名', '出典の種別', 'ケース', '判定', '条件', '代替・関連クレーム（ID）', '用途／失うこと', '見直し条件', '検証 ID']
     widths = [11, 30, 18, 8, 15, 24, 18, 50, 30, 10]
     for i, (h, w) in enumerate(zip(head, widths), 1):
         c = ws.cell(row=1, column=i, value=h)
@@ -172,8 +196,8 @@ def sheet_long(wb, rows, dec):
         d = dec.get(r['id']) or {}
         for c, _ in CASES:
             x = d.get(c) or {}
-            vals = [r['id'], r['name'], r['source_kind'], c, x.get('judgement', ''), x.get('condition', ''), '、'.join(x.get('alt', []) or []),
-                    x.get('use_or_loss', ''), x.get('revisit', ''), '、'.join(x.get('checks', []) or [])]
+            vals = [r['id'], r['name'], r['source_kind'], c, x.get('judgement', ''), case_value(x, 'condition'), case_value(x, 'alt'),
+                    case_value(x, 'use_or_loss'), case_value(x, 'revisit'), case_value(x, 'checks')]
             for i, v in enumerate(vals, 1):
                 cell = ws.cell(row=n, column=i, value=v)
                 cell.font = f(); cell.alignment = Alignment(wrap_text=True, vertical='top'); cell.border = BORDER
@@ -317,14 +341,14 @@ def sheet_readme(wb, rows, dec):
         ('行の単位', '同じ名前・同じ意味のクレームでも、定義した出典が違えば別の行にした（例：RFC 9068 の groups、Entra ID の groups、Cognito の cognito:groups）。行数はクレームの数ではない。概念の数は「同義グループ」のシートで数える。'),
         ('用語', '列名と値では「クレーム」を使う。「属性」は、SCIM・eduPerson・inetOrgPerson・NIST のように、クレームの元になるディレクトリの属性を指すときだけ使う。'),
         ('判定の値', '必須（共通基準）／採用／条件付き採用／不採用・代替あり／不採用・不要／不採用・禁止／対象外。不採用は禁止ではない（「不要」と「禁止」を分けた）。'),
-        ('理由の書き方', '採用・条件付き採用は「どういう場合に使うか」、不採用は「それで何ができなくなるか」を書いた。不採用・代替ありは、代わりに使うクレームの ID を「代替クレーム（ID）」に書いた。不採用と条件付き採用には「見直し条件」を書いた。'),
+        ('理由の書き方', '採用・条件付き採用は「どういう場合に使うか」、不採用は「それで何ができなくなるか」を書いた。不採用・代替ありは、代わりに使うクレームの ID を「代替・関連クレーム（ID）」に書いた。不採用・不要／禁止／対象外の行には、同じ概念（同義グループ）でそのケースが採用しているクレームを「（同じ同義グループで採用しているクレーム）」として示し、無ければ「なし」と書いた。採用・必須の行は「—（このクレーム自体を使う）」。「条件」は条件付き採用だけが具体的な条件で、ほかは「常に」か「該当なし」。「見直し条件」は全行に書いた（採用・必須は判断を変える条件、対象外はそのクレームが関係してくる範囲の変化）。「検証 ID」が無い行は、未検証か検証しない理由を書いた。空欄のセルは無い。'),
         ('IdP での扱い', '既定＝設定なしで出る／設定で追加＝任意クレーム・マッパー・スコープで出す／独自の名前で＝同じ概念を別の名前で出す（備考に名前）／フック・式で可＝Actions・フック・式・マッパーを自分で書けば出せる／不可・未対応／対象外＝他社の独自クレームの行なので該当しない／不明＝文書で確認できなかった。'),
         ('注意 1', 'IdP で「既定」でも、認可に使ってよいとは限らない。「認可に使ってよいか」「値を書ける主体」「可変性」を必ず見る。'),
         ('注意 2', '標準のクレームでも、IdP 間で意味や形が同じとは限らない（例：groups を名前で返すか ID で返すか、sub が利用者かログイン名か）。'),
         ('注意 3', '個人情報のクレームの「採用」は、アクセストークンに載せてよいという意味ではない。「載るトークン」と「個人情報の区分」と条件を並べて読む。'),
         ('注意 4', '判定は、このケーススタディの前提（判定の方針：DECISION_POLICY.md）での結論で、2026-11-17 時点のもの。草案の行と、一次資料で確認できなかった行は灰色の斜体で表示する。'),
         ('筆者の判断', '「個人情報の区分」「ログ方針」「認可に使ってよいか」など、出典に書かれていないことが多い列は、出典の記述をもとに作成者が付けた。'),
-        ('出典とリンク', 'RFC・OpenID の仕様・IETF の草案・IANA の登録簿・各社の公式文書・公的機関の文書。「出典（節）」と「出典 URL」から原典に飛べる（RFC は該当の節へ）。「書籍の該当箇所」は日本語の書籍の章・節と印刷ページで、出版社の書籍のページへリンクする。「代替クレーム（ID）」は表の中の該当行へ、「検証 ID」はケーススタディの結果へ、「ガイドの該当 Part」はガイドの Web スライドへリンクする。'),
+        ('出典とリンク', 'RFC・OpenID の仕様・IETF の草案・IANA の登録簿・各社の公式文書・公的機関の文書。「出典（節）」と「出典 URL」から原典に飛べる（RFC は該当の節へ）。「書籍の該当箇所」は日本語の書籍の章・節と印刷ページで、出版社の書籍のページへリンクする。「代替・関連クレーム（ID）」は表の中の該当行へ、「検証 ID」はケーススタディの結果へ、「ガイドの該当 Part」はガイドの Web スライドへリンクする。'),
         ('関連', 'ガイド：https://github.com/Takenori-Kusaka/jwt-claims-guide ／ ケーススタディ：https://github.com/Takenori-Kusaka/jwt-claims-casestudy'),
         ('件数', '%d 行（うち本ケーススタディで定義した組織の独自クレーム %d 行）、同義グループ %d。判定の件数は「集計」のシート。' % (
             len(rows), sum(1 for r in rows if r['source_kind'] == '本ケーススタディで定義'), len(set(r.get('synonym_group') for r in rows)))),

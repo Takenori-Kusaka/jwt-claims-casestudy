@@ -13626,7 +13626,7 @@
    "Cognito": "フック・式で可"
   },
   "is_custom": "独自（どの標準にもない）",
-  "notes": "",
+  "notes": "principal_tags と組で使う。ロールの連鎖（AssumeRole の連続）でも引き継ぐタグのキーの一覧。",
   "verified": true,
   "status": "ベンダー提供中",
   "change_controller": "AWS",
