@@ -1,0 +1,6575 @@
+[
+ {
+  "id": "CLM-0001",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "3GPP CAPIF（通信事業者の API 公開）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "3GPP CAPIF（通信事業者の API 公開）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "3GPP CAPIF（通信事業者の API 公開）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0002",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "トークン内の値は発行時点の写しで、アカウントの無効化をすぐには反映しない。無効化は 300 秒の寿命とテナント側の DB で扱い、トークンでアカウントの状態を示すことはできない。",
+   "revisit": "トークンの寿命を延ばし、無効化をトークンで伝える必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時点の写しで、無効化の即時反映にならない。退職・停止は重要な操作でのイントロスペクションとディレクトリ参照で確かめる。",
+   "revisit": "重要な操作以外でもアカウントの停止を即時に反映する必要が出たら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時点の写しで、無効化の即時反映にならない。利用者の停止は交換時の再確認で反映する。",
+   "revisit": "交換時の再確認をやめ、トークンだけで判断するようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0003",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SaaS は匿名の利用者を受けないので使い道がない（Supabase も使っていない）。",
+   "revisit": "試用版などで匿名の利用者を受け入れるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムは匿名の利用者を受けない。",
+   "revisit": "社内の公開ページで匿名の利用者を受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントへの委任は認証した利用者だけに許し、匿名の利用者はいない。",
+   "revisit": "匿名の利用者にもエージェントを使わせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0004",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM 拡張の社員番号。顧客テナントの利用者に社員番号はなく使い道がない。",
+   "revisit": "自社の社員を運用担当として SaaS に入れ、社員番号で監査する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-05"
+   ],
+   "use_or_loss": "SCIM 拡張の社員番号をそのまま載せず、入口で組織の employee_id（ORG-05）に文字列として写し、必要な旧システム宛てだけに載せる。",
+   "revisit": "旧システムが社員番号を必要としなくなったら（ORG-05 ごと外す）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM 拡張の社員番号。委任の主体は user_id で表すので要らない。",
+   "revisit": "エージェントが社員番号をキーにする旧システムを呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0005",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "LDAP（inetOrgPerson）の社員番号。顧客テナントの利用者に社員番号はなく使い道がない。",
+   "revisit": "自社の社員を運用担当として SaaS に入れ、社員番号で監査する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-05"
+   ],
+   "use_or_loss": "LDAP（inetOrgPerson）の社員番号をそのまま載せず、入口で組織の employee_id（ORG-05）に文字列として写し、必要な旧システム宛てだけに載せる。",
+   "revisit": "旧システムが社員番号を必要としなくなったら（ORG-05 ごと外す）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "LDAP（inetOrgPerson）の社員番号。委任の主体は user_id で表すので要らない。",
+   "revisit": "エージェントが社員番号をキーにする旧システムを呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0006",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "プロビジョニング元の識別子は元のドメインの中でしか意味を持たない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "顧客テナントの人事システムの ID で利用者を引く要件ができたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "プロビジョニング元の識別子は元のドメインの中でしか意味を持たない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "人事システムの ID でしか引けない旧システムを内部トークンで呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "プロビジョニング元の識別子は元のドメインの中でしか意味を持たない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "エージェントが人事システムの ID で利用者を引くツールを使うようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0007",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "ORG-06"
+   ],
+   "use_or_loss": "Cognito を接続していない。どの IdP から来たかは組織の idp（ORG-06）、利用者は user_id（ORG-02）で表す。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "ORG-06"
+   ],
+   "use_or_loss": "Cognito にリンクした外部 IdP の一覧は ID トークンにしか出ず、型も揺れる（primary が文字列）。どの IdP から来たかは組織の idp（ORG-06）、利用者は user_id（ORG-02）で表す。",
+   "revisit": "Cognito のフェデレーションで外部 IdP ごとに扱いを変える必要が出たら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cognito を接続していない。委任の主体は組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0008",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "ORG-06"
+   ],
+   "use_or_loss": "Firebase の連携先 ID の一覧は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Firebase Authentication でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "ORG-06"
+   ],
+   "use_or_loss": "Firebase の連携先 ID の一覧は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Firebase Authentication を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の連携先 ID の一覧は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Firebase Authentication でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0009",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0010",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SSO のヒントで、API の認可にも識別にも使わない（Entra も接続していない）。再ログイン時の入力の手間を省けないだけ。",
+   "revisit": "顧客テナントの Entra を接続し、クライアントの再ログインを滑らかにしたくなったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "再認証時の login_hint の最適値だが、業務システムは IdP のログイン画面に任せており読まない。再ログインで利用者を選び直す手間を省けない。",
+   "revisit": "業務システムのクライアントが Entra への再認証を自分で組み立てるようになったら（ID トークンのみで使う）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントは利用者の再ログインを組み立てないので使い道がない。",
+   "revisit": "ポータルが Entra でのログインを扱うようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0011",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0012",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0013",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0014",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0015",
+  "guide_part": "Part 2・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の RP ごとの識別子。SAML は入口に接続しておらず、内部では RP をまたいで同じ人を指す必要があるので組織の user_id（ORG-02）を使う。",
+   "revisit": "顧客テナントが SAML の IdP を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の RP ごとの識別子。SAML は入口に接続しておらず、内部では RP をまたいで同じ人を指す必要があるので組織の user_id（ORG-02）を使う。",
+   "revisit": "社内の SAML IdP を入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の RP ごとの識別子。SAML は入口に接続しておらず、内部では RP をまたいで同じ人を指す必要があるので組織の user_id（ORG-02）を使う。",
+   "revisit": "エージェントの利用者が SAML の IdP でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0016",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0017",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0018",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cloudflare Access のアプリケーショントークンの利用者 ID は、Cloudflare Access を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Cloudflare Access でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cloudflare Access のアプリケーショントークンの利用者 ID は、Cloudflare Access を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Cloudflare Access を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cloudflare Access のアプリケーショントークンの利用者 ID は、Cloudflare Access を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Cloudflare Access でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0019",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Google アカウントの不変 ID は、Google を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Google でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Google アカウントの不変 ID は、Google を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Google を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Google アカウントの不変 ID は、Google を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Google でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0020",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Apple の開発チーム内の利用者 ID は、Sign in with Apple を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Sign in with Apple でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Apple の開発チーム内の利用者 ID は、Sign in with Apple を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Sign in with Apple を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Apple の開発チーム内の利用者 ID は、Sign in with Apple を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Sign in with Apple でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0021",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0022",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0023",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0024",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0025",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0026",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の uid は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Firebase Authentication でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の uid は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Firebase Authentication を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の uid は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Firebase Authentication でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0027",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Sign in with Apple のアプリ移管用の識別子で、Apple を使っていないので使い道がない。",
+   "revisit": "Sign in with Apple を採り入れ、アプリを別の開発チームへ移管することになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Sign in with Apple のアプリ移管用の識別子で、Apple を使っていないので使い道がない。",
+   "revisit": "Sign in with Apple を採り入れ、アプリを別の開発チームへ移管することになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Sign in with Apple のアプリ移管用の識別子で、Apple を使っていないので使い道がない。",
+   "revisit": "Sign in with Apple を採り入れ、アプリを別の開発チームへ移管することになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0028",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SCIM のプロビジョニング先が割り当てる ID は、そのサービスの中でしか意味を持たない。組織内で同じ人を指す役は組織の user_id（ORG-02）が担い、必要なら入口で SCIM の id から写す。",
+   "revisit": "顧客テナントから SCIM でプロビジョニングを受けるようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SCIM のプロビジョニング先が割り当てる ID は、そのサービスの中でしか意味を持たない。組織内で同じ人を指す役は組織の user_id（ORG-02）が担い、必要なら入口で SCIM の id から写す。",
+   "revisit": "SCIM で社員を各業務システムへ配るようになり、その ID で照合する旧システムが残ったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SCIM のプロビジョニング先が割り当てる ID は、そのサービスの中でしか意味を持たない。組織内で同じ人を指す役は組織の user_id（ORG-02）が担い、必要なら入口で SCIM の id から写す。",
+   "revisit": "エージェント事業者へ SCIM で利用者を配るようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0029",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "利用者の主体を iss と組で特定する（文字列に型を固定）。データ側では組織の user_id（ORG-02）と合わせて請求書の持ち主を照合する。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "A3"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの主体。入口で IdP ごとの不変 ID（Keycloak の sub、Entra の oid+tid、Okta の uid など）から決め、ログイン名は使わない。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任の主体（代わりに操作される利用者）。交換のたびに引き継ぎ、ツールが差し替えられないことを確かめる。今の行為者は act で表す。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "C3",
+    "C15"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0030",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "利用者の主体を iss と組で特定する（文字列に型を固定）。データ側では組織の user_id（ORG-02）と合わせて請求書の持ち主を照合する。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "A3"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの主体。入口で IdP ごとの不変 ID（Keycloak の sub、Entra の oid+tid、Okta の uid など）から決め、ログイン名は使わない。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任の主体（代わりに操作される利用者）。交換のたびに引き継ぎ、ツールが差し替えられないことを確かめる。今の行為者は act で表す。",
+   "revisit": "",
+   "checks": [
+    "G14",
+    "C3",
+    "C15"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0031",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "RFC 9493 の Subject Identifier は、IdP からのセキュリティイベント（SET）で主体を表すもの。SET を受けていないので、テナントの IdP での失効やアカウント停止を即時に受け取れない。",
+   "revisit": "顧客テナントの IdP から SSF/CAEP でセッション失効を受け取るようにしたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "RFC 9493 の Subject Identifier は SET 専用。SET を受けていないので、IdP 側の失効を即時に受け取れず、重要な操作のイントロスペクションで補う。",
+   "revisit": "IdP から SSF/CAEP でセッション失効・異動を受け取るようにしたら",
+   "checks": [
+    "B11",
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "RFC 9493 の Subject Identifier は SET 専用。委任の取り消しは交換時の再確認で反映し、SET は受けない。",
+   "revisit": "利用者の IdP から SSF/CAEP で失効を受け取り、エージェントの委任を即時に止める必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0032",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "LDAP の一意識別子（ビット列）をトークンに入れる理由がない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "LDAP の一意識別子でしか利用者を引けない旧システムを内部トークンで呼ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "LDAP の一意識別子（ビット列）をトークンに入れる理由がない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "LDAP の一意識別子でしか利用者を引けない旧システムを内部トークンで呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "LDAP の一意識別子（ビット列）をトークンに入れる理由がない。組織内の不変 ID は組織の user_id（ORG-02）で運ぶ。",
+   "revisit": "LDAP の一意識別子でしか利用者を引けない旧システムを内部トークンで呼ぶ必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0033",
+  "guide_part": "Part 1・4",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者のログイン時に、クライアントが ID トークンの sub（iss と組で利用者を特定） を検証する。API はこの ID トークンを受けない。",
+   "revisit": "クライアントをセッションなしの API 直結に変える、または ID トークンを使わない認証方式に移ったら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "社員のログイン時に、業務システムのクライアントが ID トークンの sub（iss と組で利用者を特定） を検証する。API や入口はこの ID トークンを受けない。",
+   "revisit": "IdP を 1 つに統合してクライアントのログインを入口に集約したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "利用者がポータルにログインするときに、クライアントが ID トークンの sub（iss と組で利用者を特定） を検証する。エージェントやツールには渡さない。",
+   "revisit": "利用者のログインを別の方式（例 パスキーだけで IdP を介さない）に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0034",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの sub。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの sub。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの sub。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0035",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Shared Signals Framework の SET は、IdP からのセキュリティイベント（SET）で主体を表すもの。SET を受けていないので、テナントの IdP での失効やアカウント停止を即時に受け取れない。",
+   "revisit": "顧客テナントの IdP から SSF/CAEP でセッション失効を受け取るようにしたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Shared Signals Framework の SET は SET 専用。SET を受けていないので、IdP 側の失効を即時に受け取れず、重要な操作のイントロスペクションで補う。",
+   "revisit": "IdP から SSF/CAEP でセッション失効・異動を受け取るようにしたら",
+   "checks": [
+    "B11",
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Shared Signals Framework の SET は SET 専用。委任の取り消しは交換時の再確認で反映し、SET は受けない。",
+   "revisit": "利用者の IdP から SSF/CAEP で失効を受け取り、エージェントの委任を即時に止める必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0036",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud_sub。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud_sub。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud_sub。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0037",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0038",
+  "guide_part": "Part 6・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0030",
+    "ORG-02"
+   ],
+   "use_or_loss": "Transaction Token（草案）の sub。内部の呼び出しは入口が発行する内部トークン（RFC 9068 の形）で運ぶので、同じ役は CLM-0030, ORG-02 が担う。",
+   "revisit": "RFC になり、サービス間の呼び出しの連鎖で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0030",
+    "ORG-02"
+   ],
+   "use_or_loss": "Transaction Token（草案）の sub。業務システム間の呼び出しは内部トークンで運び、同じ役は CLM-0030, ORG-02 が担う。",
+   "revisit": "RFC になり、業務システム間で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0030",
+    "ORG-02"
+   ],
+   "use_or_loss": "Transaction Token（草案）の sub。ホップごとの交換で作る内部トークンが同じ役を担い、同じ値は CLM-0030, ORG-02 で表す。",
+   "revisit": "RFC になり、エージェントの呼び出しの連鎖を Txn-Token で運ぶ実装が IdP・ライブラリに揃ったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0039",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0040",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub_id。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub_id。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の sub_id。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0041",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra の SAML の objectidentifier は読まない（Entra を接続していない）。利用者・IdP の識別は組織のクレームが担う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML のアサーションは入口に接続していない。同じ値は JWT の oid として入口で読み、組織の user_id（ORG-02）に写す。",
+   "revisit": "Entra を SAML で入口に接続するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra の SAML の objectidentifier は読まない（Entra を接続していない）。委任の主体は組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0042",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0043",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。接続していれば組織の user_id（ORG-02）が同じ人を指す役を担う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra の利用者の不変キー（oid+tid）として読み、組織の user_id（ORG-02）に写す。ログイン名（upn）は使わない。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B10"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。接続していれば組織の user_id（ORG-02）が同じ人を指す役を担う。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0044",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra の onprem_sid は読まない（Entra を接続していない）。利用者・IdP の識別は組織のクレームが担う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "オンプレミスの SID を内側に持ち込まない。オンプレの AD に依存する旧システムを SID で認可することはできなくなるが、利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "SID でしか認可できない旧システムを入口の内側に置く必要が出たら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra の onprem_sid は読まない（Entra を接続していない）。委任の主体は組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0045",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の restricted claim set に名前があるだけで意味・発行条件の記載がなく、読む理由がない。失うものはない。",
+   "revisit": "Microsoft が意味を文書化し、利用者の照合に必要になったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の restricted claim set に名前があるだけで意味・発行条件の記載がなく、読む理由がない。失うものはない。",
+   "revisit": "Microsoft が意味を文書化し、利用者の照合に必要になったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の restricted claim set に名前があるだけで意味・発行条件の記載がなく、読む理由がない。失うものはない。",
+   "revisit": "Microsoft が意味を文書化し、利用者の照合に必要になったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0046",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "CLM-0030"
+   ],
+   "use_or_loss": "Entra の sub は読まない（Entra を接続していない）。利用者・IdP の識別は組織のクレームが担う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "CLM-0030"
+   ],
+   "use_or_loss": "Entra の sub はアプリごとのペアワイズ値で、同じ人でもアプリが違えば一致しない。入口は oid+tid（CLM-0043）から組織の user_id（ORG-02）を作り、内部トークンの sub（CLM-0030）に入れるので、Entra の sub は読まない。",
+   "revisit": "Entra のアプリごとの sub をキーにする外部サービスと連携する必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "CLM-0030"
+   ],
+   "use_or_loss": "Entra の sub は読まない（Entra を接続していない）。委任の主体は組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0047",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口でテナントのレルムの利用者 ID（UUID）として読み、組織の user_id（ORG-02）と内部トークンの sub に写す。軽量アクセストークンでは落ちるので、欠けたら拒否する。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "A11"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Keycloak（corp レルム）の利用者の不変キーとして読み、組織の user_id（ORG-02）に写す。preferred_username は使わない。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B1"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "利用者のログイン（corp レルム）の主体として入口で読み、交換の起点となる内部トークンの sub と user_id（ORG-02）に写す。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "C1"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0048",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "顧客テナントが Auth0 を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Auth0 の user_id（接続名|ID の形）を利用者の不変キーとして読み、組織の user_id（ORG-02）に写す。M2M のトークンでは利用者として扱わない。",
+   "revisit": "Auth0 を入口から外したら、または Auth0 がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B21"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "エージェントの利用者が Auth0 でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0049",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02",
+    "CLM-0051"
+   ],
+   "use_or_loss": "Okta の AT の sub はログイン名になりうり、再利用されると前任者のデータに一致する。入口は uid（CLM-0051）から組織の user_id（ORG-02）を作るので、sub は読まない。",
+   "revisit": "Okta が AT の sub を不変の ID に固定すると文書で保証したら",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。委任の主体は組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0050",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Cognito の利用者の一意 ID として読み、組織の user_id（ORG-02）に写す（形式は厳密に検証しない）。username は使わない。",
+   "revisit": "Cognito を入口から外したら、または Cognito がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B16"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0051",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Okta の AT の利用者キーとして uid を読み、組織の user_id（ORG-02）に写す。AT の sub はログイン名になりうるので使わない。",
+   "revisit": "Okta を入口から外したら、または Okta がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。利用者の照合は組織の user_id（ORG-02）で行う。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0052",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ペアワイズの sub にすると同じ利用者がクライアントごとに別の値になり、入口で組織の user_id（ORG-02）に写せない。クライアント間での追跡を防ぐ効果は得られない。",
+   "revisit": "テナントの利用者の値を外部のクライアントに渡し、名寄せを防ぐ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システム間で同じ人を指す ID が要るため、ペアワイズは逆効果。外部への名寄せ防止は得られない。",
+   "revisit": "社外の取引先のアプリに Keycloak の ID トークンを渡すようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任の連鎖で同じ利用者を指し続ける必要があるため使わない。",
+   "revisit": "外部のエージェント事業者に利用者の識別子を渡すようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0053",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Hasura の権限ルール用のユーザー ID は、Hasura を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "Hasura を API 層に採り入れたら（入口で内部トークンから作る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Hasura の権限ルール用のユーザー ID は、Hasura を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "Hasura を API 層に採り入れたら（入口で内部トークンから作る）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Hasura の権限ルール用のユーザー ID は、Hasura を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "Hasura を API 層に採り入れたら（入口で内部トークンから作る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0054",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の予約名 user_id は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントの利用者が Firebase Authentication でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の予約名 user_id は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内システムのログインに Firebase Authentication を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Firebase の予約名 user_id は、Firebase Authentication を使っていないので読まない。同じ役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が Firebase Authentication でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0055",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0056",
+  "guide_part": "Part 2・4",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の全 RP 共通の識別子。SAML は入口に接続しておらず、組織内で同じ人を指す役は組織の user_id（ORG-02）が担う。",
+   "revisit": "顧客テナントが SAML の IdP を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の全 RP 共通の識別子。SAML は入口に接続しておらず、組織内で同じ人を指す役は組織の user_id（ORG-02）が担う。",
+   "revisit": "社内の SAML IdP を入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "SAML の全 RP 共通の識別子。SAML は入口に接続しておらず、組織内で同じ人を指す役は組織の user_id（ORG-02）が担う。",
+   "revisit": "エージェントの利用者が SAML の IdP でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0057",
+  "guide_part": "Part 3・5",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra を接続しておらず、ゲストかメンバーかの区別はテナントの所属（ORG-01）とロールで扱う。",
+   "revisit": "顧客テナントの Entra を接続し、ゲスト利用者を区別する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムは社員だけを入れており、ゲストかメンバーかで分ける規則がない。ゲストを入れた場合に入口で弾けなくなる。",
+   "revisit": "取引先などのゲスト利用者を社内システムに入れるようになったら（入口の正規化でのみ読み、ロールに写す）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの利用者は社員だけで、ゲストかどうかで分ける規則がない。",
+   "revisit": "ゲスト利用者にもエージェントへの委任を許すようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0058",
+  "guide_part": "Part 3・10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SaaS にはエージェントの委任がなく、Entra Agent ID も接続していない。",
+   "revisit": "顧客テナントの Entra Agent ID のエージェントが SaaS の API を呼ぶようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムはエージェントやデバイスの主体を受けないので、主体の種類を細かく分ける必要がない。",
+   "revisit": "社内システムに Entra Agent ID のエージェントからの呼び出しを許したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0369",
+    "CLM-0405"
+   ],
+   "use_or_loss": "Entra Agent ID は使っていない。主体と今の行為者の区別は act（CLM-0369）と client_id（CLM-0405）で表すので、主体の種類を数値で受け取れなくても困らない。",
+   "revisit": "エージェントの ID 基盤を Entra Agent ID に移したら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0059",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "LDAP の uid はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "LDAP の uid はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。利用者は組織の user_id（ORG-02）で照合する。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "LDAP の uid はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。エージェント側のツールにも個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0060",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM の userName はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM の userName はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。利用者は組織の user_id（ORG-02）で照合する。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM の userName はログイン名として使われる個人情報で、改名・再利用がありうる。アクセストークンに載せて照合に使うと別人に一致しうる。エージェント側のツールにも個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0061",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の cognito:username はログイン名で、直接識別できる個人情報かつ再利用されうる。アクセストークンに載せて照合に使うと別人に一致しうる。表示が必要なら UserInfo から取る。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の cognito:username はログイン名で、再利用されると前任者のデータに一致する。入口は不変の ID から組織の user_id（ORG-02）を作り、ログイン名は内部トークンにもログにも載せない。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の cognito:username はログイン名で個人情報。エージェント・ツールへ流れるトークンに載せると、第三者のツールに個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0062",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の upn はログイン名で、直接識別できる個人情報かつ再利用されうる。アクセストークンに載せて照合に使うと別人に一致しうる。表示が必要なら UserInfo から取る。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の upn はログイン名で、再利用されると前任者のデータに一致する。入口は不変の ID から組織の user_id（ORG-02）を作り、ログイン名は内部トークンにもログにも載せない。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の upn はログイン名で個人情報。エージェント・ツールへ流れるトークンに載せると、第三者のツールに個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0063",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Keycloak の upn（MicroProfile）はログイン名で、直接識別できる個人情報かつ再利用されうる。アクセストークンに載せて照合に使うと別人に一致しうる。表示が必要なら UserInfo から取る。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Keycloak の upn（MicroProfile）はログイン名で、再利用されると前任者のデータに一致する。入口は不変の ID から組織の user_id（ORG-02）を作り、ログイン名は内部トークンにもログにも載せない。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Keycloak の upn（MicroProfile）はログイン名で個人情報。エージェント・ツールへ流れるトークンに載せると、第三者のツールに個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0064",
+  "guide_part": "Part 4・9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の username はログイン名で、直接識別できる個人情報かつ再利用されうる。アクセストークンに載せて照合に使うと別人に一致しうる。表示が必要なら UserInfo から取る。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の username はログイン名で、再利用されると前任者のデータに一致する。入口は不変の ID から組織の user_id（ORG-02）を作り、ログイン名は内部トークンにもログにも載せない。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": [
+    "B13"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の username はログイン名で個人情報。エージェント・ツールへ流れるトークンに載せると、第三者のツールに個人情報が渡る。禁止はエージェントやツールに届くトークンについて。ポータルの ID トークンでは、このケースでは単に不要。",
+   "revisit": "見直さない（表示が要っても UserInfo か API から取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0065",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0066",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術認証連合（eduPerson）の属性で、3 つのケースの会社は学術連合に参加しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0067",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0068",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0069",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SPIFFE のワークロード ID。人間の利用者を表さず、サービス間の認証は内部トークン（client_id・act）で表すため実験の範囲外。C のツールの身元に使う余地はあるが、今回はクライアント ID で足りている。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SPIFFE のワークロード ID。人間の利用者を表さず、サービス間の認証は内部トークン（client_id・act）で表すため実験の範囲外。C のツールの身元に使う余地はあるが、今回はクライアント ID で足りている。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SPIFFE のワークロード ID。人間の利用者を表さず、サービス間の認証は内部トークン（client_id・act）で表すため実験の範囲外。C のツールの身元に使う余地はあるが、今回はクライアント ID で足りている。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0070",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "API（saas-api）宛てのトークンだけを受け、ID トークンや別サービス宛てを拒否する。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "サービスごとの宛先（orders・invoices など）を確かめ、宛先の差し替えを拒否する。aud のない Cognito のトークンは入口で client_id により確かめてから内部トークンの aud を付ける。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "B2",
+    "B3",
+    "B16"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ホップごとに単一の宛先で交換したトークンだけを受け、受け取ったトークンの転送や広い宛先のトークンの再送を拒否する。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "C2",
+    "C13"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0071",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "API（saas-api）宛てのトークンだけを受け、ID トークンや別サービス宛てを拒否する。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "サービスごとの宛先（orders・invoices など）を確かめ、宛先の差し替えを拒否する。aud のない Cognito のトークンは入口で client_id により確かめてから内部トークンの aud を付ける。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "B2",
+    "B3",
+    "B16"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ホップごとに単一の宛先で交換したトークンだけを受け、受け取ったトークンの転送や広い宛先のトークンの再送を拒否する。",
+   "revisit": "",
+   "checks": [
+    "G8",
+    "C2",
+    "C13"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0072",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0073",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者のログイン時に、クライアントが ID トークンの aud（自分の client_id を含むか） を検証する。API はこの ID トークンを受けない。",
+   "revisit": "クライアントをセッションなしの API 直結に変える、または ID トークンを使わない認証方式に移ったら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "社員のログイン時に、業務システムのクライアントが ID トークンの aud（自分の client_id を含むか） を検証する。API や入口はこの ID トークンを受けない。",
+   "revisit": "IdP を 1 つに統合してクライアントのログインを入口に集約したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "利用者がポータルにログインするときに、クライアントが ID トークンの aud（自分の client_id を含むか） を検証する。エージェントやツールには渡さない。",
+   "revisit": "利用者のログインを別の方式（例 パスキーだけで IdP を介さない）に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0074",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの aud。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの aud。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの aud。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0075",
+  "guide_part": "Part 6・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Transaction Token（草案）の aud。内部の呼び出しは入口が発行する内部トークン（RFC 9068 の形）で運ぶので、同じ役は CLM-0071 が担う。",
+   "revisit": "RFC になり、サービス間の呼び出しの連鎖で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Transaction Token（草案）の aud。業務システム間の呼び出しは内部トークンで運び、同じ役は CLM-0071 が担う。",
+   "revisit": "RFC になり、業務システム間で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Transaction Token（草案）の aud。ホップごとの交換で作る内部トークンが同じ役を担い、同じ値は CLM-0071 で表す。",
+   "revisit": "RFC になり、エージェントの呼び出しの連鎖を Txn-Token で運ぶ実装が IdP・ライブラリに揃ったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0076",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の aud。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0077",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra の AT の aud（api://orders など、v1/v2 で形式が揺れる）を確かめ、内部トークンにはサービスごとの aud（CLM-0071）を付け直す。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B3"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0078",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口でテナントのレルムが出す aud（Audience マッパーで saas-api）を確かめる。軽量アクセストークンでは落ちるので、欠けたら拒否する。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Keycloak の aud（orders など）を確かめ、内部トークンのサービスごとの aud（CLM-0071）に付け直す。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B3"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で利用者のトークンの aud を確かめる。エージェント・ツール向けの宛先は STS の交換で決め、Keycloak の標準交換で宛先を広げられることには頼らない。",
+   "revisit": "IdP を Keycloak から別の製品に移したら、または Keycloak がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "C13"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0079",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "顧客テナントが Auth0 を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Auth0 の aud（API Identifier。openid 付きなら配列）を確かめ、内部トークンにサービスごとの aud を付け直す。",
+   "revisit": "Auth0 を入口から外したら、または Auth0 がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B21"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "エージェントの利用者が Auth0 でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0080",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Okta の Custom AS の audience（api://default など）を確かめる。Org AS の AT は自前の API では受けない。",
+   "revisit": "Okta を入口から外したら、または Okta がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0081",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Cognito の AT には既定で aud がないので、入口は client_id で要求元のアプリを確かめ、内部トークンにサービスごとの aud を付ける。aud があれば併せて確かめる。",
+   "revisit": "Cognito を入口から外したら、または Cognito がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B16"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。宛先は内部トークンの aud（CLM-0071）で確かめる。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0082",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Cloudflare Access の AUD タグは、Cloudflare Access を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "顧客テナントの利用者が Cloudflare Access でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Cloudflare Access の AUD タグは、Cloudflare Access を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "社内システムのログインに Cloudflare Access を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Cloudflare Access の AUD タグは、Cloudflare Access を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "エージェントの利用者が Cloudflare Access でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0083",
+  "guide_part": "Part 3・6",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "Keycloak のクライアント設定でのみ使う（宛先を明示するため。軽量アクセストークンでは Add to lightweight を確認）",
+   "alt": [],
+   "use_or_loss": "テナントのレルムで API（saas-api）を aud に明示するために使う。Keycloak は既定で API を aud に入れないため、これがないと宛先の確認ができない。",
+   "revisit": "Keycloak をやめる、または宛先を resource パラメータで決める方式に変えたら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "Keycloak のクライアント設定でのみ使う（宛先を明示するため）",
+   "alt": [],
+   "use_or_loss": "corp レルムで orders・invoices などのサービスを aud に明示するために使う。",
+   "revisit": "Keycloak をやめる、または宛先を resource パラメータで決める方式に変えたら",
+   "checks": [
+    "B1",
+    "B3"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "Keycloak のクライアント設定でのみ使う（宛先を明示するため）",
+   "alt": [],
+   "use_or_loss": "corp レルムでポータル・mcp-tools などの宛先を明示するために使う。ホップごとの宛先は STS の交換で付け直す。",
+   "revisit": "Keycloak の標準トークン交換で act を出せるようになり、STS の代わりに使うなら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0084",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0085",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0086",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0087",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Firebase の ID トークンの aud（プロジェクト ID）は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "顧客テナントの利用者が Firebase Authentication でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Firebase の ID トークンの aud（プロジェクト ID）は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "社内システムのログインに Firebase Authentication を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "Firebase の ID トークンの aud（プロジェクト ID）は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの aud（CLM-0071）が担う。",
+   "revisit": "エージェントの利用者が Firebase Authentication でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0088",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0089",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0090",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0091",
+  "guide_part": "Part 1・5",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "テナントのレルムごとの発行者を許可リストと完全一致で照合し、その発行者に登録した鍵だけで検証する。テナントのクレームが発行したレルムと一致するかの照合（tenant_iss_bind）の基準にもなる。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10",
+    "A8",
+    "A9",
+    "A10"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口で 5 つの IdP の発行者を完全一致で照合し、内部トークンでは入口の発行サービスだけを発行者として受ける。Entra の {tenantid} を何でも受ける実装を防ぐ。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10",
+    "B10"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部のトークン発行サービス（STS）だけを発行者として受け、交換で得たトークンも同じ発行者で照合する。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0092",
+  "guide_part": "Part 1・5",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "テナントのレルムごとの発行者を許可リストと完全一致で照合し、その発行者に登録した鍵だけで検証する。テナントのクレームが発行したレルムと一致するかの照合（tenant_iss_bind）の基準にもなる。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10",
+    "A8",
+    "A9",
+    "A10"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口で 5 つの IdP の発行者を完全一致で照合し、内部トークンでは入口の発行サービスだけを発行者として受ける。Entra の {tenantid} を何でも受ける実装を防ぐ。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10",
+    "B10"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部のトークン発行サービス（STS）だけを発行者として受け、交換で得たトークンも同じ発行者で照合する。",
+   "revisit": "",
+   "checks": [
+    "G9",
+    "G10"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0093",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者のログイン時に、クライアントが ID トークンの iss（Discovery の issuer と完全一致） を検証する。API はこの ID トークンを受けない。",
+   "revisit": "クライアントをセッションなしの API 直結に変える、または ID トークンを使わない認証方式に移ったら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "社員のログイン時に、業務システムのクライアントが ID トークンの iss（Discovery の issuer と完全一致） を検証する。API や入口はこの ID トークンを受けない。",
+   "revisit": "IdP を 1 つに統合してクライアントのログインを入口に集約したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "利用者がポータルにログインするときに、クライアントが ID トークンの iss（Discovery の issuer と完全一致） を検証する。エージェントやツールには渡さない。",
+   "revisit": "利用者のログインを別の方式（例 パスキーだけで IdP を介さない）に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0094",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iss。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iss。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iss。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0095",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0096",
+  "guide_part": "Part 6・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iss。内部の呼び出しは入口が発行する内部トークン（RFC 9068 の形）で運ぶので、同じ役は CLM-0092 が担う。",
+   "revisit": "RFC になり、サービス間の呼び出しの連鎖で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iss。業務システム間の呼び出しは内部トークンで運び、同じ役は CLM-0092 が担う。",
+   "revisit": "RFC になり、業務システム間で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iss。ホップごとの交換で作る内部トークンが同じ役を担い、同じ値は CLM-0092 で表す。",
+   "revisit": "RFC になり、エージェントの呼び出しの連鎖を Txn-Token で運ぶ実装が IdP・ライブラリに揃ったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0097",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iss。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iss。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iss。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0098",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。発行者の照合は内部トークンの iss（CLM-0092）で行う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra の発行者をテナント ID 入りの値と完全一致で照合し（{tenantid} を何でも受けない）、内部トークンの iss（CLM-0092）は入口の発行サービスに置き換える。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": [
+    "B10"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。発行者の照合は内部トークンの iss（CLM-0092）で行う。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0099",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Okta の Custom AS の発行者を完全一致で照合し、Org AS の発行者と取り違えない。",
+   "revisit": "Okta を入口から外したら、または Okta がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0100",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Cognito のユーザープールの発行者を完全一致で照合する（original／updated の 2 種のどちらを受けるか決めておく）。",
+   "revisit": "Cognito を入口から外したら、または Cognito がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0101",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "顧客テナントが Auth0 を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Auth0 の発行者を Discovery の値と完全一致で照合する（末尾スラッシュの揺れに注意）。",
+   "revisit": "Auth0 を入口から外したら、または Auth0 がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。発行者は内部トークンの iss（CLM-0092）で照合する。",
+   "revisit": "エージェントの利用者が Auth0 でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0102",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0103",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0104",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のジョブが発行するトークンの属性。本ケーススタディはデプロイ基盤を扱わず（B も業務システムの利用者の認可だけ）、利用者・エージェントの API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0105",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Firebase の ID トークンの iss は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの iss（CLM-0092）が担う。",
+   "revisit": "顧客テナントの利用者が Firebase Authentication でログインできるようにしたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Firebase の ID トークンの iss は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの iss（CLM-0092）が担う。",
+   "revisit": "社内システムのログインに Firebase Authentication を使うようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0092"
+   ],
+   "use_or_loss": "Firebase の ID トークンの iss は、Firebase Authentication を使っていないので読まない。同じ役は内部トークンの iss（CLM-0092）が担う。",
+   "revisit": "エージェントの利用者が Firebase Authentication でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0106",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0107",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0108",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（STIR/PASSporT）専用で、Web・API のトークンでは使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0109",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の resource。宛先は内部トークンの aud で表し、ID-JAG を使わない。",
+   "revisit": "RFC になり、ID-JAG を採り入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の resource。宛先は内部トークンの aud で表し、ID-JAG を使わない。",
+   "revisit": "RFC になり、ID-JAG を採り入れたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0071"
+   ],
+   "use_or_loss": "ID-JAG（草案）の resource。ホップごとの宛先は交換時に決めて内部トークンの aud（CLM-0071）に単一の値で入れるので、同じ役を aud が担う。",
+   "revisit": "RFC になり、エージェントが社外の SaaS を ID-JAG で呼ぶようになったら",
+   "checks": [
+    "C13"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0110",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0111",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-06"
+   ],
+   "use_or_loss": "Entra の SAML の identityprovider は読まない（Entra を接続していない）。利用者・IdP の識別は組織のクレームが担う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-06"
+   ],
+   "use_or_loss": "SAML のアサーションは入口に接続していない。どの IdP から来たかは組織の idp（ORG-06）で表す。",
+   "revisit": "Entra を SAML で入口に接続するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-02"
+   ],
+   "use_or_loss": "Entra の SAML の identityprovider は読まない（Entra を接続していない）。C では元の IdP を内部トークンで運ばないので、利用者の識別だけを組織の user_id（ORG-02）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0112",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0113",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Cache Time to Live）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Cache Time to Live）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Cache Time to Live）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0114",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Deletion Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Deletion Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Deletion Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0115",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Expiration Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Expiration Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Expiration Date）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0116",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Refresh）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Refresh）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Refresh）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0117",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Verification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Verification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Last Verification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0118",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra を接続しておらず、認証時刻で判断する操作もない。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の任意クレームの auth_time で、入口は読まない。内部トークンの auth_time（CLM-0228）は、IdP のアクセストークンの auth_time かイントロスペクションの結果から作る。重要な操作の鮮度はイントロスペクションとディレクトリの引き直しで確かめる（B11）。",
+   "revisit": "経理の操作に再認証の時間制限（max_age）を設け、アクセストークンの auth_time もイントロスペクションも使えないと分かったら",
+   "checks": [
+    "B11"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra を接続しておらず、支払いは人の承認の記録で確かめる。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0119",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "テナントの利用者の再認証の新しさで判断する操作がなく、認証時刻は入口で読まない。「最近認証した人だけ」の制限はできない。",
+   "revisit": "テナント管理の操作に再認証の時間制限を設けるなら（入口で読み CLM-0228 に写す）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "重要な操作の鮮度はイントロスペクションとディレクトリの引き直しで確かめ、認証時刻では判断しない。「直近に認証したか」による制限はできない。",
+   "revisit": "経理の操作に再認証の時間制限（max_age）を設けるなら（入口で読み CLM-0228 に写す）",
+   "checks": [
+    "B11",
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "支払いは人の承認の記録（ORG-10）で確かめ、利用者の認証時刻では判断しない。",
+   "revisit": "承認の代わりに「直近の再認証」を求める操作を作るなら（入口で読み CLM-0228 に写す）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0120",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta を接続しておらず、認証時刻で判断する操作もない。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "重要な操作の鮮度はイントロスペクションとディレクトリの引き直しで確かめ、認証時刻では判断しない。「直近に認証したか」による制限はできない。",
+   "revisit": "経理の操作に再認証の時間制限（max_age）を設けるなら（入口で読み CLM-0228 に写す）",
+   "checks": [
+    "B11"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta を接続しておらず、支払いは人の承認の記録で確かめる。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0121",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0122",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "必須にし、時計のずれは 30 秒まで。内部トークンの寿命は 300 秒。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7",
+    "A14"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "必須にし、ずれは 30 秒まで。exp 前の失効は検出できないので、重要な操作は別に引き直す（鮮度確認）。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "タスク単位の短命トークン（300 秒）の期限として必須。委任の取り消しは交換時の再確認で補う。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7",
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0123",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "必須にし、時計のずれは 30 秒まで。内部トークンの寿命は 300 秒。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7",
+    "A14"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "必須にし、ずれは 30 秒まで。exp 前の失効は検出できないので、重要な操作は別に引き直す（鮮度確認）。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "タスク単位の短命トークン（300 秒）の期限として必須。委任の取り消しは交換時の再確認で補う。",
+   "revisit": "",
+   "checks": [
+    "G6",
+    "G7",
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0124",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者のログイン時に、クライアントが ID トークンの exp を検証する。API はこの ID トークンを受けない。",
+   "revisit": "クライアントをセッションなしの API 直結に変える、または ID トークンを使わない認証方式に移ったら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "社員のログイン時に、業務システムのクライアントが ID トークンの exp を検証する。API や入口はこの ID トークンを受けない。",
+   "revisit": "IdP を 1 つに統合してクライアントのログインを入口に集約したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "利用者がポータルにログインするときに、クライアントが ID トークンの exp を検証する。エージェントやツールには渡さない。",
+   "revisit": "利用者のログインを別の方式（例 パスキーだけで IdP を介さない）に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0125",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの exp。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの exp。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの exp。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0126",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0127",
+  "guide_part": "Part 6・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Transaction Token（草案）の exp。内部の呼び出しは入口が発行する内部トークン（RFC 9068 の形）で運ぶので、同じ役は CLM-0123 が担う。",
+   "revisit": "RFC になり、サービス間の呼び出しの連鎖で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Transaction Token（草案）の exp。業務システム間の呼び出しは内部トークンで運び、同じ役は CLM-0123 が担う。",
+   "revisit": "RFC になり、業務システム間で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Transaction Token（草案）の exp。ホップごとの交換で作る内部トークンが同じ役を担い、同じ値は CLM-0123 で表す。",
+   "revisit": "RFC になり、エージェントの呼び出しの連鎖を Txn-Token で運ぶ実装が IdP・ライブラリに揃ったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0128",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の exp。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の exp。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の exp。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0129",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークンの期限を確かめる。内部トークンは入口が 300 秒の exp（CLM-0123）で発行し直すので、Entra の長い寿命（CAE で最大 28 時間）は内側に持ち込まない。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0130",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Okta のトークンの期限を確かめる。内部トークンは 300 秒の exp で発行し直す。",
+   "revisit": "Okta を入口から外したら、または Okta がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0131",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Cognito のトークンの期限を確かめる。失効は exp 前に分からないので、重要な操作は別に引き直す。",
+   "revisit": "Cognito を入口から外したら、または Cognito がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0123"
+   ],
+   "use_or_loss": "Cognito を接続していないので読まない。期限は内部トークンの exp（CLM-0123）で確かめる。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0132",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの発行時刻として必須。障害調査でトークンの年齢を見る（認証時刻とは扱わない）。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時刻として必須。鮮度確認で「トークンが古いか」の目安に使うが、認証時刻（auth_time）の代わりにはしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時刻として必須。タスクの交換の連鎖でどのトークンがいつ作られたかを監査で追う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0133",
+  "guide_part": "Part 9・6",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "テナントの連携先（社外の API クライアント）に発行するアクセストークンだけ。DPoP の鍵（cnf.jkt）で束縛する",
+   "alt": [],
+   "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。DPoP の証明の iat。受け手は、iat が受け入れる時間の幅（前後数十秒）に入る証明だけを受け、古い証明や先の時刻の証明を拒否する。使用済みの jti を覚えておく期間もこの幅で決まる。",
+   "revisit": "cnf.jkt（CLM-0431）の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "DPoP の証明の iat。送信者制約（DPoP・mTLS）は見送るので使わない。漏れたトークンを別の端末から再送されると通る。",
+   "revisit": "トークンが社外・取引先へ渡るようになったら、または盗用の兆候があったら",
+   "checks": [
+    "B23"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "エージェントの実行基盤に発行するタスク単位のトークンだけ。実行基盤が持つ DPoP の鍵（cnf.jkt）で束縛する",
+   "alt": [],
+   "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。DPoP の証明の iat。受け手は、iat が受け入れる時間の幅（前後数十秒）に入る証明だけを受け、古い証明や先の時刻の証明を拒否する。使用済みの jti を覚えておく期間もこの幅で決まる。",
+   "revisit": "cnf.jkt（CLM-0431）の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0134",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの発行時刻として必須。障害調査でトークンの年齢を見る（認証時刻とは扱わない）。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時刻として必須。鮮度確認で「トークンが古いか」の目安に使うが、認証時刻（auth_time）の代わりにはしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "発行時刻として必須。タスクの交換の連鎖でどのトークンがいつ作られたかを監査で追う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0135",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0136",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者のログイン時に、クライアントが ID トークンの iat を検証する。API はこの ID トークンを受けない。",
+   "revisit": "クライアントをセッションなしの API 直結に変える、または ID トークンを使わない認証方式に移ったら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "社員のログイン時に、業務システムのクライアントが ID トークンの iat を検証する。API や入口はこの ID トークンを受けない。",
+   "revisit": "IdP を 1 つに統合してクライアントのログインを入口に集約したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ（クライアントがログイン時に検証する。API では受けない）",
+   "alt": [],
+   "use_or_loss": "利用者がポータルにログインするときに、クライアントが ID トークンの iat を検証する。エージェントやツールには渡さない。",
+   "revisit": "利用者のログインを別の方式（例 パスキーだけで IdP を介さない）に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0137",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iat。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iat。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの iat。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0138",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0139",
+  "guide_part": "Part 6・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0134"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iat。内部の呼び出しは入口が発行する内部トークン（RFC 9068 の形）で運ぶので、同じ役は CLM-0134 が担う。",
+   "revisit": "RFC になり、サービス間の呼び出しの連鎖で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0134"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iat。業務システム間の呼び出しは内部トークンで運び、同じ役は CLM-0134 が担う。",
+   "revisit": "RFC になり、業務システム間で取引の文脈を運ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0134"
+   ],
+   "use_or_loss": "Transaction Token（草案）の iat。ホップごとの交換で作る内部トークンが同じ役を担い、同じ値は CLM-0134 で表す。",
+   "revisit": "RFC になり、エージェントの呼び出しの連鎖を Txn-Token で運ぶ実装が IdP・ライブラリに揃ったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0140",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iat。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iat。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の iat。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0141",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0134"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。発行時刻は内部トークンの iat（CLM-0134）で表す。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークンの時刻の妥当性確認にだけ使う。Entra は「認証の時刻」と説明するので、認証時刻としては扱わず、内部トークンの iat（CLM-0134）は入口が付け直す。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0134"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。発行時刻は内部トークンの iat（CLM-0134）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0142",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0143",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "外部のトークンに入っていれば入口で検証する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "外部（レルム）のトークンに nbf があれば入口で検証する。内部トークンは発行と同時に有効なので載せない。",
+   "revisit": "発行より後に有効になるトークン（予約実行など）を内部で使うようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "外部のトークンに入っていれば入口で検証する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Entra などのトークンに nbf があれば入口で検証する（ずれは 30 秒まで）。内部トークンには載せない。",
+   "revisit": "発行より後に有効になるトークン（予約実行など）を内部で使うようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "外部のトークンに入っていれば入口で検証する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "外部のトークンに nbf があれば検証する。タスク単位のトークンは発行と同時に有効なので載せない。",
+   "revisit": "承認後の決まった時刻に実行する予約支払いをトークンで表すようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0144",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0145",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0143"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。他の IdP のトークンの nbf は標準の nbf（CLM-0143）として入口で検証する。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークンの nbf を検証する（標準の nbf と同義）。内部トークンには載せない。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0143"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。他の IdP のトークンの nbf は標準の nbf（CLM-0143）として入口で検証する。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0146",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0147",
+  "guide_part": "Part 3・8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "パスワードの期限はトークンの認可に関係せず、2 つの文書で値の説明も食い違う。パスワード期限の警告を API 側で出せなくなるが、IdP の画面に任せる。",
+   "revisit": "Entra を接続し、パスワード期限の警告を自前の画面で出す必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "パスワードの期限はトークンの認可に関係せず、2 つの文書で値の説明も食い違う。パスワード期限の警告を API 側で出せなくなるが、IdP の画面に任せる。",
+   "revisit": "業務システムが自分でパスワード期限の警告を出す必要が出たら（ID トークンのみ）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "パスワードの期限はトークンの認可に関係せず、2 つの文書で値の説明も食い違う。パスワード期限の警告を API 側で出せなくなるが、IdP の画面に任せる。",
+   "revisit": "Entra を接続し、パスワード期限の警告を自前の画面で出す必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0148",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、SaaS の API には関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking（FAPI 対応の銀行 API）専用で、社内システムには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "UK Open Banking の銀行 API 専用。C の支払いは社内の支払い API で、銀行と直接つながらないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0149",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS が外向けに発行するワークロードのトークン（GetWebIdentityToken）。3 つのケースは AWS のワークロードから外部 API を呼ばないため範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0150",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ワークロード（Kubernetes の ServiceAccount）のトークン。サービス間の呼び出しは入口が発行する内部トークン（client_id・act）で表し、ワークロード ID の基盤は実験の範囲外。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0151",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0152",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ETSI NFV（ネットワーク機能仮想化）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ETSI NFV（ネットワーク機能仮想化）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ETSI NFV（ネットワーク機能仮想化）専用で、3 つのケースに関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0153",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IoT の制約デバイス向け ACE-OAuth 専用で、時計を持つサーバー間の 3 つのケースには関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0154",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0155",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0156",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0157",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0158",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0159",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名トークン専用で、利用者の API 認可には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0160",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0161",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0162",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0163",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0164",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0165",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0166",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0167",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0168",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0169",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0170",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0171",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0172",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0173",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "OpenID Federation のエンティティステートメント・トラストマーク専用で、ID トークン・アクセストークンには入らない。3 つのケースは信頼関係を個別に設定する。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0174",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Auth0 を接続しておらず、グラント種別で判断する規則もない。",
+   "revisit": "顧客テナントが Auth0 を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "グラント種別では認可せず、利用者かクライアントかは内部トークンの sub と client_id で区別する。どのグラントで取ったかを内側で見分けられないだけ。",
+   "revisit": "password グラントなど特定のグラントを入口で拒否する規則を作るなら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Auth0 を接続しておらず、交換の種類は STS の監査ログで分かる。",
+   "revisit": "エージェントの利用者が Auth0 でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0175",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（aio）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（aio）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（aio）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0176",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（rh）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（rh）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra 内部の不透明な値（rh）で、リソースは使ってはならないと明記されている。読んで判断に使うと、意味の保証がない値に依存してしまう。",
+   "revisit": "Microsoft が意味を公開し、使ってよいと文書化したら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0177",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "イントロスペクションは使わず、自己完結の内部トークンで判断する。応答に署名を求める場面がない。",
+   "revisit": "テナントの連携先へイントロスペクションの結果を中継するようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "重要な操作ではイントロスペクションを使うが、入口から認可サーバーへ直接問い合わせるので、署名つきの JWT 応答は要らない。応答の改ざんを受け手が検出できないが、TLS の直接接続で足りる。",
+   "revisit": "イントロスペクションの結果を別のサービスへ中継・保存するようになったら",
+   "checks": [
+    "B11",
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "取り消しの再確認は STS の中で行い、イントロスペクションの JWT 応答を使わない。",
+   "revisit": "ツールが外部の認可サーバーにトークンの状態を問い合わせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0178",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの一意 ID として必須。監査ログはトークン全文ではなく jti で残す。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの一意 ID として必須。ログにはトークン全文の代わりに jti を残し、入口で交換した元のトークンとの対応を追う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "交換ごとのトークンの一意 ID として必須。タスクの ID（ORG-09）と並べて、どのホップでどのトークンが使われたかを追う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0179",
+  "guide_part": "Part 9・6",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "テナントの連携先（社外の API クライアント）に発行するアクセストークンだけ。DPoP の鍵（cnf.jkt）で束縛する",
+   "alt": [],
+   "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。DPoP の証明の jti。受け手は使用済みの jti を（iat の受け入れ幅の間）覚えておき、同じ jti の証明を拒否して、証明の再送を検知する。",
+   "revisit": "cnf.jkt（CLM-0431）の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "DPoP の証明の jti。送信者制約（DPoP・mTLS）は見送るので使わない。漏れたトークンを別の端末から再送されると通る。",
+   "revisit": "トークンが社外・取引先へ渡るようになったら、または盗用の兆候があったら",
+   "checks": [
+    "B23"
+   ]
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "エージェントの実行基盤に発行するタスク単位のトークンだけ。実行基盤が持つ DPoP の鍵（cnf.jkt）で束縛する",
+   "alt": [],
+   "use_or_loss": "推奨。ケーススタディの実験では未検証の追加防御。DPoP の証明の jti。受け手は使用済みの jti を（iat の受け入れ幅の間）覚えておき、同じ jti の証明を拒否して、証明の再送を検知する。",
+   "revisit": "cnf.jkt（CLM-0431）の判断（DPoP の対象）を広げる・やめるときに一緒に見直す。漏れたトークンの再送（B23 型）の攻撃ケースを足して効果を測ったら見直す。",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0180",
+  "guide_part": "Part 1・8",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの一意 ID として必須。監査ログはトークン全文ではなく jti で残す。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部トークンの一意 ID として必須。ログにはトークン全文の代わりに jti を残し、入口で交換した元のトークンとの対応を追う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "交換ごとのトークンの一意 ID として必須。タスクの ID（ORG-09）と並べて、どのホップでどのトークンが使われたかを追う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0181",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの jti。IdP でのログアウトをクライアントのセッションへ即時に伝えられない。テナントの利用者のセッションは寿命（300 秒のトークン・30 分のセッション）で切れる。",
+   "revisit": "テナントから即時のシングルログアウトを求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの jti。IdP でのログアウトを各業務システムのセッションへ即時に伝えられない。経理・管理の重要な操作はイントロスペクションで失効を確かめて補う。",
+   "revisit": "重要な操作以外でもログアウトの即時反映が必要になったら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ログアウトトークンの jti。利用者のログアウトをポータルのセッションへ即時に伝えられない。エージェントへの委任の取り消しは交換時の再確認で反映する。",
+   "revisit": "ログアウトと同時にエージェントの委任も止める要件ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0182",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の jti。別組織の認可サーバーに利用者を引き継ぐ仕組みで、SaaS の API は自前の入口で完結するので使い道がない。",
+   "revisit": "RFC になり、顧客テナントの IdP から SaaS の認可サーバーへ ID-JAG で引き継ぐ要望が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の jti。社内システムは同じ組織の入口で完結し、別組織の認可サーバーへ引き継がない。",
+   "revisit": "RFC になり、社外の SaaS を社員の SSO のまま呼ぶ必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ID-JAG（草案）の jti。エージェントの呼び出し先は社内の API だけで、別組織の認可サーバーへ利用者を引き継がない。外部の SaaS をエージェントから呼ぶことはできない。",
+   "revisit": "RFC になり、エージェントが社外の SaaS の API を利用者の代わりに呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0183",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM のリソースのメタデータ（作成・更新日時、版）で、トークンに載せる理由がない。属性が最後にいつ変わったかを受け手が知る手段にはならない。",
+   "revisit": "SCIM でプロビジョニングを受け、更新の版で同期の漏れを検出する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM のリソースのメタデータ（作成・更新日時、版）で、トークンに載せる理由がない。属性が最後にいつ変わったかを受け手が知る手段にはならない。",
+   "revisit": "SCIM でプロビジョニングを受け、更新の版で同期の漏れを検出する必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SCIM のリソースのメタデータ（作成・更新日時、版）で、トークンに載せる理由がない。属性が最後にいつ変わったかを受け手が知る手段にはならない。",
+   "revisit": "SCIM でプロビジョニングを受け、更新の版で同期の漏れを検出する必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0184",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0185",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0186",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0187",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0188",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0189",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0190",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0191",
+  "guide_part": "Part 8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化する手段がない。内部トークンは 300 秒の寿命で切れるのを待つ。",
+   "revisit": "RFC になり、寿命の長いトークンを期限前に無効化する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、重要な操作のイントロスペクションで補う。",
+   "revisit": "RFC になり、入口や IdP が Status List に対応したら",
+   "checks": [
+    "B12"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Token Status List（草案）の要素。個々のトークンを期限前に無効化できず、タスク単位の短命トークンと交換時の取り消しの再確認で補う。",
+   "revisit": "RFC になり、委任の取り消しをホップの途中のトークンにも即時に反映する必要が出たら",
+   "checks": [
+    "C9"
+   ]
+  }
+ },
+ {
+  "id": "CLM-0192",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SAML の RP メタデータで要求する識別子の種類で、トークンのクレームではない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SAML の RP メタデータで要求する識別子の種類で、トークンのクレームではない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SAML の RP メタデータで要求する識別子の種類で、トークンのクレームではない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0193",
+  "guide_part": "Part 3・10",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0030",
+    "CLM-0405"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。利用者かクライアントかは内部トークンの sub（CLM-0030）と client_id（CLM-0405）で区別する。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークンがアプリだけのもの（app）か利用者＋アプリかを判定し、利用者のいないトークンに user_id（ORG-02）を付けないようにする。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0030",
+    "CLM-0405"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。利用者かクライアントかは内部トークンの sub（CLM-0030）と client_id（CLM-0405）で区別する。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0194",
+  "guide_part": "Part 3・9",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "顧客テナントが Auth0 を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Auth0（RFC 9068 プロファイル）のトークン ID を監査ログに残し、内部トークンの jti と対応づける。",
+   "revisit": "Auth0 を入口から外したら、または Auth0 がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Auth0 を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "エージェントの利用者が Auth0 でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0195",
+  "guide_part": "Part 3・9",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Okta のトークン ID（AT. で始まる）を監査ログに残し、内部トークンの jti と対応づける。",
+   "revisit": "Okta を入口から外したら、または Okta がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Okta を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0196",
+  "guide_part": "Part 3・9",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークン ID（jti 相当）を監査ログに残し、発行した内部トークンの jti（CLM-0180）と対応づける。トークン全文は残さない。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0180"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。トークンの追跡は内部トークンの jti（CLM-0180）で行う。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0197",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito を接続しておらず、種類はヘッダーの typ（at+jwt）で確かめる。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Cognito のトークンはヘッダーで種類を区別できないので、入口で token_use=access を確かめて ID トークンを拒否する。",
+   "revisit": "Cognito を入口から外す、または Cognito がヘッダーの typ で種類を示すようになったら",
+   "checks": [
+    "B17"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito を接続しておらず、種類はヘッダーの typ（at+jwt）で確かめる。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0198",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "種類はヘッダーの typ（at+jwt）で確かめるので、Keycloak のペイロードの typ は読まない。失うものはない。",
+   "revisit": "クライアント設定 access.token.header.type.rfc9068 を外したら",
+   "checks": [
+    "A13"
+   ]
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口はヘッダーの typ（at+jwt）で ID トークンを拒否するので、ペイロードの typ は読まない。",
+   "revisit": "クライアント設定 access.token.header.type.rfc9068 を外したら",
+   "checks": [
+    "B2"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ヘッダーの typ（at+jwt）で確かめるので読まない。",
+   "revisit": "クライアント設定 access.token.header.type.rfc9068 を外したら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0199",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access のトークンの種類（app／org）で、Cloudflare Access を使っていない。種類はヘッダーの typ（at+jwt）で確かめる。",
+   "revisit": "Cloudflare Access を入口に置くようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access のトークンの種類（app／org）で、Cloudflare Access を使っていない。種類はヘッダーの typ（at+jwt）で確かめる。",
+   "revisit": "社内システムを Cloudflare Access の後ろに置くようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access のトークンの種類（app／org）で、Cloudflare Access を使っていない。種類はヘッダーの typ（at+jwt）で確かめる。",
+   "revisit": "Cloudflare Access を入口に置くようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0200",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-07"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。内部トークンの形式の版は名前空間の版（ORG-07）で表す。",
+   "revisit": "顧客テナントが Entra ID を IdP として持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "入口で Entra のトークンが v1.0 か v2.0 かを見て、iss・aud の形式の違いに合わせて正規化を分ける。",
+   "revisit": "Entra ID を入口から外したら、または Entra ID がこのクレームの形式・既定値を変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-07"
+   ],
+   "use_or_loss": "Entra を接続していないので読まない。内部トークンの形式の版は名前空間の版（ORG-07）で表す。",
+   "revisit": "エージェントの利用者が Entra ID でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0201",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta を接続していない。",
+   "revisit": "顧客テナントが Okta を持ち込み、入口に接続したら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta のトークンの形式の版で正規化を分ける必要は今はない。Okta が形式を変えたときに入口で気づく手がかりが 1 つ減る。",
+   "revisit": "Okta がトークンの版を上げてクレームの形式を変えたら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta を接続していない。",
+   "revisit": "エージェントの利用者が Okta でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0202",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito を接続していない。",
+   "revisit": "顧客テナントの利用者を Cognito のユーザープールで管理するようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "意味の説明がなく、正規化を分ける根拠にならない。失うものはない。",
+   "revisit": "Cognito が版の意味を文書化し、版でクレームの形式が変わるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito を接続していない。",
+   "revisit": "エージェントの利用者が Cognito でログインするようになったら（入口の正規化でのみ読む）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0203",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0204",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0205",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "検証可能な資格情報（VC）とその提示の語彙で、3 つのケースは VC を発行も受け取りもしない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-01",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "主体が今回の操作で属するテナント。パスやヘッダーの X-Tenant ではなくこの値だけを使い、発行したレルムと照合して SQL のテナント条件と SET LOCAL に渡す。",
+   "revisit": "",
+   "checks": [
+    "G12",
+    "G13",
+    "A5",
+    "A8",
+    "A10",
+    "A11",
+    "A12"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "固定値 corp。欠けたら拒否し、受け手が既定値で補わないことで、将来のテナント追加にも同じ検証が使える。",
+   "revisit": "",
+   "checks": [
+    "G12"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "固定値 corp。交換のたびに引き継ぎ、エージェントやツールが変えられないことを確かめる。",
+   "revisit": "",
+   "checks": [
+    "G12"
+   ]
+  }
+ },
+ {
+  "id": "ORG-02",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "組織内の利用者の不変 ID。請求書の持ち主（owner）との照合と監査に使い、メールやログイン名では照合しない。",
+   "revisit": "",
+   "checks": [
+    "A3"
+   ]
+  },
+  "B": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "IdP をまたいで同じ人を指す不変 ID。入口で IdP ごとの不変 ID から写し、各業務システムはこの値をキーにする。",
+   "revisit": "",
+   "checks": [
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "必須（共通基準）",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任の主体（利用者）の不変 ID。交換で差し替えられていないか、データの持ち主と一致するかを確かめる。",
+   "revisit": "",
+   "checks": [
+    "C3",
+    "C15"
+   ]
+  }
+ },
+ {
+  "id": "ORG-03",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "テナント内の粗いロール（例 approver・tenant-admin）を組織の語彙で運ぶ。請求書ごとの許可は PDP で都度判定する。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "各 IdP の groups・roles を入口で組織の語彙に正規化して運ぶ。欠けたら既定値で補わずに拒否し、クライアントが送ったヘッダーのロールは捨てる。",
+   "revisit": "",
+   "checks": [
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B9",
+    "B18",
+    "B19",
+    "B20",
+    "B21"
+   ]
+  },
+  "C": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任の主体（利用者）の粗いロールを運ぶ。エージェントに何を許すかは scope と act の行為者で決め、このロールだけでは支払いを許さない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-04",
+  "guide_part": "Part 4・8",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SaaS の顧客テナントの部門構成は扱わないため使い道がない。部門による絞り込みはできないが、必要ならテナント内の PDP で判定する。",
+   "revisit": "顧客テナントから部門単位の利用制限を求められたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内文書・経理の画面を部門で絞る。異動で変わるため、経理・管理の重要な操作ではディレクトリから引き直し、トークンの値だけでは判断しない。欠けたら拒否する。",
+   "revisit": "",
+   "checks": [
+    "B11",
+    "B15"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任は利用者・タスク・承認の単位で絞り、部門は判定に使わない。部門をまたぐ委任の制限はできない。",
+   "revisit": "部門ごとにエージェントの利用を制限する規則ができたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-05",
+  "guide_part": "Part 4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "顧客テナントの利用者に社員番号はなく使い道がない。",
+   "revisit": "自社の社員を運用担当として SaaS に入れ、社員番号で監査する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "社員番号をキーにする旧システム宛てのトークンだけに載せる（文字列で、他の宛先には載せない）",
+   "alt": [],
+   "use_or_loss": "社員番号でキーを引く旧システム（給与明細など）に渡すときだけ、数値でなく文字列で運ぶ。",
+   "revisit": "旧システムが user_id（ORG-02）で引けるようになったら外す",
+   "checks": [
+    "B22"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任は user_id で主体を表すので社員番号は要らない。",
+   "revisit": "エージェントが社員番号をキーにする旧システムを呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-06",
+  "guide_part": "Part 3・6",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "顧客が自分の IdP を持ち込む（BYO IdP）場合",
+   "alt": [],
+   "use_or_loss": "入口で受け取った元の IdP の種類を監査に残し、テナントが自社の IdP を持ち込んだときの正規化の分岐を追えるようにする。認可には使わない。",
+   "revisit": "BYO IdP を受けず、テナントの IdP を Keycloak のレルムだけに限ると決めたら外す",
+   "checks": []
+  },
+  "B": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "5 つの IdP のどれから来た利用者かを監査と障害調査で追う（正規化の誤りの切り分け）。認可には使わない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部のトークン交換の連鎖は STS だけが発行し、元の IdP の種類で判断することがない。どの IdP で認証したかを内部トークンから追えなくなるが、交換の監査ログで足りる。",
+   "revisit": "エージェントの利用者が複数の IdP から来るようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-07",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "名前空間オブジェクトの版。受け手は知っている版だけを読み、tenant_id の形式変更などを安全に出し分ける。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "名前空間オブジェクトの版。多くの業務システムが読むため、roles の形式変更などを版で出し分け、契約テストで検出する。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "名前空間オブジェクトの版。交換のたびに引き継ぎ、エージェント・ツールが知らない版のトークンを受けないようにする。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-08",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SaaS の API は人の承認つきの支払いを扱わないため使い道がない。",
+   "revisit": "SaaS に承認つきの支払い・振込の機能を加えたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムの支払いは人が自分で操作し、承認の内容をトークンに束縛する必要がない。",
+   "revisit": "経理の支払いを自動化し、承認者と実行者が分かれる流れをトークンで運ぶようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "人が承認した支払いの金額・相手先・対象を交換時にトークンへ入れ、支払いの API が要求の内容と照合する（本文に書いた承認 ID は信じない）。",
+   "revisit": "",
+   "checks": [
+    "C5",
+    "C6",
+    "C8"
+   ]
+  }
+ },
+ {
+  "id": "ORG-09",
+  "guide_part": "Part 8・10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントのタスクはなく使い道がない。",
+   "revisit": "SaaS にエージェントによる操作を加えたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントのタスクはなく使い道がない。",
+   "revisit": "社内システムにエージェントからの呼び出しを許したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "タスク単位の短命トークン（300 秒）にタスクの ID を入れ、トークンと監査ログでタスクを相関させる。タスクの範囲を超える要求（返金など）の拒否と取り消しの反映は、scope とタスク単位の短命トークン（short_task、実験 C9・C14）で行い、task_id はその判定には使わない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "ORG-10",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "人の承認を伴う操作をトークンで運ばないため使い道がない。",
+   "revisit": "SaaS に承認つきの操作を加えたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "承認は業務システムの中で完結し、トークンで運ぶ必要がない。",
+   "revisit": "承認と実行を別のシステム・主体が行うようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "採用",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "人の承認の記録の ID。存在する承認かを記録と照合し、内容は ORG-08 と突き合わせる。",
+   "revisit": "",
+   "checks": [
+    "C7",
+    "C8"
+   ]
+  }
+ }
+]

@@ -1,0 +1,5340 @@
+[
+ {
+  "id": "CLM-0596",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術機関の連合（eduPerson）の保証の語彙で、学術連合に参加しないマルチテナント SaaS には関係しない。",
+   "revisit": "学術機関をテナントとして連合経由で受け入れるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術機関の連合（eduPerson）の保証の語彙で、学術連合に参加しない社内業務システムには関係しない。",
+   "revisit": "学術機関と連合認証でつながるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "学術機関の連合（eduPerson）の保証の語彙で、学術連合に参加しない AI エージェントの委任には関係しない。",
+   "revisit": "学術機関の利用者の委任を受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0597",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。用途・形式も未確認。",
+   "revisit": "SaaS の API を Kubernetes 上のワークロードから ServiceAccount トークンで呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。用途・形式も未確認。社内サービスがクラスタ上で動いていても、利用者の認可には使わない。",
+   "revisit": "サービス間の認証を ServiceAccount トークンで行うことにしたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。用途・形式も未確認。",
+   "revisit": "エージェントやツールの身元を ServiceAccount トークンで示すようにしたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0598",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Origin）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Origin）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Origin）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0599",
+  "guide_part": "Part 4・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Pedigree）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Pedigree）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Pedigree）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0600",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Provider）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Provider）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Provider）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0601",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Method）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Method）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Method）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0602",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verifier）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verifier）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verifier）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0603",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "派生させた値（例 成年か）で判断する要件が請求書の SaaS にない。元の生年月日などはそもそも扱わない。このため年齢などの条件で機能を分けることはできない。",
+   "revisit": "年齢や居住地などの条件で機能を絞る要件が出たら（その場合は元の値でなく派生値を使う）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "派生させた値（例 成年か）で判断する要件が社内業務システムにない。元の生年月日などはそもそも扱わない。年齢・在籍年数などの条件による制御は、必要ならディレクトリで都度引く。",
+   "revisit": "年齢などの条件で操作を分ける社内規程ができたら（派生値で受ける）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "派生させた値（例 成年か）で判断する要件がエージェントの委任にない。元の生年月日などはそもそも扱わない。エージェントに元の個人情報を渡さずに条件だけ示す仕組みも、今は使わない。",
+   "revisit": "エージェントが利用者の属性の条件（成年かなど）を外部のサービスに示す必要が出たら（派生値で渡す）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0604",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Cognito の email_verified は使わず、利用者の照合は不変の user_id で行う。メールが検証済みかどうかでテナントの利用者を結び付けることはできなくなるが、nOAuth 型の取り違えを避けられる。",
+   "revisit": "メールアドレスでアカウントを結び付ける機能（招待・連携）を作るとき",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Cognito の email_verified は入口の正規化でも読まず、照合は不変の ID（oid+tid・uid など）から作る user_id で行う。メールの検証状態で社員を同定することはできない。Cognito では管理者が直接 true にできるため、照合に使うと危険。",
+   "revisit": "メールアドレスで IdP 間のアカウントを結び付ける必要が出たら",
+   "checks": [
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Cognito の email_verified は使わず、委任元の利用者は user_id で示す。エージェントがメールの検証状態を見て相手を判断することはできない。",
+   "revisit": "エージェントがメールで外部の相手を確かめる機能を持つようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0605",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Okta の email_verified は使わず、利用者の照合は不変の user_id で行う。メールが検証済みかどうかでテナントの利用者を結び付けることはできなくなるが、nOAuth 型の取り違えを避けられる。",
+   "revisit": "メールアドレスでアカウントを結び付ける機能（招待・連携）を作るとき",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Okta の email_verified は入口の正規化でも読まず、照合は不変の ID（oid+tid・uid など）から作る user_id で行う。メールの検証状態で社員を同定することはできない。Okta の値は primary email の状態で、メールが変われば意味も変わる。",
+   "revisit": "メールアドレスで IdP 間のアカウントを結び付ける必要が出たら",
+   "checks": [
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Okta の email_verified は使わず、委任元の利用者は user_id で示す。エージェントがメールの検証状態を見て相手を判断することはできない。",
+   "revisit": "エージェントがメールで外部の相手を確かめる機能を持つようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0606",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Entra の xms_edov は使わず、利用者の照合は不変の user_id で行う。メールが検証済みかどうかでテナントの利用者を結び付けることはできなくなるが、nOAuth 型の取り違えを避けられる。",
+   "revisit": "メールアドレスでアカウントを結び付ける機能（招待・連携）を作るとき",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Entra の xms_edov は入口の正規化でも読まず、照合は不変の ID（oid+tid・uid など）から作る user_id で行う。メールの検証状態で社員を同定することはできない。ドメイン所有の検証は、メールを識別子にしない限り要らない。",
+   "revisit": "メールアドレスで IdP 間のアカウントを結び付ける必要が出たら",
+   "checks": [
+    "B13",
+    "B14"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "メールでアカウントを結び付けないので使い道がない。Entra の xms_edov は使わず、委任元の利用者は user_id で示す。エージェントがメールの検証状態を見て相手を判断することはできない。",
+   "revisit": "エージェントがメールで外部の相手を確かめる機能を持つようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0607",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "国籍は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。テナントの利用者の国籍・出生地による制御はできない。",
+   "revisit": "本人確認（KYC）を要する業務をテナントに提供することになったら（その場合も UserInfo か verified_claims で、アクセストークンには載せない）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "国籍は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。人事上の情報は人事システムで扱い、トークンからは引けない。",
+   "revisit": "法令でこの値による制御が必要になったら（ディレクトリで都度引く）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "国籍は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。エージェントやツールにこの値を渡すことはできない。",
+   "revisit": "エージェントが本人確認を要する手続きを代行するようになったら（その場合も都度 API で取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0608",
+  "guide_part": "Part 3・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話番号を使う機能がなく、検証状態も要らない。管理者が直接 true にできる値で、SMS の宛先の確からしさは判断できなくなる。",
+   "revisit": "SMS の通知や電話番号での本人確認を SaaS に入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の電話番号の検証状態は、社内システムで電話番号を使わないので入口でも読まない。",
+   "revisit": "電話での追加認証を社内システム側で実装するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントが電話番号に連絡する機能はなく、検証状態も要らない。",
+   "revisit": "エージェントが利用者に SMS で承認を求めるようになったら（その場合も承認の記録は ORG-10）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0609",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。テナントの利用者の国籍・出生地による制御はできない。",
+   "revisit": "本人確認（KYC）を要する業務をテナントに提供することになったら（その場合も UserInfo か verified_claims で、アクセストークンには載せない）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。人事上の情報は人事システムで扱い、トークンからは引けない。",
+   "revisit": "法令でこの値による制御が必要になったら（ディレクトリで都度引く）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。エージェントやツールにこの値を渡すことはできない。",
+   "revisit": "エージェントが本人確認を要する手続きを代行するようになったら（その場合も都度 API で取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0610",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地の市区町村は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。テナントの利用者の国籍・出生地による制御はできない。",
+   "revisit": "本人確認（KYC）を要する業務をテナントに提供することになったら（その場合も UserInfo か verified_claims で、アクセストークンには載せない）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地の市区町村は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。人事上の情報は人事システムで扱い、トークンからは引けない。",
+   "revisit": "法令でこの値による制御が必要になったら（ディレクトリで都度引く）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "出生地の市区町村は個人情報（出生・国籍）で、アクセストークンに載せると害があり、ID トークンでもログイン画面に使い道がない。エージェントやツールにこの値を渡すことはできない。",
+   "revisit": "エージェントが本人確認を要する手続きを代行するようになったら（その場合も都度 API で取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0611",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Sign in with Apple を受け入れておらず、実在の人物らしさの判定は使えない。不正登録の対策は登録時の確認で行う。",
+   "revisit": "テナントの利用者に Apple でのサインインを許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社員は社内の IdP でサインインし、Apple の判定は来ない。",
+   "revisit": "Apple でのサインインを社内システムに受け入れることになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任元の利用者は社員で、Apple の判定は来ない。",
+   "revisit": "一般消費者の委任を Apple のサインインで受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0612",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証済みクレームの入れ物。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証済みクレームの入れ物。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証済みクレームの入れ物。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0613",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証されたクレームの本体（氏名・生年月日・住所など）。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証されたクレームの本体（氏名・生年月日・住所など）。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の検証されたクレームの本体（氏名・生年月日・住所など）。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0614",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の過程の情報。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の過程の情報。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の過程の情報。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0615",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証レベル。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証レベル。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証レベル。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0616",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証の手続き。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証の手続き。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の保証の手続き。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0617",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の証拠。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の証拠。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の証拠。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0618",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "本人確認書類の写しをトークンに入れると、誰でも読める JWS に機微な個人情報が大量に載る。KYC も要さない。",
+   "revisit": "KYC を扱うことになっても、書類はトークンでなく別の保管先で扱う（見直しは保管方式の変更時）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "書類の写しを社内のトークンに入れると、ログや中継のどこでも漏れうる。社内システムで使い道もない。",
+   "revisit": "同上：書類はトークンでなく人事システム側で扱う",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "書類の写しがエージェントやツールに渡ると、目的外の利用と漏えいを止められない。",
+   "revisit": "エージェントが本人確認書類を扱う業務を任されても、トークンでなく都度の API で渡す",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0619",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の証拠の種類。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の証拠の種類。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の証拠の種類。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0620",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の完了日時。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の完了日時。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の完了日時。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0621",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims のトラストフレームワーク。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims のトラストフレームワーク。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims のトラストフレームワーク。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0622",
+  "guide_part": "Part 2・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の手続きの参照。請求書の SaaS は KYC を要さず、本人確認の水準でテナントの利用者を区別することはできない。",
+   "revisit": "金融・行政などの KYC を要するテナントの業務を扱うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の手続きの参照。社員の身元は入社時に確かめ済みで、社内システムの認可に使い道がない。",
+   "revisit": "社外の個人を本人確認して社内システムに受け入れるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "verified_claims の本人確認の手続きの参照。社内の請求書の支払いは人の承認（ORG-10）で確かめ、本人確認の水準は見ない。",
+   "revisit": "エージェントに KYC を要する手続き（口座開設・社外への送金など）を任せるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0623",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では kube-apiserver も検証しない情報提供用の値。",
+   "revisit": "SaaS の API を Kubernetes 上のワークロードから ServiceAccount トークンで呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では kube-apiserver も検証しない情報提供用の値。社内サービスがクラスタ上で動いていても、利用者の認可には使わない。",
+   "revisit": "サービス間の認証を ServiceAccount トークンで行うことにしたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では kube-apiserver も検証しない情報提供用の値。ツールサーバーの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "エージェントやツールの身元を ServiceAccount トークンで示すようにしたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0624",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では検証されない値。",
+   "revisit": "SaaS の API を Kubernetes 上のワークロードから ServiceAccount トークンで呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では検証されない値。社内サービスがクラスタ上で動いていても、利用者の認可には使わない。",
+   "revisit": "サービス間の認証を ServiceAccount トークンで行うことにしたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Kubernetes の ServiceAccount トークンの属性。ケースはサービスを動かす基盤（クラスタ）の認証を扱わないので対象外。Pod 束縛では検証されない値。ツールサーバーの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "エージェントやツールの身元を ServiceAccount トークンで示すようにしたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0625",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDN 相互接続（CDNI）の URI 署名用で、API のトークンとは用途が違う。",
+   "revisit": "SaaS の配信に CDNI の URI 署名を使うことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDNI の URI 署名用で、社内システムに関係しない。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CDNI の URI 署名用で、エージェントの委任に関係しない。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0626",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub Actions のランナー種別）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub Actions のランナー種別）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub Actions のランナー種別）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0627",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab CI のランナー種別）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab CI のランナー種別）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab CI のランナー種別）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0628",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェント種別）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェント種別）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェント種別）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0629",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントの UUID。AI エージェントの ID ではない）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントの UUID。AI エージェントの ID ではない）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントの UUID。AI エージェントの ID ではない）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0630",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントタグ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントタグ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のエージェントタグ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0631",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタの UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタの UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタの UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0632",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタ名）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタ名）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のクラスタ名）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0633",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0634",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの key）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの key）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のキューの key）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0635",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のランナー ID。数値で型も揃っていない）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のランナー ID。数値で型も揃っていない）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のランナー ID。数値で型も揃っていない）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0636",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（IMDS の版）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（IMDS の版）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（IMDS の版）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0637",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 インスタンスの ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 インスタンスの ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 インスタンスの ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0638",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（Lambda 関数の ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（Lambda 関数の ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（Lambda 関数の ARN）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0639",
+  "guide_part": "Part 6・9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の利用者の国・地域で、A の IdP（Keycloak）は出さない。国で機能を分けることはできない。",
+   "revisit": "テナントの国ごとのデータ規制で処理を分ける必要が出たら（その場合もテナントの設定で持つ）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "利用者の国・地域は社内システムの認可に使わず、入口でも読まない。国で操作を絞る要件があれば PEP がディレクトリで都度引く。",
+   "revisit": "輸出管理など国による制御が社内規程で必要になったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任では国・地域を使わない。",
+   "revisit": "エージェントの操作を国ごとの規制で絞る必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0640",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の Multi-Geo の優先データ所在地で、A の IdP には無い。データの置き場所はテナントの設定で決め、トークンからは選べない。",
+   "revisit": "テナントのデータを地域ごとに置き分けるようになったら（テナントの設定で持つ）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Multi-Geo を使っておらず、入口でも読まない。利用者ごとのデータ所在地でサービスを振り分けることはできない。",
+   "revisit": "Entra の Multi-Geo を導入したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任ではデータ所在地を使わない。",
+   "revisit": "エージェントが地域ごとに置いたデータを扱うようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0641",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の記憶された端末の ID で、A は Cognito を使わない。端末の情報は PEP で要求ごとに見る。",
+   "revisit": "Cognito を IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。端末単位でトークンを絞ることはできないが、端末は発行後に変わりうるので PEP で都度評価する。",
+   "revisit": "端末ごとの失効や、端末に束縛したトークン（送信者制約）を入れることになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任では利用者の端末を見ない。呼び出し元はワークロード ID で確かめる。",
+   "revisit": "利用者の端末からの承認を端末に結び付ける必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0642",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の restricted 名として名前だけが載り、意味が文書にない。意味の分からない値は使えない。",
+   "revisit": "Microsoft が意味と発行条件を文書化したら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "意味が文書にないため入口でも読まない。端末の情報は PEP で都度評価する。",
+   "revisit": "Microsoft が意味と発行条件を文書化したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "意味が文書にないため使わない。",
+   "revisit": "Microsoft が意味と発行条件を文書化したら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0643",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Windows AutoPilot の展開用の端末 ID で、SaaS の認可に使い道がない。",
+   "revisit": "端末の展開状態で SaaS の利用を絞る要件が出たら（PEP で評価）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の展開は MDM・条件付きアクセスの側の話で、入口でも読まない。端末の状態は PEP で都度評価する。",
+   "revisit": "端末の展開状態で社内システムの利用を絞る要件が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任に使い道がない。",
+   "revisit": "エージェントが動く端末の展開状態を確かめる必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0644",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動回数。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動回数。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動回数。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0645",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動サイクルの識別値。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動サイクルの識別値。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動サイクルの識別値。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0646",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の RATS の概念メッセージの包み。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の RATS の概念メッセージの包み。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の RATS の概念メッセージの包み。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0647",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のデバッグ機能の状態。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のデバッグ機能の状態。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のデバッグ機能の状態。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0648",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の取得した認証（DLOA）。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の取得した認証（DLOA）。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の取得した認証（DLOA）。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0649",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の検証者の nonce。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の検証者の nonce。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の検証者の nonce。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0650",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT のプロファイル。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT のプロファイル。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT のプロファイル。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0651",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアのモデル。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアのモデル。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアのモデル。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0652",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアの版。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアの版。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のハードウェアの版。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0653",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT の用途。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT の用途。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の EAT の用途。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0654",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の地理的位置。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の地理的位置。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の地理的位置。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0655",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアのマニフェスト。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアのマニフェスト。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアのマニフェスト。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0656",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値の比較結果。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値の比較結果。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値の比較結果。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0657",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の測定値。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0658",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM に認可された起動か。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM に認可された起動か。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM に認可された起動か。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0659",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM の ID。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM の ID。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の OEM の ID。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0660",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のサブモジュール。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のサブモジュール。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のサブモジュール。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0661",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の半永続の UEID。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の半永続の UEID。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の半永続の UEID。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0662",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの名前。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの名前。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの名前。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0663",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの版。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの版。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）のソフトウェアの版。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0664",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の一意 ID。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の一意 ID。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の端末の一意 ID。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0665",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動からの秒数。利用者のアクセストークンとは用途が違い、SaaS では端末の証明を扱わない。",
+   "revisit": "端末の証明を条件にテナントの利用を許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動からの秒数。社内の端末の健全性は MDM・条件付きアクセスの側で扱い、トークンには入れない。",
+   "revisit": "端末の証明結果を入口の PEP で評価するようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "端末の証明（EAT・RATS）の起動からの秒数。エージェントの委任とは用途が違う。",
+   "revisit": "エージェントが動く環境の証明を委任の条件にするようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0666",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access のトークンで、A の前段に Cloudflare Access は無い。認証した国は発行後に古くなるので、場所での制御をするなら PEP で要求ごとに見る。",
+   "revisit": "Cloudflare Access を SaaS の前段に置いたら（その場合も入口の正規化で読むだけ）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access を使っておらず、入口でも読まない。場所による制御は PEP で要求ごとに評価する。",
+   "revisit": "Cloudflare Access を社内システムの前段に置いたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任で利用者の国は使わない。",
+   "revisit": "Cloudflare Access 経由でエージェントを公開するようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0667",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Keycloak のサービスアカウントの認証元 IP で、認証時点の値のまま古くなる。テナントの API を呼ぶ機械の IP をトークンで確かめることはできないが、呼び出し元の IP は PEP が要求ごとに見る。",
+   "revisit": "連携先の送信元 IP をテナントごとに監査で突き合わせる要件が出たら（ログ側で記録）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。社内の IP がトークン経由で下流やログに広がることも避ける。",
+   "revisit": "サービスアカウントの認証元を監査で突き合わせる要件が出たら（ログ側で記録）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ツールの身元は mTLS のワークロード ID で確かめ、認証時の IP は使わない。",
+   "revisit": "ツールの身元確認を IP 制限に頼る構成に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0668",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "サービスアカウントの認証元ホスト名で、認証時点の値のまま古くなる。PEP で要求ごとに見る。",
+   "revisit": "連携先のホストを監査で突き合わせる要件が出たら（ログ側で記録）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。社内のホスト名を下流に広げない。",
+   "revisit": "サービスアカウントの認証元を監査で突き合わせる要件が出たら（ログ側で記録）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ツールの身元は mTLS のワークロード ID で確かめ、ホスト名は使わない。",
+   "revisit": "ツールの身元確認をホスト名に頼る構成に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0669",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の VNET 内の元の IP で、A の IdP には無い。送信元は PEP で要求ごとに見る。",
+   "revisit": "Entra を IdP として受け入れ、VNET 内からの利用を区別する必要が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。発行時の IP で要求元を判断することはできないが、送信元は PEP で要求ごとに見る。",
+   "revisit": "社内ネットワークの構成上、入口から元の IP が見えなくなったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任では利用者の IP を使わない。",
+   "revisit": "エージェントの呼び出し元を IP で絞る必要が出たら（PEP で評価）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0670",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 のプライベート IPv4）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 のプライベート IPv4）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（EC2 のプライベート IPv4）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0671",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の、利用者が認証した IP で、A の IdP には無い。認証時の IP は発行後に古くなり、IP による制限はできないが、PEP で要求ごとに見る。",
+   "revisit": "テナントが IP 制限を求め、PEP で実装できない事情が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。認証時の IP で社内アクセスを判断すると、トークンの寿命の間に場所が変わっても通ってしまう。送信元は PEP で要求ごとに見る。",
+   "revisit": "トークンの盗用の兆候が出て、発行時の IP との食い違いを検知に使うことにしたら（その場合もログと PEP で）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任では利用者の IP を使わない。",
+   "revisit": "エージェントの呼び出し元を IP で絞る必要が出たら（PEP で評価）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0672",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。LDAP の部屋番号で、SaaS の利用者には使い道がない。",
+   "revisit": "テナントのディレクトリ連携で部屋番号を表示する機能を作ったら（ID トークンのみ）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "アクセストークン：禁止（載せない）／ID トークン：このケースでは不要。部屋番号は社員の所在の情報で、認可に使わない。座席表などはディレクトリの API で引く。",
+   "revisit": "座席・会議室のクライアントがログイン画面で部屋番号を表示する必要が出たら（ID トークンのみ）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任に使い道がない。",
+   "revisit": "エージェントに会議室の手配などを任せるようになったら（都度 API で取る）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0673",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Geohash の位置で、用途も未確認。位置は発行後に古くなるので、場所での制御をするなら PEP で要求ごとに見る。",
+   "revisit": "位置による制御をテナントが求めたら（PEP で評価）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムで位置を使わず、入口でも読まない。",
+   "revisit": "位置による制御が社内規程で必要になったら（PEP で評価）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任で位置は使わない。",
+   "revisit": "エージェントの操作を利用者の位置で絞る必要が出たら（PEP で評価）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0674",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（VPC ID）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（VPC ID）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（VPC ID）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0675",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の「企業ネットワークからか」で、A の IdP には無い。",
+   "revisit": "Entra を IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。社外では値が出ない（無い）ので無い・false の区別に頼ることになり、発行後にネットワークを移っても値が変わらない。社内からのみの制御は PEP で要求ごとに送信元を見る。",
+   "revisit": "社内ネットワークの判定を IdP の信頼できる IP 設定に一本化し、PEP で判定できなくなったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任ではネットワークの場所を使わない。",
+   "revisit": "エージェントの操作を社内ネットワークからに限る必要が出たら（PEP で評価）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0676",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の VNET 指定子で、A の IdP には無い。",
+   "revisit": "Entra を IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。どの VNET からの要求かは PEP が要求ごとに見る。",
+   "revisit": "VNET 単位で社内システムの利用を絞る要件が出たら（PEP で評価）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任に使い道がない。",
+   "revisit": "エージェントが VNET 内からだけ呼べるようにする必要が出たら（PEP で評価）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0677",
+  "guide_part": "Part 3・6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Keycloak が AT に付ける許可された Web オリジン。CORS は API の設定で決め、トークンから読まない。トークンでオリジンを絞ることはできない。",
+   "revisit": "ブラウザから直接テナントの API を呼ぶクライアントを、テナントごとに違うオリジンで増やすことになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "入口でも読まず、内部トークンに載せない。CORS は入口の設定で決める。",
+   "revisit": "Keycloak のクライアントごとのオリジンを入口の CORS の設定の元にする運用に変えたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントとツールはブラウザを経由せず、オリジンは使わない。",
+   "revisit": "ブラウザで動くエージェントの画面から API を呼ぶようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0678",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（要求したリージョン）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（要求したリージョン）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（要求したリージョン）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0679",
+  "guide_part": "Part 6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Transaction Tokens（草案）の要求の環境で、A はサービス間の伝搬に Txn-Token を使わない。要求元の情報は PEP が要求ごとに見る。",
+   "revisit": "Transaction Tokens が RFC になり、サービス間の伝搬を Txn-Token に移したら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムは内部トークンだけを伝え、Txn-Token を使わない。要求元の IP などは入口の PEP が要求ごとに評価する。",
+   "revisit": "Transaction Tokens が RFC になり、サービス間の伝搬を Txn-Token に移したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "ホップごとに宛先に束縛した交換を行い、Txn-Token は使わない。要求の環境を下流のツールに伝えることはできないが、各ホップの PEP で見る。",
+   "revisit": "Transaction Tokens が RFC になり、エージェントの呼び出しの連鎖を Txn-Token で伝えることにしたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0680",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。Entra の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。Hybrid などのフローで ID トークンの横取りを検出する手段は持たない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。ポータルのログインで、トークンの差し替えを ID トークンで検出することはしない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra を使わない。Entra の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0681",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Okta を使わない。Okta の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。Hybrid などのフローで ID トークンの横取りを検出する手段は持たない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Okta の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。ポータルのログインで、トークンの差し替えを ID トークンで検出することはしない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Okta を使わない。Okta の ID トークンの値。コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0682",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。Entra の ID トークンの値。コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。Hybrid などのフローで ID トークンの横取りを検出する手段は持たない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra の ID トークンの値。コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。ポータルのログインで、トークンの差し替えを ID トークンで検出することはしない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra を使わない。Entra の ID トークンの値。コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0683",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "集約・分散クレームを使う IdP が A に無い。テナントのクレームは自己完結のトークンで受け、外部の取得元をたどることはしない。",
+   "revisit": "分散クレームを返す IdP をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "分散クレームの名前と取得元の対応で、入口がグループの超過（groups が消えた）を検出し、ディレクトリで引き直す手がかりにする。内部トークンには ORG-03 のロールに正規化して載せる。",
+   "revisit": "入口がすべての IdP のグループを常にディレクトリで引くように変えたら、または超過の起きない IdP に一本化したら",
+   "checks": [
+    "B8",
+    "B9"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部の発行サービスのトークンだけを使い、分散クレームは出ない。",
+   "revisit": "外部の IdP のトークンをエージェントの経路で直接受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0684",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "集約・分散クレームを使う IdP が A に無く、外部の取得元をたどることはしない。",
+   "revisit": "分散クレームを返す IdP をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "超過時の取得元を示すが、入口はその endpoint を信用せず、組織が決めたディレクトリで引き直す。結果は ORG-03 のロールに正規化する。",
+   "revisit": "入口がすべての IdP のグループを常にディレクトリで引くように変えたら",
+   "checks": [
+    "B8",
+    "B9"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "内部の発行サービスのトークンだけを使い、分散クレームは出ない。",
+   "revisit": "外部の IdP のトークンをエージェントの経路で直接受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0685",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わず、グループの超過も起きない。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Entra のトークンで groups が超過して消えたこと（{\"groups\":\"src1\"}）を入口が検出し、ディレクトリでグループを引き直して ORG-03 に正規化する。見落とすと超過した管理者の正規の操作が拒否される。",
+   "revisit": "Entra のグループの代わりにアプリのロール（roles）だけで足りるように設計を変えたら",
+   "checks": [
+    "B8",
+    "B9"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra のトークンを直接受けない。",
+   "revisit": "Entra Agent ID のトークンを入口で受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0686",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "超過時のグループ取得 URL。入口はこの URL をそのまま信用せず、決め打ちの Microsoft Graph のエンドポイントで引き直す。結果は ORG-03 に正規化する。",
+   "revisit": "Entra のグループの代わりにアプリのロール（roles）だけで足りるように設計を変えたら",
+   "checks": [
+    "B8",
+    "B9"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra のトークンを直接受けない。",
+   "revisit": "Entra Agent ID のトークンを入口で受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0687",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "ポータルが Entra でログインするとき、ID トークンの nonce を認可要求の値と照合し、再送された ID トークンを拒否する。",
+   "revisit": "ポータルを BFF に変えて ID トークンを扱う場所が変わったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C の委任のログインは社内の Keycloak で行い、Entra の nonce は来ない。",
+   "revisit": "Entra で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0688",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "テナントの利用者が Keycloak のレルムでログインするとき、SaaS の Web クライアントが nonce を照合する。リフレッシュ後の ID トークンには付かないので、照合はログイン時だけにする。",
+   "revisit": "SaaS の Web を BFF に変えて ID トークンを扱う場所が変わったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "ポータルが社内の Keycloak でログインするとき nonce を照合する。リフレッシュ時には付かないことを前提にする。",
+   "revisit": "ポータルを BFF に変えて ID トークンを扱う場所が変わったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "利用者がエージェントへの委任を始めるために Keycloak でログインするとき、クライアントが nonce を照合する。エージェントやツールには ID トークンを渡さない。",
+   "revisit": "委任の開始を CIBA など ID トークンを使わない方式に変えたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0689",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Cognito を使わない。",
+   "revisit": "Cognito をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "ポータルが Cognito でログインするとき nonce を照合する。外部 IdP 経由では Cognito が自動で付けるので、クライアントが付けた値かどうかを区別する。",
+   "revisit": "ポータルを BFF に変えて ID トークンを扱う場所が変わったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C の委任のログインは Keycloak で行い、Cognito の nonce は来ない。",
+   "revisit": "Cognito で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0690",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Okta を使わない。",
+   "revisit": "Okta をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "ID トークンのみ、ログイン時にクライアント（RP）が認可要求の値と照合する（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "ポータルが Okta でログインするとき nonce を照合する（コードフローでも付けて照合する）。",
+   "revisit": "ポータルを BFF に変えて ID トークンを扱う場所が変わったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C の委任のログインは Keycloak で行い、Okta の nonce は来ない。",
+   "revisit": "Okta で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0691",
+  "guide_part": "Part 1・3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Sign in with Apple を受け入れておらず、nonce への対応の有無を見る必要がない。",
+   "revisit": "テナントの利用者に Apple でのサインインを許すようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社員は Apple でサインインしない。",
+   "revisit": "Apple でのサインインを社内システムに受け入れることになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "委任元の利用者は Apple でサインインしない。",
+   "revisit": "一般消費者の委任を Apple のサインインで受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0692",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の STIR 証明書の OCSP ステープル（草案）で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の STIR 証明書の OCSP ステープル（草案）で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の STIR 証明書の OCSP ステープル（草案）で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0693",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の転送前の PASSporT で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の転送前の PASSporT で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の転送前の PASSporT で、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0694",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）のメッセージのダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）のメッセージのダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）のメッセージのダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0695",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の rcd の完全性ダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の rcd の完全性ダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電話の発信者認証（SIP/PASSporT）の rcd の完全性ダイジェストで、API のトークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0696",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の配列要素の選択的開示のダイジェスト。内部トークンには個人情報を載せず、受け手ごとに開示を絞る必要がない。利用者が自分のクレームを選んで第三者に示すことはできない。",
+   "revisit": "テナントの利用者が自分のクレームを選んで第三者に提示する用途が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の配列要素の選択的開示のダイジェスト。SD-JWT は B では見送り（トークンは社内にとどまり、個人情報を載せない）。受け手ごとに開示を絞ることはできない。",
+   "revisit": "トークンが社外・取引先へ渡るようになり、受け手ごとに開示を絞る必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の配列要素の選択的開示のダイジェスト。エージェントには必要な宛先・範囲だけを交換で渡すので、選択的開示は使わない。",
+   "revisit": "エージェントが利用者の情報を受け手ごとに選んで外部に示す必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0697",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の選択的開示のダイジェストの配列。内部トークンには個人情報を載せず、受け手ごとに開示を絞る必要がない。利用者が自分のクレームを選んで第三者に示すことはできない。",
+   "revisit": "テナントの利用者が自分のクレームを選んで第三者に提示する用途が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の選択的開示のダイジェストの配列。SD-JWT は B では見送り（トークンは社内にとどまり、個人情報を載せない）。受け手ごとに開示を絞ることはできない。",
+   "revisit": "トークンが社外・取引先へ渡るようになり、受け手ごとに開示を絞る必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の選択的開示のダイジェストの配列。エージェントには必要な宛先・範囲だけを交換で渡すので、選択的開示は使わない。",
+   "revisit": "エージェントが利用者の情報を受け手ごとに選んで外部に示す必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0698",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT のダイジェストのハッシュアルゴリズム。内部トークンには個人情報を載せず、受け手ごとに開示を絞る必要がない。利用者が自分のクレームを選んで第三者に示すことはできない。",
+   "revisit": "テナントの利用者が自分のクレームを選んで第三者に提示する用途が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT のダイジェストのハッシュアルゴリズム。SD-JWT は B では見送り（トークンは社内にとどまり、個人情報を載せない）。受け手ごとに開示を絞ることはできない。",
+   "revisit": "トークンが社外・取引先へ渡るようになり、受け手ごとに開示を絞る必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT のダイジェストのハッシュアルゴリズム。エージェントには必要な宛先・範囲だけを交換で渡すので、選択的開示は使わない。",
+   "revisit": "エージェントが利用者の情報を受け手ごとに選んで外部に示す必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0699",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の KB-JWT が結び付く SD-JWT のダイジェスト。内部トークンには個人情報を載せず、受け手ごとに開示を絞る必要がない。利用者が自分のクレームを選んで第三者に示すことはできない。",
+   "revisit": "テナントの利用者が自分のクレームを選んで第三者に提示する用途が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の KB-JWT が結び付く SD-JWT のダイジェスト。SD-JWT は B では見送り（トークンは社内にとどまり、個人情報を載せない）。受け手ごとに開示を絞ることはできない。",
+   "revisit": "トークンが社外・取引先へ渡るようになり、受け手ごとに開示を絞る必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT の KB-JWT が結び付く SD-JWT のダイジェスト。エージェントには必要な宛先・範囲だけを交換で渡すので、選択的開示は使わない。",
+   "revisit": "エージェントが利用者の情報を受け手ごとに選んで外部に示す必要が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0700",
+  "guide_part": "Part 2",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電子署名の検証結果を記録するトークン（SVT）で、アクセストークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電子署名の検証結果を記録するトークン（SVT）で、アクセストークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "電子署名の検証結果を記録するトークン（SVT）で、アクセストークンとは用途が違う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0701",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。Hybrid などのフローで ID トークンの横取りを検出する手段は持たない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。ポータルのログインで、トークンの差し替えを ID トークンで検出することはしない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフロー（PKCE）でアクセストークンをトークンエンドポイントから直接受け取るので、ID トークンとアクセストークンの結び付けの検証は要らない。",
+   "revisit": "Hybrid／implicit フローを使うクライアントが出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0702",
+  "guide_part": "Part 1",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。Hybrid などのフローで ID トークンの横取りを検出する手段は持たない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。ポータルのログインで、トークンの差し替えを ID トークンで検出することはしない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "コードフローで認可コードを ID トークンと一緒に受け取らないので、コードの差し替えの検出に使い道がない。",
+   "revisit": "Hybrid フローを使うクライアントが出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0703",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT VC（草案）の型メタデータのハッシュ。A は VC を発行・受理しない。",
+   "revisit": "SD-JWT VC が RFC になり、テナントが VC を受け入れるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT VC（草案）の型メタデータのハッシュ。B は SD-JWT 自体を見送り、VC も扱わない。",
+   "revisit": "SD-JWT VC が RFC になり、社員証などを VC で扱うようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "SD-JWT VC（草案）の型メタデータのハッシュ。エージェントの委任は VC でなく交換したトークンで表す。",
+   "revisit": "SD-JWT VC が RFC になり、エージェントの資格を VC で示すようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0704",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者のアカウント名。改名・再取得されうるので、使うとしても actor_id）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者のアカウント名。改名・再取得されうるので、使うとしても actor_id）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者のアカウント名。改名・再取得されうるので、使うとしても actor_id）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0705",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者の数値 ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者の数値 ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の実行者の数値 ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0706",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者の ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者の ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者の ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0707",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者のユーザー名（変わりうる））。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者のユーザー名（変わりうる））。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブ実行者のユーザー名（変わりうる））。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0708",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のコミット SHA）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のコミット SHA）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のコミット SHA）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0709",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のコミット SHA）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のコミット SHA）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のコミット SHA）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0710",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0711",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの由来メタデータ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの由来メタデータ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの由来メタデータ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0712",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0713",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定の ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定の ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定の ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0714",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定のリポジトリ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定のリポジトリ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の設定のリポジトリ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0715",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のパイプライン定義の UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のパイプライン定義の UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のパイプライン定義の UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0716",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフロー名）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフロー名）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフロー名）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0717",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0718",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の SHA）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の SHA）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプライン定義の SHA）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0719",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの SHA）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの SHA）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の再利用ワークフローの SHA）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0720",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの SHA）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの SHA）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のワークフローの SHA）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0721",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の context の UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の context の UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の context の UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0722",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のデプロイ階層）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のデプロイ階層）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のデプロイ階層）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0723",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の environment 名）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の environment 名）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の environment 名）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0724",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0725",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment の操作）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment の操作）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の environment の操作）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0726",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクト ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクト ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクト ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0727",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0728",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0729",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のプロジェクトの UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のプロジェクトの UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI のプロジェクトの UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0730",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ（V3 以外））。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ（V3 以外））。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動元リポジトリ（V3 以外））。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0731",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの UUID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの UUID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの UUID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0732",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの slug）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの slug）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のパイプラインの slug）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0733",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクト ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクト ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクト ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0734",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトのパス）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトのパス）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトのパス）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0735",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリ名。改名されうるので、使うとしても repository_id）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリ名。改名されうるので、使うとしても repository_id）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリ名。改名されうるので、使うとしても repository_id）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0736",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの数値 ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの数値 ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの数値 ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0737",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクト ID）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクト ID）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクト ID）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0738",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のソースのプロジェクトのパス）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0739",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された environment か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された environment か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された environment か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0740",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された ref か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された ref か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の保護された ref か（文字列の真偽値））。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0741",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のマージ先）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のマージ先）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のマージ先）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0742",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のブランチ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のブランチ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のブランチ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0743",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のタグ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のタグ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のタグ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0744",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のソースブランチ）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のソースブランチ）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の PR のソースブランチ）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0745",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0746",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref（V3 以外））。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref（V3 以外））。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の起動した ref（V3 以外））。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0747",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動した ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動した ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動した ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0748",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0749",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の完全修飾 ref）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の完全修飾 ref）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の完全修飾 ref）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0750",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の ref の種類）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の ref の種類）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の ref の種類）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0751",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の ref の種類）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の ref の種類）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab の ref の種類）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0752",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の SSH 再実行か）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の SSH 再実行か）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（CircleCI の SSH 再実行か）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0753",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のステップの key）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のステップの key）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のステップの key）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0754",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のビルドの起動元）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のビルドの起動元）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（Buildkite のビルドの起動元）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0755",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動イベント名）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動イベント名）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub の起動イベント名）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0756",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの起動元）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの起動元）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のジョブの起動元）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0757",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプラインの起動元）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプラインの起動元）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のパイプラインの起動元）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0758",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトの可視性）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトの可視性）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitLab のプロジェクトの可視性）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0759",
+  "guide_part": "Part 5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの可視性）。ケースはデプロイ基盤を扱わない。SaaS を配備するパイプラインからクラウドへの連携も本ケーススタディの範囲外。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの可視性）。ケースはデプロイ基盤を扱わない。社内サービスを配備するパイプラインはありうるが、利用者の認可とは別の信頼の経路で、本ケーススタディでは扱わない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "CI/CD のワークロード属性（GitHub のリポジトリの可視性）。ケースはデプロイ基盤を扱わない。エージェントの身元とは別物で、エージェントの委任には関係しない。",
+   "revisit": "デプロイ基盤（CI からクラウドへの OIDC 連携）をケーススタディに含めたら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0760",
+  "guide_part": "Part 4・5",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（呼び出し側が任意に付けるタグ。自己申告の値で、認可には使えない）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。テナントの利用者の認可には関係しない。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（呼び出し側が任意に付けるタグ。自己申告の値で、認可には使えない）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。社内システムの入口は利用者のトークンだけを受ける。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "AWS STS の外向きの連携（GetWebIdentityToken）が出すワークロードの属性（呼び出し側が任意に付けるタグ。自己申告の値で、認可には使えない）。ケースは AWS 上のワークロードから外部を呼ぶ連携を扱わない。ツールの身元は mTLS のワークロード ID で確かめている。",
+   "revisit": "AWS 上のワークロードから組織の API を STS の JWT で呼ばせるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0761",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Classification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Classification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Classification）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0762",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Releasability）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Releasability）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Releasability）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0763",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Allowed Values）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Allowed Values）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Allowed Values）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0764",
+  "guide_part": "Part 9・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Processing）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Processing）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Data Processing）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0765",
+  "guide_part": "Part 11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Description）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Description）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Description）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0766",
+  "guide_part": "Part 4・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Format）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Format）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Format）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0767",
+  "guide_part": "Part 8・11",
+  "A": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Frequency）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "B": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Frequency）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  },
+  "C": {
+   "judgement": "対象外",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "NIST IR 8112 の属性メタデータ（Verification Frequency）。トークンには載せず、台帳（この一覧表）の列として使う。",
+   "revisit": "",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0768",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Cognito を使わない。",
+   "revisit": "Cognito をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito のカスタム属性は、設定によっては利用者本人が書き換えられ、常に文字列で出る。認可に使うと custom:role=admins のような自己申告で管理操作が通る。ロールは入口が cognito:groups などから ORG-03 に正規化する。",
+   "revisit": "カスタム属性をアプリクライアントの書き込み権限で本人が変えられないことを、設定と契約テストで保証できたら（それでも入口の正規化でのみ読む）",
+   "checks": [
+    "B18"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Cognito を使わない。",
+   "revisit": "Cognito で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0769",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Cognito を使わない。",
+   "revisit": "Cognito をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cognito の開発者属性は非推奨の旧機能で、新しく使わない。入口でも読まない。",
+   "revisit": "Cognito が開発者属性を廃止したら行ごと整理する",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Cognito を使わない。",
+   "revisit": "Cognito で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0770",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-04"
+   ],
+   "use_or_loss": "Entra のディレクトリ拡張属性を独自のクレームとして出さない。部門などは入口が組織の名前空間（ORG-04）に正規化して書くので、Entra 側の名前（extension_<appid>_…）に受け手が依存しなくなる。",
+   "revisit": "入口の正規化で拡張属性を読む必要が出たら（その場合は条件付き採用、入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra のトークンを直接受けない。",
+   "revisit": "Entra Agent ID のトークンを入口で受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0771",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Okta を使わない。",
+   "revisit": "Okta をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Okta の Custom AS で出す部署などの値を入口が読み、ORG-04・ORG-03 に正規化する。値が欠けたら既定値で補わず拒否する。",
+   "revisit": "Okta の値をディレクトリの API で引く方式に変えたら",
+   "checks": [
+    "B15"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Okta を使わない。",
+   "revisit": "Okta で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0772",
+  "guide_part": "Part 3・5",
+  "A": {
+   "judgement": "条件付き採用",
+   "condition": "テナントのレルムで tenant_id を出す入力としてのみ使う（受け手は iss と照合する）",
+   "alt": [],
+   "use_or_loss": "各テナントのレルムで、組織の名前空間の tenant_id を固定値で出す。テナント管理者が自分のレルムで別のテナントを名乗れるので、受け手は tenant_id を発行したレルム（iss）と照合する。",
+   "revisit": "テナントのレルムの管理をテナントに任せなくなったら、または tenant_id を入口の発行サービスだけが書く構成に変えたら",
+   "checks": [
+    "A8",
+    "A10",
+    "A11"
+   ]
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "社内の Keycloak のレルムで tenant_id を固定値 corp として出す。内部トークンの tenant_id は入口が書き直す。",
+   "revisit": "入口の発行サービスが tenant_id を常に自分で付けるようにしたら（マッパーは不要になる）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C のトークンは内部の発行サービスが作り、Keycloak の固定値のクレームは使わない。",
+   "revisit": "エージェントの経路で Keycloak のトークンを直接受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0773",
+  "guide_part": "Part 3・6",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Cognito を使わない。",
+   "revisit": "Cognito をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Cognito の発行前フックで足した・外したクレームを入口が読む。フックが cognito:groups を外したら、既定値で補わず拒否し、ロールは ORG-03 に正規化する。",
+   "revisit": "Cognito のグループをディレクトリで引く方式に変えたら",
+   "checks": [
+    "B19"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Cognito を使わない。",
+   "revisit": "Cognito で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0774",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "デプロイした JavaScript でクレームを作る Script マッパーは使わない。テナントの管理者がレルムで任意の値を作れる経路を増やさない。",
+   "revisit": "固定値と属性のマッパーで表せない値がテナントのトークンに必要になったら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Script マッパーは使わない。社内のクレームは属性のマッパーと入口の正規化で足りる。",
+   "revisit": "属性のマッパーで表せない値が必要になったら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C のトークンは内部の発行サービスが作り、Keycloak のマッパーは使わない。",
+   "revisit": "エージェントの経路で Keycloak のトークンを直接受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0775",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A ではテナントの利用者の属性をクレームに写さない。細かい権限は PDP で都度判定する。",
+   "revisit": "テナントの利用者の属性（部署など）で粗い認可をする要件が出たら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "社内の Keycloak で利用者の department 属性を組織の名前空間のクレームに写す。発行時点の写しなので、重要な操作では入口がディレクトリで引き直す。",
+   "revisit": "department をディレクトリの API だけで引く方式に変えたら",
+   "checks": [
+    "B11",
+    "B15"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C のトークンは内部の発行サービスが作り、Keycloak の属性マッパーは使わない。",
+   "revisit": "エージェントの経路で Keycloak のトークンを直接受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0776",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "ORG-03",
+    "ORG-04"
+   ],
+   "use_or_loss": "Entra 側で任意名のクレームを足さず、入口が groups・roles とディレクトリから ORG-03・ORG-04 を作る。Entra の設定変更が受け手の契約を直接壊すことはなくなる。",
+   "revisit": "Entra の claims mapping でしか得られない値が必要になったら（その場合は入口の正規化でのみ読む）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Entra のトークンを直接受けない。",
+   "revisit": "Entra Agent ID のトークンを入口で受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0777",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Auth0 を使わない。",
+   "revisit": "Auth0 をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "条件付き採用",
+   "condition": "入口の正規化でのみ読む（内部トークンには載せない）",
+   "alt": [],
+   "use_or_loss": "Auth0 の Action が名前空間付きで足したロール（https://claims.example.com/ の下）を入口が読み、ORG-03 に正規化する。予約名で足すと黙って外れるため、名前空間付きだけを読む。",
+   "revisit": "Auth0 の RBAC（permissions）に移したら",
+   "checks": [
+    "B20",
+    "B21"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Auth0 を使わない。",
+   "revisit": "Auth0 で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0778",
+  "guide_part": "Part 3・4",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Auth0 を使わない。",
+   "revisit": "Auth0 をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・代替あり",
+   "condition": "",
+   "alt": [
+    "CLM-0777"
+   ],
+   "use_or_loss": "名前空間なしのカスタムクレームは使わない。予約名（roles など）と衝突すると Auth0 が黙って外し、既定の権限で処理される。名前空間付きのクレームで受ける。",
+   "revisit": "Auth0 が名前空間なしのクレームの制約を撤廃し、黙って外す挙動がなくなったら",
+   "checks": [
+    "B20"
+   ]
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Auth0 を使わない。",
+   "revisit": "Auth0 で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0779",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Entra Agent ID のサンプルに現れるだけで意味が文書にない。A は Entra を使わない。",
+   "revisit": "Microsoft が意味を文書化したら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "意味が文書にないため、入口でも読まない。",
+   "revisit": "Microsoft が意味を文書化したら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントのトークンに現れうるが、意味が文書にないため、エージェントの身元や委任の判断に使わない。",
+   "revisit": "Microsoft が意味を文書化し、Entra Agent ID を入口で受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0780",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Entra を使わない。パスワードの変更は IdP の画面で行う。",
+   "revisit": "Entra をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "パスワードの変更案内は IdP の画面の役目で、内部トークンには載せない。ポータルから変更画面へ誘導することはできない。",
+   "revisit": "ポータルでパスワードの期限切れを案内する要件が出たら（ID トークンのみ）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "エージェントの委任に使い道がない。",
+   "revisit": "エージェントの委任に関係する使い道が出たら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0781",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "A は Cognito を使わない。",
+   "revisit": "Cognito をテナントの IdP として受け入れたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "cognito: で始まる名前は Cognito の予約で、組織のクレームにこの接頭辞を使わない。cognito:groups は別の行で扱う。",
+   "revisit": "Cognito が新しい予約クレームを文書化し、入口で読む必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "C は Cognito を使わない。",
+   "revisit": "Cognito で委任のログインを受けるようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0782",
+  "guide_part": "Part 10",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "操作のリスクを示す文脈クレームで、A の細かい判定は PDP で都度行い、トークンに載せない。",
+   "revisit": "リスクに応じた追加認証をトークンの発行時に決める設計に変えたら",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "社内システムでは重要な操作を鮮度確認で扱い、リスクのラベルをトークンに載せない。",
+   "revisit": "リスクの評価をトークンの発行時に固定する必要が出たら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "操作のリスクを示す文脈クレームで、C はリスクの値で判断しないので使い道がない。リスクの値でツールが自ら判断することはできない。支払いの可否は、これとは別に承認の束縛（ORG-08・ORG-10）で確かめる。",
+   "revisit": "CoSAI などの文脈クレームが標準になり、PDP がリスクの値を入力に使うようになったら",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0783",
+  "guide_part": "Part 9",
+  "A": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "決して返さない種類の値で、トークンに入れると誰でも読める JWS に資格情報が載る。どの用途にも使えない。",
+   "revisit": "見直さない（資格情報はトークンに入れない）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "決して返さない種類の値で、トークンに入れると誰でも読める JWS に資格情報が載る。どの用途にも使えない。",
+   "revisit": "見直さない（資格情報はトークンに入れない）",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・禁止",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "決して返さない種類の値で、トークンに入れると誰でも読める JWS に資格情報が載る。どの用途にも使えない。",
+   "revisit": "見直さない（資格情報はトークンに入れない）",
+   "checks": []
+  }
+ },
+ {
+  "id": "CLM-0784",
+  "guide_part": "Part 3",
+  "A": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access の IdP 由来の値の入れ物で、A の前段に Cloudflare Access は無い。best-effort の値で認可には使えない。",
+   "revisit": "Cloudflare Access を SaaS の前段に置いたら（その場合も入口の正規化で読むだけ）",
+   "checks": []
+  },
+  "B": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access を使っていない。",
+   "revisit": "Cloudflare Access を社内システムの前段に置いたら",
+   "checks": []
+  },
+  "C": {
+   "judgement": "不採用・不要",
+   "condition": "",
+   "alt": [],
+   "use_or_loss": "Cloudflare Access を使っていない。",
+   "revisit": "Cloudflare Access 経由でエージェントを公開するようになったら",
+   "checks": []
+  }
+ }
+]
