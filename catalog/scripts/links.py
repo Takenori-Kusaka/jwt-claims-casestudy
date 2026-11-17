@@ -74,8 +74,8 @@ def source_link(row):
         return 'https://www.rfc-editor.org/rfc/rfc%s#section-%s' % (m.group(1), m.group(2).rstrip('.'))
     return url
 
-# first slide (the divider) of each Part in the published guide (149 slides, 2026-11-17)
-PART_SLIDE = {0: 2, 1: 9, 2: 17, 3: 31, 4: 45, 5: 61, 6: 74, 7: 90, 8: 101, 9: 111, 10: 120, 11: 130, 12: 142}
+# first slide (the divider) of each Part in the published guide (152 slides, 2026-11-18)
+PART_SLIDE = {0: 2, 1: 9, 2: 17, 3: 31, 4: 45, 5: 62, 6: 75, 7: 91, 8: 102, 9: 112, 10: 121, 11: 132, 12: 145}
 
 
 def guide_link(part_text):
