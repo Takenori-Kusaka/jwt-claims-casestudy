@@ -61,10 +61,11 @@ def user(name, roles=(), attrs=None):
             'attributes': attrs or {}}
 
 
-def client(cid, mappers=(), direct=True, exchange=False, default_scopes=None, optional_scopes=None, service=False):
+def client(cid, mappers=(), direct=True, exchange=False, default_scopes=None, optional_scopes=None, service=False, full_scope=True, light=False):
     c = {'clientId': cid, 'enabled': True, 'publicClient': False, 'secret': f'{cid}-secret', 'standardFlowEnabled': False,
-         'directAccessGrantsEnabled': direct, 'serviceAccountsEnabled': service, 'protocol': 'openid-connect', 'fullScopeAllowed': True,
-         'attributes': {'access.token.header.type.rfc9068': 'true', 'standard.token.exchange.enabled': 'true' if exchange else 'false'},
+         'directAccessGrantsEnabled': direct, 'serviceAccountsEnabled': service, 'protocol': 'openid-connect', 'fullScopeAllowed': full_scope,
+         'attributes': {'access.token.header.type.rfc9068': 'true', 'standard.token.exchange.enabled': 'true' if exchange else 'false',
+                        'client.use.lightweight.access.token.enabled': 'true' if light else 'false'},
          'protocolMappers': list(mappers)}
     if default_scopes is not None:
         c['defaultClientScopes'] = default_scopes
@@ -93,10 +94,16 @@ def realm(name, clients, users, scopes=(), roles=()):
 def tenant_realm(t, rogue=False):
     ns = [hard('tenant', NS_KC + '.tenant_id', t), aud('aud-saas-api', 'saas-api')]
     clients = [client('saas-web', ns), client('saas-api', direct=False)]
+    if t == 't1':
+        groups = _mapper('groups', 'oidc-group-membership-mapper', {'claim.name': 'groups', 'full.path': 'false'})
+        clients += [client('saas-light', ns, light=True),  # lightweight access token: mappers are not applied unless marked
+                    client('saas-multi', [hard('tenant', NS_KC + '.tenant_id', '["t1","t2"]', 'JSON'), aud('aud-saas-api', 'saas-api')]),
+                    client('fs-on', ns + [groups], full_scope=True), client('fs-off', ns + [groups], full_scope=False),
+                    client('grp-light', ns + [groups], light=True)]
     if rogue:  # a tenant administrator controls mappers inside its own realm and can claim another tenant
         clients.append(client('rogue-web', [hard('tenant', NS_KC + '.tenant_id', 't1'), aud('aud-saas-api', 'saas-api')]))
-    users = [user('alice' if t == 't1' else 'bob', roles=['approver'])]
-    return realm(t, clients, users, roles=['approver'])
+    users = [user('alice' if t == 't1' else 'bob', roles=['approver'] + (['tenant-admin'] if t == 't1' else []))]
+    return realm(t, clients, users, roles=['approver', 'tenant-admin'])
 
 
 def corp_realm():

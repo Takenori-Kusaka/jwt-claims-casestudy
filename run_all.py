@@ -1,141 +1,182 @@
 # -*- coding: utf-8 -*-
-"""Run the whole JWT claim-design case study: start containers, run every scenario, write results/*.json and results/summary.md,
-then stop the containers.  Usage: .venv/Scripts/python run_all.py [--keep]"""
-import inspect
+"""Run the whole JWT claim-design case study: start containers, run every scenario with every configuration and ablation,
+measure Keycloak behaviour, simulate lifetimes, run the claim-change experiment, write results/ and stop the containers.
+Usage: .venv/Scripts/python run_all.py [--keep]"""
 import json
 import os
+import platform
 import statistics
+import subprocess
 import sys
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cs import change, common, generic, infra, scen_a, scen_b, scen_c  # noqa: E402
-from cs.common import CONFIG_JA, RemoteIssuer  # noqa: E402
-from cs.jwtlib import CLOCK, NS, STS, Baseline, entra_token, naive_verify, size  # noqa: E402
+import jwt  # noqa: E402
+
+from cs import change, common, flags, generic, infra, kcmeasure, lifetime, scen_a, scen_b, scen_c  # noqa: E402
+from cs.common import RemoteIssuer  # noqa: E402
+from cs.jwtlib import CLOCK, NS, STS, entra_token, size  # noqa: E402
+from cs.verify import Verifier  # noqa: E402
 
 RES = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'results')
 SCEN = {'G': '汎用の攻撃（Part 1）', 'A': 'A マルチテナント SaaS', 'B': 'B 社内業務システム', 'C': 'C AI エージェントの委任'}
+REPS = 5000
 
 
-def pct(xs, p):
+def q(xs, p):
     xs = sorted(xs)
     return xs[min(len(xs) - 1, int(len(xs) * p))]
 
 
-def perf(corp):
-    tok = STS.mint({'sub': 'u-7f3a', 'aud': 'orders', NS: {'tenant_id': 't-042'}})
-    base = Baseline([STS], 'orders', required={NS + '|tenant_id': str})
-    out = {}
-    for name, fn in (('N', lambda: naive_verify(tok, {STS.kid: STS.pub_pem})), ('B', lambda: base.verify(tok))):
-        lat = []
-        for _ in range(2000):
-            t = time.perf_counter()
-            fn()
-            lat.append((time.perf_counter() - t) * 1e6)
-        out['verify_' + name] = {'p50_us': statistics.median(lat), 'p95_us': pct(lat, 0.95)}
-    gw = scen_b.Gateway('BE', corp)
-    ext = entra_token('oid-staff-0002', scen_b.TID, groups=['g1', 'g2'])
+def timing(fn, reps=REPS):
+    for _ in range(200):
+        fn()
     lat = []
-    for _ in range(1000):
+    for _ in range(reps):
         t = time.perf_counter()
-        gw.exchange(ext, 'orders')
+        fn()
         lat.append((time.perf_counter() - t) * 1e6)
-    out['gateway_exchange_entra_to_internal'] = {'p50_us': statistics.median(lat), 'p95_us': pct(lat, 0.95)}
+    return {'reps': reps, 'p50_us': statistics.median(lat), 'p95_us': q(lat, 0.95), 'p99_us': q(lat, 0.99)}
+
+
+def perf(corp):
+    tok = STS.mint({'sub': 'u-7f3a', 'aud': 'orders', NS: {'tenant_id': 't-042'}}, lifetime=10 ** 9)
+    req = {'sub': str, NS + '|tenant_id': str}
+    vn = Verifier(set(), {STS.iss: [STS]}, audience='orders', required=req, clock=CLOCK)
+    vb = Verifier(set(flags.BASE), {STS.iss: [STS]}, audience='orders', required=req, clock=CLOCK)
+    env = scen_b.Env(corp)
+    gw = scen_b.Gateway(set(flags.BASE) | {'normalize_gw'}, env)
+    ext = entra_token('oid-staff-0002', scen_b.TID, groups=['g1', 'g2'], iss=scen_b.ENTRA_ISS, lifetime=10 ** 9) if False else \
+        entra_token('oid-staff-0002', scen_b.TID, groups=['g1', 'g2'], iss=scen_b.ENTRA_ISS)
+    return {'verify_naive': timing(lambda: vn.verify(tok)), 'verify_baseline': timing(lambda: vb.verify(tok)),
+            'gateway_exchange_entra_to_internal': timing(lambda: gw.forward(ext, [], 'orders'), reps=2000)}
+
+
+def env_info():
+    try:
+        cpu = subprocess.run(['powershell', '-NoProfile', '-Command', '(Get-CimInstance Win32_Processor).Name'], capture_output=True, text=True).stdout.strip()
+    except Exception:  # noqa: BLE001
+        cpu = platform.processor()
+    return {'cpu': cpu, 'os': platform.platform(), 'python': sys.version.split()[0], 'pyjwt': jwt.__version__, 'keycloak': infra.KC_IMAGE, 'postgres': infra.PG_IMAGE}
+
+
+def run_scenario(key, cases):
+    cfgs = flags.configs(key)
+    rows = common.matrix(cases, cfgs)
+    out = {'configs': {k: sorted(v) for k, v in cfgs.items()}, 'rows': rows, 'scores': common.score(rows, list(cfgs)),
+           'ablation_B': common.ablation(rows, 'B', 'B'), 'blockers_B': common.blockers(rows, 'B', 'B')}
+    if 'BE' in cfgs:
+        out['ablation_BE'] = common.ablation(rows, 'BE', 'BE')
+        out['blockers_BE'] = common.blockers(rows, 'BE', 'BE')
     return out
-
-
-def loc():
-    """Lines of code each emphasis needed (a rough cost proxy): whole functions that exist only for the emphasis."""
-    def n(obj):
-        return len(inspect.getsourcelines(obj)[0])
-    return {
-        'A テナント分離（発行者とテナントの照合・SET LOCAL・RLS）': n(scen_a.Api._auth) // 3 + n(scen_a.Api._query) // 3 + 3,
-        'B 正規化の入口（IdP ごとの検証・組織の名前空間・内部トークン）': n(scen_b.Gateway.exchange),
-        'B 鮮度（重要な判断で属性とセッションを引き直す）': 8,
-        'C 委任（交換・act の連鎖・承認の照合・深さ・取り消し）': n(scen_c.STSService.exchange) + 6 + 4,
-        '共通の基準（検証部品）': n(Baseline.verify),
-    }
-
-
-def variants():
-    """見送りの効果: BE から 1 つの重点を外したときに通る攻撃（必要な部分だけ再実行）。"""
-    out = {}
-    old = scen_c.MAX_DEPTH
-    scen_c.MAX_DEPTH = 99
-    c9 = [c for c in scen_c.cases() if c.cid == 'C9'][0]
-    out['C: 深さの組織規則を見送る → C9（5 段の連鎖）'] = c9.run('BE')
-    scen_c.MAX_DEPTH = old
-    out['B: 送信者制約（DPoP）を見送る → 盗まれたトークンの再送'] = True  # no sender-constraint in any config: replay of a stolen bearer token is accepted
-    return out
-
-
-def table(rows):
-    h = '| ID | 種類 | 狙い | ガイド | 内容 | 素朴 | 共通の基準 | 基準＋重点 |\n|---|---|---|---|---|---|---|---|\n'
-    mark = lambda r, cfg: ('通った' if r[cfg] else '拒否') if r['kind'] == 'attack' else ('受理' if r[cfg] else '誤って拒否')  # noqa: E731
-    return h + ''.join(f"| {r['id']} | {'攻撃' if r['kind'] == 'attack' else '正規'} | {r['target']} | {r['part']} | {r['desc']} | "
-                       f"{mark(r, 'N')} | {mark(r, 'B')} | {mark(r, 'BE')} |\n" for r in rows)
 
 
 def main():
     os.makedirs(RES, exist_ok=True)
     started = time.time()
     boot = infra.up()
+    res, extra = {}, {}
     try:
         mem = infra.mem()
-        res = {}
-        res['G'] = common.matrix(generic.cases())
-        a_cases, a_extra = scen_a.run()
-        res['A'] = common.matrix(a_cases)
-        b_cases, b_extra = scen_b.run()
-        res['B'] = common.matrix(b_cases)
-        CLOCK.t = 1_800_000_000
-        c_cases, c_extra = scen_c.run()
-        res['C'] = common.matrix(c_cases)
+        res['G'] = run_scenario('G', generic.cases())
+        a_cases, extra['A'] = scen_a.run()
+        res['A'] = run_scenario('A', a_cases)
+        b_cases, extra['B'] = scen_b.run()
+        res['B'] = run_scenario('B', b_cases)
+        CLOCK.t = scen_c.T0
+        c_cases, extra['C'] = scen_c.run()
+        res['C'] = run_scenario('C', c_cases)
+        extra['keycloak'] = kcmeasure.run()
         corp = RemoteIssuer('corp')
-        extra = {'A': a_extra, 'B': b_extra, 'C': c_extra, 'change': change.run(), 'perf': perf(corp), 'loc': loc(), 'variants': variants(),
-                 'env': {'keycloak_boot_s': round(boot), 'container_mem': mem, 'run_s': None}}
+        extra['perf'] = perf(corp)
+        extra['env'] = env_info() | {'keycloak_boot_s': round(boot), 'container_mem': mem}
     finally:
         if '--keep' not in sys.argv:
             infra.down()
+    extra['change'] = change.run()
+    extra['lifetime'] = lifetime.run()
     extra['env']['run_s'] = round(time.time() - started)
-    scores = {k: common.score(v) for k, v in res.items()}
     json.dump(res, open(os.path.join(RES, 'matrix.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    json.dump(scores, open(os.path.join(RES, 'scores.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     json.dump(extra, open(os.path.join(RES, 'measurements.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=str)
-    write_summary(res, scores, extra)
-    print(json.dumps(scores, ensure_ascii=False))
+    json.dump({k: v['scores'] for k, v in res.items()}, open(os.path.join(RES, 'scores.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    write_summary(res, extra)
+    print(json.dumps({k: {c: v['scores'][c] for c in ('N', 'B', 'BE') if c in v['scores']} for k, v in res.items()}, ensure_ascii=False))
 
 
-def write_summary(res, scores, extra):
-    L = ['# 結果の要約（自動生成）', '', '構成：' + '／'.join(f'{k}＝{v}' for k, v in CONFIG_JA.items()), '']
-    L += ['## 攻撃が通った数と、正規の要求を誤って拒否した数', '', '| 題材 | 構成 | 攻撃 | 通った | 正規 | 誤って拒否 |', '|---|---|---|---|---|---|']
-    for k, s in scores.items():
-        for cfg, v in s.items():
-            L.append(f"| {SCEN[k]} | {CONFIG_JA[cfg]} | {v['attacks']} | {v['attacks_succeeded']} | {v['legit']} | {v['false_rejects']} |")
-    for k, rows in res.items():
-        L += ['', f'## {SCEN[k]}', '', table(rows)]
-    m = extra
-    L += ['', '## 見送りの代償と、重点の費用', '',
-          f"- A：細かい権限をトークンに載せると、許可した請求書の数 0/20/200/1000 で、トークンは {list(m['A']['defer_fine_grained']['token_bytes'].values())} バイト。"
-          f"取り消しはトークンの期限（300 秒）まで届かない。PDP（DB）で都度判定すると p50 {m['A']['defer_fine_grained']['check_us']['pdp_db_p50']:.0f} µs かかるが、取り消しは次の要求で効く。",
-          f"- B：入れ子の JWE は {m['B']['defer_crypto']['bytes']['jwe_nested']} バイト（JWS は {m['B']['defer_crypto']['bytes']['jws']}）、復号 p50 {m['B']['defer_crypto']['us_p50']['jwe_decrypt']:.0f} µs。"
-          f"DPoP の証明は {m['B']['defer_crypto']['bytes']['dpop_proof']} バイト、作成と検証で p50 {m['B']['defer_crypto']['us_p50']['dpop_create'] + m['B']['defer_crypto']['us_p50']['dpop_verify']:.0f} µs。"
-          '見送ると、盗まれたトークンの再送はどの構成でも通る。',
-          f"- B：鮮度の確認（重要な判断だけ）にかかる時間は、イントロスペクション p50 {m['B']['freshness']['introspection_ms_p50']:.1f} ms、ディレクトリ参照 p50 {m['B']['freshness']['directory_lookup_ms_p50']:.1f} ms。"
-          '確認しない場合、異動・失効はトークンの期限（Keycloak の既定 300 秒）まで反映されない。',
-          f"- C：委任 2 段の交換（タスクごと）は p50 {m['C']['sts_exchange']['per_task_two_hops_us_p50']:.0f} µs。取り消しが効くまでの最大時間は 1 時間のトークンで 3600 秒、タスク単位 300 秒＋交換時の再確認で 300 秒（次の交換で即時）。"
-          f"Keycloak 26.8 の標準トークン交換は p50 {m['C']['keycloak_exchange']['ms_p50']:.1f} ms、結果のトークンに act は {'あった' if m['C']['keycloak_exchange']['has_act'] else '無かった'}（azp＝{m['C']['keycloak_exchange']['azp']}）。",
-          f"- C：深さの組織規則を見送ると、5 段の連鎖は {'通った' if m['variants']['C: 深さの組織規則を見送る → C9（5 段の連鎖）'] else '拒否された'}。",
-          '', '## 共有クレームを変えたときに壊れる受け手（6 つの受け手）', '', '| 変更 | 共通の部品なしで壊れる | うち黙って誤る | 契約テストで出荷前に検出 | 共通の部品ありで壊れる |', '|---|---|---|---|---|']
-    for k, v in m['change'].items():
-        L.append(f"| {k} | {v['broken_without_parser']} | {v['silently_wrong']} | {v['caught_by_contract_tests_before_release']} | {v['broken_with_common_parser']} |")
-    p = m['perf']
-    L += ['', '## 検証と交換の時間', '', f"- 検証（素朴）p50 {p['verify_N']['p50_us']:.0f} µs／p95 {p['verify_N']['p95_us']:.0f} µs、検証（共通の基準）p50 {p['verify_B']['p50_us']:.0f} µs／p95 {p['verify_B']['p95_us']:.0f} µs",
+def mark(r, c):
+    if r['kind'] == 'attack':
+        return '**通る**' if r[c] else '拒否'
+    return '受理' if r[c] else '**誤拒否**'
+
+
+def write_summary(res, x):
+    L = ['# 結果の要約（自動生成）', '', '構成：N＝素朴（よくある誤り）／B＝共通の基準／BE＝共通の基準＋その題材の重点。'
+         '除去実験：B から基準の要素を 1 つ、BE から重点の要素を 1 つずつ外して、どの攻撃が再び通るかを見る。', '']
+    L += ['## 要素', '', '| 区分 | 要素 | 中身 | ガイド |', '|---|---|---|---|']
+    for k, (ja, d, part) in flags.BASE.items():
+        L.append(f'| 共通の基準 | {ja}（{k}） | {d} | {part} |')
+    for s, es in flags.EMPH.items():
+        for k, (ja, d, part) in es.items():
+            L.append(f'| 重点 {s} | {ja}（{k}） | {d} | {part} |')
+    L += ['', '## 攻撃が通った数と、正規の要求が正しく処理されなかった数', '', '| 題材 | N 通った | B 通った | BE 通った | 攻撃 | N 誤拒否 | B 誤拒否 | BE 誤拒否 | 正規 |', '|---|---|---|---|---|---|---|---|---|']
+    for k, v in res.items():
+        s = v['scores']
+        be = s.get('BE', s['B'])
+        L.append(f"| {SCEN[k]} | {s['N']['attacks_succeeded']} | {s['B']['attacks_succeeded']} | {be['attacks_succeeded'] if 'BE' in s else '—'} | {s['N']['attacks']} | "
+                 f"{s['N']['false_rejects']} | {s['B']['false_rejects']} | {be['false_rejects'] if 'BE' in s else '—'} | {s['N']['legit']} |")
+    for k, v in res.items():
+        L += ['', f'## {SCEN[k]}', '', '| ID | 種類 | 狙い | ガイド | 内容 | N | B | BE |', '|---|---|---|---|---|---|---|---|']
+        for r in v['rows']:
+            L.append(f"| {r['id']} | {'攻撃' if r['kind'] == 'attack' else '正規'} | {r['target']} | {r['part']} | {r['desc']} | {mark(r, 'N')} | {mark(r, 'B')} | "
+                     f"{mark(r, 'BE') if 'BE' in r else '—'} |")
+        for full, key in (('B', 'ablation_B'), ('BE', 'ablation_BE')):
+            if key not in v:
+                continue
+            names = flags.BASE if full == 'B' else flags.EMPH[k]
+            L += ['', f'### 除去実験：{full} から 1 つ外すと', '', '| 外した要素 | 再び通る攻撃 | 新たに拒否される正規の要求 | 外すと通る正規の要求（要素の誤拒否の代償） |', '|---|---|---|---|']
+            for e, a in v[key].items():
+                L.append(f"| {names[e][0]} | {'、'.join(a['reopened']) or '—'} | {'、'.join(a['newly_rejected_legit']) or '—'} | {'、'.join(a['legit_only_without']) or '—'} |")
+            multi = [c for c, es in v['blockers_' + full].items() if not es]
+            if multi:
+                L.append(f"\n{full} で防げている攻撃のうち、1 つ外しても防げたまま（複数の要素が重ねて防いでいる）：{'、'.join(multi)}")
+        if k == 'A':
+            r = {row['id']: row for row in v['rows']}
+            L.append('\n接続プールの補足：' + '、'.join(f"{c}＝{'通る' if r['A7'][c] else '拒否'}" for c in ('BE~session', 'BE-data_tenant_check-rls_local', 'BE~session-data_tenant_check')))
+    a, b, c, kc = x['A'], x['B'], x['C'], x['keycloak']
+    L += ['', '## 見送りの代償と重点の費用', '',
+          f"- A 細かい権限をトークンに：許可した請求書 0/20/200/1000 件で {list(a['defer_fine_grained']['token_bytes'].values())} バイト。PDP（DB）の判定 p50 {a['defer_fine_grained']['check_us']['pdp_db_p50']:.0f} µs／p95 {a['defer_fine_grained']['check_us']['pdp_db_p95']:.0f} µs。",
+          f"- B JWE（入れ子）{b['defer_crypto']['bytes']['jwe_nested']} バイト（JWS {b['defer_crypto']['bytes']['jws']}）、暗号化 p50 {b['defer_crypto']['us']['jwe_encrypt']['p50']:.0f} µs、復号 p50 {b['defer_crypto']['us']['jwe_decrypt']['p50']:.0f} µs。"
+          f"DPoP の証明 {b['defer_crypto']['bytes']['dpop_proof']} バイト、作成 p50 {b['defer_crypto']['us']['dpop_create']['p50']:.0f} µs・検証 p50 {b['defer_crypto']['us']['dpop_verify']['p50']:.0f} µs（{b['defer_crypto']['reps']} 回）。",
+          f"- B 鮮度の確認：イントロスペクション p50 {b['freshness']['introspection_ms']['p50']:.1f} ms／p95 {b['freshness']['introspection_ms']['p95']:.1f} ms、ディレクトリ参照 p50 {b['freshness']['directory_lookup_ms']['p50']:.1f} ms（管理用トークンの取得を含む）。",
+          f"- C タスクごとの 2 段の交換 p50 {c['sts_exchange']['per_task_two_hops_us_p50']:.0f} µs／p95 {c['sts_exchange']['p95']:.0f} µs。Keycloak の標準トークン交換 p50 {c['keycloak_exchange']['ms_p50']:.1f} ms／p95 {c['keycloak_exchange']['ms_p95']:.1f} ms（{c['keycloak_exchange']['reps']} 回）、act は {'あり' if c['keycloak_exchange']['has_act'] else 'なし'}。",
+          '', '## Keycloak 26.8 の実際の挙動', '']
+    L.append(f"- Full Scope Allowed：オンのクライアントに tenant-admin が漏れる＝{kc['full_scope']['fs-on']['tenant_admin_leaks']}、オフ＝{kc['full_scope']['fs-off']['tenant_admin_leaks']}（オフでは realm_access 自体が空：{kc['full_scope']['fs-off']['realm_roles']}）")
+    lw = kc['lightweight']
+    L.append(f"- 軽量アクセストークン：落ちるクレーム＝{'、'.join(lw['missing_in_light'])}（sub・aud・組織の名前空間も落ちる）")
+    L.append(f"- 定義していない利用者属性：{json.dumps(kc['unmanaged_attribute'], ensure_ascii=False)}")
+    L.append(f"- Organizations のクレーム：{json.dumps(kc['organizations'], ensure_ascii=False)}")
+    L.append('- グループ数とトークンの大きさ（全量／軽量）：' + '、'.join(f"{n} 個＝{v['full_bytes']}/{v['light_bytes']} B" for n, v in kc['groups_size'].items()))
+    L.append(f"- リフレッシュでの再評価：{json.dumps(kc['refresh_reevaluation'], ensure_ascii=False)}")
+    L.append(f"- ログアウト → イントロスペクション：{json.dumps(kc['logout_introspection'], ensure_ascii=False)}")
+    L.append(f"- 標準トークン交換の絞り込み・拡大の試験：{json.dumps(c['keycloak_exchange']['probes'], ensure_ascii=False)}")
+    L += ['', '## 寿命の試算（1,000 人・1 時間・1 人 2 件／分・重要 5%）', '', '| 寿命 | 方式 | 変更後に古い情報で判断した件数 | うち重要な操作 | 古さの平均（秒） | p95（秒） | 認可サーバーへの呼び出し／時 |', '|---|---|---|---|---|---|---|']
+    for k_, v_ in x['lifetime'].items():
+        if k_ == 'model':
+            continue
+        lt, st = k_.split('/')
+        ja = {'self': '自己完結のみ', 'crit': '重要な操作だけ問い合わせ', 'always': '毎回問い合わせ'}[st]
+        L.append(f"| {lt} | {ja} | {v_['stale_decisions_after_change']} | {v_['stale_critical_decisions']} | {v_['stale_window_s_mean']:.0f} | "
+                 f"{v_['stale_window_s_p95']:.0f} | {v_['as_calls_per_hour']} |")
+    L += ['', '## 共有クレームを変えたとき（9 つの受け手）', '', '| 変更 | 壊れた | うち黙って誤る | 契約テストで出荷前に検出 | 検出できない受け手 | 共通の部品 |', '|---|---|---|---|---|---|']
+    for k_, v_ in x['change'].items():
+        L.append(f"| {k_} | {v_['broken']} | {len(v_['silently_wrong'])} | {v_['caught_by_contract_tests']} | {'、'.join(v_['broken_but_not_caught']) or '—'} | "
+                 f"{'正しく処理' if v_['common_parser'] == 'ok' else '拒否（fail closed）' if v_['common_parser'] == 'crash' else '誤り'} |")
+    p = x['perf']
+    L += ['', '## 時間（' + str(p['verify_naive']['reps']) + ' 回）', '',
+          f"- 検証（素朴）p50 {p['verify_naive']['p50_us']:.1f} µs／p95 {p['verify_naive']['p95_us']:.1f} µs、検証（共通の基準）p50 {p['verify_baseline']['p50_us']:.1f} µs／p95 {p['verify_baseline']['p95_us']:.1f} µs",
           f"- 入口での交換（Entra 形式 → 内部トークン）p50 {p['gateway_exchange_entra_to_internal']['p50_us']:.0f} µs／p95 {p['gateway_exchange_entra_to_internal']['p95_us']:.0f} µs",
-          f"- トークンの大きさ：Keycloak の AT {m['B']['token_bytes']['keycloak_at']} バイト、内部トークン {m['B']['token_bytes']['internal_at']} バイト、Entra 形式（150 グループ）{m['B']['token_bytes']['entra_150_groups']} バイト、Entra 形式（超過で groups が消えたもの）{m['B']['token_bytes']['entra_overage']} バイト",
-          '', '## 重点に要したコードの行数（費用の目安）', '']
-    L += [f'- {k}：{v} 行' for k, v in m['loc'].items()]
-    L += ['', f"環境：Keycloak 起動 {m['env']['keycloak_boot_s']} 秒、全体 {m['env']['run_s']} 秒。コンテナのメモリ：{m['env']['container_mem']}"]
+          f"- トークンの大きさ：Keycloak の AT {b['token_bytes']['keycloak_at']} B、内部トークン {b['token_bytes']['internal_at']} B、Entra 形式 150 グループ {b['token_bytes']['entra_150_groups']} B、超過で groups が消えたもの {b['token_bytes']['entra_overage']} B",
+          '', '## 環境', '', '```', json.dumps(x['env'], ensure_ascii=False, indent=1), '```']
     open(os.path.join(RES, 'summary.md'), 'w', encoding='utf-8').write('\n'.join(L) + '\n')
 
 

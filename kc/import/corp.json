@@ -24,7 +24,8 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "false"
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": [
     {
@@ -71,7 +72,8 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "false"
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": []
   },
@@ -87,7 +89,8 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "false"
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": []
   },
@@ -103,7 +106,8 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "true"
+    "standard.token.exchange.enabled": "true",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": [
     {

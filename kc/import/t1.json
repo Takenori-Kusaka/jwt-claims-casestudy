@@ -8,6 +8,9 @@
   "realm": [
    {
     "name": "approver"
+   },
+   {
+    "name": "tenant-admin"
    }
   ]
  },
@@ -24,7 +27,8 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "false"
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": [
     {
@@ -69,9 +73,282 @@
    "fullScopeAllowed": true,
    "attributes": {
     "access.token.header.type.rfc9068": "true",
-    "standard.token.exchange.enabled": "false"
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
    },
    "protocolMappers": []
+  },
+  {
+   "clientId": "saas-light",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "saas-light-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "true"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t1",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "saas-multi",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "saas-multi-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "[\"t1\",\"t2\"]",
+      "jsonType.label": "JSON"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "fs-on",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "fs-on-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t1",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    },
+    {
+     "name": "groups",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-group-membership-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "groups",
+      "full.path": "false"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "fs-off",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "fs-off-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": false,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t1",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    },
+    {
+     "name": "groups",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-group-membership-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "groups",
+      "full.path": "false"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "grp-light",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "grp-light-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false",
+    "client.use.lightweight.access.token.enabled": "true"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t1",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    },
+    {
+     "name": "groups",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-group-membership-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "groups",
+      "full.path": "false"
+     }
+    }
+   ]
   }
  ],
  "users": [
@@ -91,6 +368,7 @@
    ],
    "realmRoles": [
     "approver",
+    "tenant-admin",
     "default-roles-t1"
    ],
    "attributes": {}

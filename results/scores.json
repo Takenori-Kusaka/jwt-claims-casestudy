@@ -1,19 +1,67 @@
 {
  "G": {
   "N": {
-   "attacks": 12,
-   "attacks_succeeded": 12,
+   "attacks": 14,
+   "attacks_succeeded": 13,
    "legit": 1,
    "false_rejects": 0
   },
   "B": {
-   "attacks": 12,
+   "attacks": 14,
    "attacks_succeeded": 0,
    "legit": 1,
    "false_rejects": 0
   },
-  "BE": {
-   "attacks": 12,
+  "B-alg": {
+   "attacks": 14,
+   "attacks_succeeded": 6,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-iss": {
+   "attacks": 14,
+   "attacks_succeeded": 2,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-aud": {
+   "attacks": 14,
+   "attacks_succeeded": 1,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-exp": {
+   "attacks": 14,
+   "attacks_succeeded": 2,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-typ": {
+   "attacks": 14,
+   "attacks_succeeded": 1,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-required": {
+   "attacks": 14,
+   "attacks_succeeded": 1,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-types": {
+   "attacks": 14,
+   "attacks_succeeded": 1,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-immutable_id": {
+   "attacks": 14,
+   "attacks_succeeded": 0,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B-namespace": {
+   "attacks": 14,
    "attacks_succeeded": 0,
    "legit": 1,
    "false_rejects": 0
@@ -21,60 +69,318 @@
  },
  "A": {
   "N": {
-   "attacks": 4,
-   "attacks_succeeded": 3,
-   "legit": 2,
-   "false_rejects": 0
+   "attacks": 10,
+   "attacks_succeeded": 9,
+   "legit": 4,
+   "false_rejects": 1
   },
   "B": {
-   "attacks": 4,
-   "attacks_succeeded": 3,
-   "legit": 2,
-   "false_rejects": 0
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
   },
   "BE": {
-   "attacks": 4,
+   "attacks": 10,
    "attacks_succeeded": 0,
-   "legit": 2,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "B-alg": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-iss": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-aud": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-exp": {
+   "attacks": 10,
+   "attacks_succeeded": 6,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-typ": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-required": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-types": {
+   "attacks": 10,
+   "attacks_succeeded": 6,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-immutable_id": {
+   "attacks": 10,
+   "attacks_succeeded": 5,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "B-namespace": {
+   "attacks": 10,
+   "attacks_succeeded": 6,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "BE-rls_local": {
+   "attacks": 10,
+   "attacks_succeeded": 0,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "BE-tenant_iss_bind": {
+   "attacks": 10,
+   "attacks_succeeded": 2,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "BE-per_tenant_keys": {
+   "attacks": 10,
+   "attacks_succeeded": 1,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "BE-data_tenant_check": {
+   "attacks": 10,
+   "attacks_succeeded": 0,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "BE~session": {
+   "attacks": 10,
+   "attacks_succeeded": 0,
+   "legit": 4,
+   "false_rejects": 0
+  },
+  "BE-data_tenant_check-rls_local": {
+   "attacks": 10,
+   "attacks_succeeded": 2,
+   "legit": 4,
+   "false_rejects": 1
+  },
+  "BE~session-data_tenant_check": {
+   "attacks": 10,
+   "attacks_succeeded": 1,
+   "legit": 4,
    "false_rejects": 0
   }
  },
  "B": {
   "N": {
-   "attacks": 9,
-   "attacks_succeeded": 9,
-   "legit": 3,
+   "attacks": 18,
+   "attacks_succeeded": 18,
+   "legit": 5,
    "false_rejects": 0
   },
   "B": {
-   "attacks": 9,
-   "attacks_succeeded": 4,
-   "legit": 3,
+   "attacks": 18,
+   "attacks_succeeded": 7,
+   "legit": 5,
    "false_rejects": 2
   },
   "BE": {
-   "attacks": 9,
+   "attacks": 18,
    "attacks_succeeded": 1,
-   "legit": 3,
+   "legit": 5,
    "false_rejects": 0
+  },
+  "B-alg": {
+   "attacks": 18,
+   "attacks_succeeded": 7,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-iss": {
+   "attacks": 18,
+   "attacks_succeeded": 8,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-aud": {
+   "attacks": 18,
+   "attacks_succeeded": 8,
+   "legit": 5,
+   "false_rejects": 1
+  },
+  "B-exp": {
+   "attacks": 18,
+   "attacks_succeeded": 7,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-typ": {
+   "attacks": 18,
+   "attacks_succeeded": 7,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-required": {
+   "attacks": 18,
+   "attacks_succeeded": 9,
+   "legit": 5,
+   "false_rejects": 1
+  },
+  "B-types": {
+   "attacks": 18,
+   "attacks_succeeded": 8,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-immutable_id": {
+   "attacks": 18,
+   "attacks_succeeded": 8,
+   "legit": 5,
+   "false_rejects": 2
+  },
+  "B-namespace": {
+   "attacks": 18,
+   "attacks_succeeded": 7,
+   "legit": 5,
+   "false_rejects": 3
+  },
+  "BE-header_strip": {
+   "attacks": 18,
+   "attacks_succeeded": 1,
+   "legit": 5,
+   "false_rejects": 0
+  },
+  "BE-overage_resolve": {
+   "attacks": 18,
+   "attacks_succeeded": 1,
+   "legit": 5,
+   "false_rejects": 1
+  },
+  "BE-freshness": {
+   "attacks": 18,
+   "attacks_succeeded": 3,
+   "legit": 5,
+   "false_rejects": 0
+  },
+  "BE-normalize_gw": {
+   "attacks": 18,
+   "attacks_succeeded": 2,
+   "legit": 5,
+   "false_rejects": 1
   }
  },
  "C": {
   "N": {
-   "attacks": 7,
-   "attacks_succeeded": 7,
+   "attacks": 12,
+   "attacks_succeeded": 12,
    "legit": 3,
    "false_rejects": 0
   },
   "B": {
-   "attacks": 7,
-   "attacks_succeeded": 6,
+   "attacks": 12,
+   "attacks_succeeded": 12,
    "legit": 3,
    "false_rejects": 0
   },
   "BE": {
-   "attacks": 7,
+   "attacks": 12,
    "attacks_succeeded": 0,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-alg": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-iss": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-aud": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-exp": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-typ": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-required": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-types": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-immutable_id": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B-namespace": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "BE-act_chain": {
+   "attacks": 12,
+   "attacks_succeeded": 1,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "BE-aud_exchange": {
+   "attacks": 12,
+   "attacks_succeeded": 3,
+   "legit": 3,
+   "false_rejects": 1
+  },
+  "BE-depth_rule": {
+   "attacks": 12,
+   "attacks_succeeded": 1,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "BE-approval_bind": {
+   "attacks": 12,
+   "attacks_succeeded": 3,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "BE-short_task": {
+   "attacks": 12,
+   "attacks_succeeded": 2,
    "legit": 3,
    "false_rejects": 0
   }

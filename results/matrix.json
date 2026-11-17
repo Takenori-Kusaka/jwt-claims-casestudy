@@ -1,420 +1,3111 @@
 {
- "G": [
-  {
-   "id": "G0",
-   "kind": "legit",
-   "target": "正規のトークン",
-   "part": "Part 1",
-   "desc": "発行者が署名した正しいトークン",
-   "N": true,
-   "B": true,
-   "BE": true
+ "G": {
+  "configs": {
+   "N": [],
+   "B": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-alg": [
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-iss": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-aud": [
+    "alg",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-exp": [
+    "alg",
+    "aud",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-typ": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "types"
+   ],
+   "B-required": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "typ",
+    "types"
+   ],
+   "B-types": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ"
+   ],
+   "B-immutable_id": [
+    "alg",
+    "aud",
+    "exp",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-namespace": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "required",
+    "typ",
+    "types"
+   ]
   },
-  {
-   "id": "G1",
-   "kind": "attack",
-   "target": "alg",
-   "part": "Part 1 危険なヘッダー",
-   "desc": "alg を none にして署名なしで送る",
-   "N": true,
-   "B": false,
-   "BE": false
+  "rows": [
+   {
+    "id": "G0",
+    "kind": "legit",
+    "target": "正規のトークン",
+    "part": "Part 1 検証の順序",
+    "desc": "発行者が署名した正しいトークン",
+    "N": true,
+    "B": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true
+   },
+   {
+    "id": "G1",
+    "kind": "attack",
+    "target": "alg",
+    "part": "Part 1 危険なヘッダー",
+    "desc": "alg を none にして署名なしで送る",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G2",
+    "kind": "attack",
+    "target": "alg",
+    "part": "Part 1 危険なヘッダー",
+    "desc": "RS256 を HS256 に変え、公開鍵を HMAC の秘密として署名する",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G3",
+    "kind": "attack",
+    "target": "kid",
+    "part": "Part 1 危険なヘッダー",
+    "desc": "kid にパスを入れて空の鍵を読ませ、空の秘密で署名する",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G4",
+    "kind": "attack",
+    "target": "jku",
+    "part": "Part 1 危険なヘッダー",
+    "desc": "jku で攻撃者の鍵の場所を指し、自分の鍵で署名する",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G5",
+    "kind": "attack",
+    "target": "jwk",
+    "part": "Part 1 危険なヘッダー",
+    "desc": "ヘッダーに自分の公開鍵を埋め込み、自分で署名する",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G6",
+    "kind": "attack",
+    "target": "exp",
+    "part": "Part 1 検証の順序",
+    "desc": "exp の無いトークン（期限のない合鍵）",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": true,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G7",
+    "kind": "attack",
+    "target": "exp",
+    "part": "Part 1 検証の順序",
+    "desc": "1 日前に期限が切れたトークン",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": true,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G8",
+    "kind": "attack",
+    "target": "aud",
+    "part": "Part 1 ID トークンとアクセストークン",
+    "desc": "別のサービス宛て（invoices）のトークンを orders に送る",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": true,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G9",
+    "kind": "attack",
+    "target": "iss",
+    "part": "Part 1 攻撃の型",
+    "desc": "同じ鍵の集合に載っている別の発行者が、自分の iss で発行したトークン",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": true,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G10",
+    "kind": "attack",
+    "target": "iss と鍵の対応",
+    "part": "Part 0 事故の例（Storm-0558）",
+    "desc": "別の発行者の鍵で、iss を自分の発行者と偽って署名したトークン",
+    "N": true,
+    "B": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G11",
+    "kind": "attack",
+    "target": "typ",
+    "part": "Part 1 ID トークンとアクセストークン",
+    "desc": "同じ発行者の ID トークン（typ JWT）を API に送る",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": true,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G12",
+    "kind": "attack",
+    "target": "必須クレーム",
+    "part": "Part 4 前方互換",
+    "desc": "テナントのクレームが無いトークン（発行時フックの失敗など）を、既定のテナントで処理させる",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": true,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G13",
+    "kind": "attack",
+    "target": "型",
+    "part": "Part 4 型",
+    "desc": "テナントのクレームが配列（2 テナント分）",
+    "N": true,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": true,
+    "B-immutable_id": false,
+    "B-namespace": false
+   },
+   {
+    "id": "G14",
+    "kind": "attack",
+    "target": "型",
+    "part": "Part 4 型",
+    "desc": "sub が数値（文字列と比べる受け手で別人と一致しうる）",
+    "N": false,
+    "B": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false
+   }
+  ],
+  "scores": {
+   "N": {
+    "attacks": 14,
+    "attacks_succeeded": 13,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B": {
+    "attacks": 14,
+    "attacks_succeeded": 0,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-alg": {
+    "attacks": 14,
+    "attacks_succeeded": 6,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-iss": {
+    "attacks": 14,
+    "attacks_succeeded": 2,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-aud": {
+    "attacks": 14,
+    "attacks_succeeded": 1,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-exp": {
+    "attacks": 14,
+    "attacks_succeeded": 2,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-typ": {
+    "attacks": 14,
+    "attacks_succeeded": 1,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-required": {
+    "attacks": 14,
+    "attacks_succeeded": 1,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-types": {
+    "attacks": 14,
+    "attacks_succeeded": 1,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-immutable_id": {
+    "attacks": 14,
+    "attacks_succeeded": 0,
+    "legit": 1,
+    "false_rejects": 0
+   },
+   "B-namespace": {
+    "attacks": 14,
+    "attacks_succeeded": 0,
+    "legit": 1,
+    "false_rejects": 0
+   }
   },
-  {
-   "id": "G2",
-   "kind": "attack",
-   "target": "alg",
-   "part": "Part 1 危険なヘッダー",
-   "desc": "RS256 を HS256 に変え、公開鍵を HMAC の秘密として署名する",
-   "N": true,
-   "B": false,
-   "BE": false
+  "ablation_B": {
+   "alg": {
+    "reopened": [
+     "G1",
+     "G2",
+     "G3",
+     "G4",
+     "G5",
+     "G10"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "iss": {
+    "reopened": [
+     "G9",
+     "G10"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "aud": {
+    "reopened": [
+     "G8"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "exp": {
+    "reopened": [
+     "G6",
+     "G7"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "typ": {
+    "reopened": [
+     "G11"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "required": {
+    "reopened": [
+     "G12"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "types": {
+    "reopened": [
+     "G13"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "immutable_id": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "namespace": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "G3",
-   "kind": "attack",
-   "target": "kid",
-   "part": "Part 1 危険なヘッダー",
-   "desc": "kid にパスを入れて空の鍵を読ませ、空の秘密で署名する",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G4",
-   "kind": "attack",
-   "target": "jku",
-   "part": "Part 1 危険なヘッダー",
-   "desc": "jku で攻撃者の鍵の場所を指し、自分の鍵で署名する",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G5",
-   "kind": "attack",
-   "target": "jwk",
-   "part": "Part 1 危険なヘッダー",
-   "desc": "ヘッダーに自分の公開鍵を埋め込み、自分で署名する",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G6",
-   "kind": "attack",
-   "target": "exp",
-   "part": "Part 1 検証の順序",
-   "desc": "exp の無いトークン（期限のない合鍵）",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G7",
-   "kind": "attack",
-   "target": "exp",
-   "part": "Part 1 検証の順序",
-   "desc": "1 日前に期限が切れたトークン",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G8",
-   "kind": "attack",
-   "target": "aud",
-   "part": "Part 1 ID トークンとアクセストークン",
-   "desc": "別のサービス宛て（invoices）のトークンを orders に送る",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G9",
-   "kind": "attack",
-   "target": "iss",
-   "part": "Part 1 攻撃の型",
-   "desc": "鍵を読み込んであった別の発行者が、正しい署名で発行したトークン",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G10",
-   "kind": "attack",
-   "target": "typ",
-   "part": "Part 1 ID トークンとアクセストークン",
-   "desc": "同じ発行者の ID トークン（typ JWT）を API に送る",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G11",
-   "kind": "attack",
-   "target": "必須クレーム",
-   "part": "Part 4 前方互換",
-   "desc": "テナントのクレームが無いトークン（発行時フックの失敗など）",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "G12",
-   "kind": "attack",
-   "target": "型",
-   "part": "Part 4 型",
-   "desc": "テナントのクレームが配列（型の揺れ）",
-   "N": true,
-   "B": false,
-   "BE": false
+  "blockers_B": {
+   "G1": [
+    "alg"
+   ],
+   "G2": [
+    "alg"
+   ],
+   "G3": [
+    "alg"
+   ],
+   "G4": [
+    "alg"
+   ],
+   "G5": [
+    "alg"
+   ],
+   "G6": [
+    "exp"
+   ],
+   "G7": [
+    "exp"
+   ],
+   "G8": [
+    "aud"
+   ],
+   "G9": [
+    "iss"
+   ],
+   "G10": [
+    "alg",
+    "iss"
+   ],
+   "G11": [
+    "typ"
+   ],
+   "G12": [
+    "required"
+   ],
+   "G13": [
+    "types"
+   ],
+   "G14": []
   }
- ],
- "A": [
-  {
-   "id": "A1",
-   "kind": "legit",
-   "target": "tenant",
-   "part": "Part 5 マルチテナント",
-   "desc": "t1 の利用者が自分のテナントの請求書を一覧する",
-   "N": true,
-   "B": true,
-   "BE": true
+ },
+ "A": {
+  "configs": {
+   "N": [],
+   "B": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE": [
+    "alg",
+    "aud",
+    "data_tenant_check",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "rls_local",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "B-alg": [
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-iss": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-aud": [
+    "alg",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-exp": [
+    "alg",
+    "aud",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-typ": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "types"
+   ],
+   "B-required": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "typ",
+    "types"
+   ],
+   "B-types": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ"
+   ],
+   "B-immutable_id": [
+    "alg",
+    "aud",
+    "exp",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-namespace": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-rls_local": [
+    "alg",
+    "aud",
+    "data_tenant_check",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "BE-tenant_iss_bind": [
+    "alg",
+    "aud",
+    "data_tenant_check",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "rls_local",
+    "typ",
+    "types"
+   ],
+   "BE-per_tenant_keys": [
+    "alg",
+    "aud",
+    "data_tenant_check",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "rls_local",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "BE-data_tenant_check": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "rls_local",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "BE~session": [
+    "alg",
+    "aud",
+    "data_tenant_check",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "rls_session",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "BE-data_tenant_check-rls_local": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ],
+   "BE~session-data_tenant_check": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "per_tenant_keys",
+    "required",
+    "rls_session",
+    "tenant_iss_bind",
+    "typ",
+    "types"
+   ]
   },
-  {
-   "id": "A2",
-   "kind": "legit",
-   "target": "tenant",
-   "part": "Part 5 マルチテナント",
-   "desc": "t2 の利用者が自分のテナントの請求書を一覧する",
-   "N": true,
-   "B": true,
-   "BE": true
+  "rows": [
+   {
+    "id": "A1",
+    "kind": "legit",
+    "target": "テナント",
+    "part": "Part 5 マルチテナント",
+    "desc": "t1 の利用者が自分のテナントの請求書を一覧する",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": true,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": true,
+    "BE-data_tenant_check": true,
+    "BE~session": true,
+    "BE-data_tenant_check-rls_local": true,
+    "BE~session-data_tenant_check": true
+   },
+   {
+    "id": "A2",
+    "kind": "legit",
+    "target": "テナント",
+    "part": "Part 5 マルチテナント",
+    "desc": "t2 の利用者が自分のテナントの請求書を一覧する",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": true,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": true,
+    "BE-data_tenant_check": true,
+    "BE~session": true,
+    "BE-data_tenant_check-rls_local": true,
+    "BE~session-data_tenant_check": true
+   },
+   {
+    "id": "A3",
+    "kind": "legit",
+    "target": "BOLA",
+    "part": "Part 5 BOLA",
+    "desc": "t1 の利用者が自分の請求書を ID で読む",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": true,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": true,
+    "BE-data_tenant_check": true,
+    "BE~session": true,
+    "BE-data_tenant_check-rls_local": true,
+    "BE~session-data_tenant_check": true
+   },
+   {
+    "id": "A4",
+    "kind": "legit",
+    "target": "集計",
+    "part": "Part 7 データ層",
+    "desc": "t1 の利用者が集計 API で自分のテナントだけを得る",
+    "N": false,
+    "B": false,
+    "BE": true,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-rls_local": true,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": true,
+    "BE-data_tenant_check": true,
+    "BE~session": true,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": true
+   },
+   {
+    "id": "A5",
+    "kind": "attack",
+    "target": "テナントの出どころ",
+    "part": "Part 5 マルチテナント",
+    "desc": "t2 のトークンで、パスとヘッダー X-Tenant を t1 にして一覧する",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A6",
+    "kind": "attack",
+    "target": "BOLA",
+    "part": "Part 5 BOLA",
+    "desc": "t1 の利用者が、t2 の請求書の ID を直接指定する",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": true,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A7",
+    "kind": "attack",
+    "target": "接続プール",
+    "part": "Part 7 接続プール",
+    "desc": "直前の t2 の要求の文脈が残った接続で、条件を書き忘れた集計 API を t1 が呼ぶ",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": true,
+    "BE~session-data_tenant_check": true
+   },
+   {
+    "id": "A8",
+    "kind": "attack",
+    "target": "テナントと発行者",
+    "part": "Part 5 マルチテナント",
+    "desc": "t2 の管理者が自分のレルムのマッパーで tenant_id=t1 を出させ、t1 を読む（実際の Keycloak）",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A9",
+    "kind": "attack",
+    "target": "テナント単位の鍵",
+    "part": "Part 5（IR 8587 §5.2.1.2）",
+    "desc": "t2 の連携先に渡した署名鍵で、iss=t1・tenant=t1 のトークンを作る",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": true,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A10",
+    "kind": "attack",
+    "target": "テナント単位の鍵",
+    "part": "Part 5 マルチテナント",
+    "desc": "同じ鍵で、iss=t2 のまま tenant=t1 を名乗る",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": true,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A11",
+    "kind": "attack",
+    "target": "必須クレーム",
+    "part": "Part 3 Keycloak（軽量アクセストークン）",
+    "desc": "軽量アクセストークンで tenant が落ち、ヘッダー X-Tenant: t2 で既定を上書きする",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A12",
+    "kind": "attack",
+    "target": "型",
+    "part": "Part 4 型",
+    "desc": "マッパーの設定誤りで tenant が配列 [\"t1\",\"t2\"] になったトークンで一覧する",
+    "N": false,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": true,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A13",
+    "kind": "attack",
+    "target": "typ・aud",
+    "part": "Part 1 ID トークンとアクセストークン",
+    "desc": "ログインで得た ID トークンを API に送る",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   },
+   {
+    "id": "A14",
+    "kind": "attack",
+    "target": "exp",
+    "part": "Part 1 検証の順序",
+    "desc": "期限切れのトークン（発行から 400 秒後）で一覧する",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": true,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-rls_local": false,
+    "BE-tenant_iss_bind": false,
+    "BE-per_tenant_keys": false,
+    "BE-data_tenant_check": false,
+    "BE~session": false,
+    "BE-data_tenant_check-rls_local": false,
+    "BE~session-data_tenant_check": false
+   }
+  ],
+  "scores": {
+   "N": {
+    "attacks": 10,
+    "attacks_succeeded": 9,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "BE": {
+    "attacks": 10,
+    "attacks_succeeded": 0,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "B-alg": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-iss": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-aud": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-exp": {
+    "attacks": 10,
+    "attacks_succeeded": 6,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-typ": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-required": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-types": {
+    "attacks": 10,
+    "attacks_succeeded": 6,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-immutable_id": {
+    "attacks": 10,
+    "attacks_succeeded": 5,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "B-namespace": {
+    "attacks": 10,
+    "attacks_succeeded": 6,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "BE-rls_local": {
+    "attacks": 10,
+    "attacks_succeeded": 0,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "BE-tenant_iss_bind": {
+    "attacks": 10,
+    "attacks_succeeded": 2,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "BE-per_tenant_keys": {
+    "attacks": 10,
+    "attacks_succeeded": 1,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "BE-data_tenant_check": {
+    "attacks": 10,
+    "attacks_succeeded": 0,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "BE~session": {
+    "attacks": 10,
+    "attacks_succeeded": 0,
+    "legit": 4,
+    "false_rejects": 0
+   },
+   "BE-data_tenant_check-rls_local": {
+    "attacks": 10,
+    "attacks_succeeded": 2,
+    "legit": 4,
+    "false_rejects": 1
+   },
+   "BE~session-data_tenant_check": {
+    "attacks": 10,
+    "attacks_succeeded": 1,
+    "legit": 4,
+    "false_rejects": 0
+   }
   },
-  {
-   "id": "A3",
-   "kind": "attack",
-   "target": "tenant の出どころ",
-   "part": "Part 5 マルチテナント",
-   "desc": "t2 のトークンで、パスとヘッダー X-Tenant を t1 にして一覧する",
-   "N": true,
-   "B": false,
-   "BE": false
+  "ablation_B": {
+   "alg": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "iss": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "aud": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "exp": {
+    "reopened": [
+     "A14"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "typ": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "required": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "types": {
+    "reopened": [
+     "A12"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "immutable_id": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "namespace": {
+    "reopened": [
+     "A5"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "A4",
-   "kind": "attack",
-   "target": "BOLA",
-   "part": "Part 5 BOLA",
-   "desc": "t1 の利用者が、t2 の請求書の ID を直接指定する（WHERE にテナントが無い）",
-   "N": false,
-   "B": true,
-   "BE": false
+  "blockers_B": {
+   "A5": [
+    "namespace"
+   ],
+   "A11": [],
+   "A12": [
+    "types"
+   ],
+   "A13": [],
+   "A14": [
+    "exp"
+   ]
   },
-  {
-   "id": "A5",
-   "kind": "attack",
-   "target": "接続プール",
-   "part": "Part 7 接続プール",
-   "desc": "直前の t2 の要求の文脈が残った接続で、条件を書き忘れた集計 API を t1 が呼ぶ",
-   "N": true,
-   "B": true,
-   "BE": false
+  "ablation_BE": {
+   "rls_local": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "tenant_iss_bind": {
+    "reopened": [
+     "A8",
+     "A10"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "per_tenant_keys": {
+    "reopened": [
+     "A9"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "data_tenant_check": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "A6",
-   "kind": "attack",
-   "target": "テナント単位の鍵",
-   "part": "Part 5 マルチテナント",
-   "desc": "t2 の管理者が自分のレルムのマッパーで tenant_id=t1 を出させ、t1 を読む",
-   "N": true,
-   "B": true,
-   "BE": false
+  "blockers_BE": {
+   "A5": [],
+   "A6": [],
+   "A7": [],
+   "A8": [
+    "tenant_iss_bind"
+   ],
+   "A9": [
+    "per_tenant_keys"
+   ],
+   "A10": [
+    "tenant_iss_bind"
+   ],
+   "A11": [],
+   "A12": [],
+   "A13": [],
+   "A14": []
   }
- ],
- "B": [
-  {
-   "id": "B1",
-   "kind": "legit",
-   "target": "aud",
-   "part": "Part 1 検証の順序",
-   "desc": "社員が orders 宛てのアクセストークンで注文を読む",
-   "N": true,
-   "B": true,
-   "BE": true
+ },
+ "B": {
+  "configs": {
+   "N": [],
+   "B": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE": [
+    "alg",
+    "aud",
+    "exp",
+    "freshness",
+    "header_strip",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "normalize_gw",
+    "overage_resolve",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-alg": [
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-iss": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-aud": [
+    "alg",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-exp": [
+    "alg",
+    "aud",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-typ": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "types"
+   ],
+   "B-required": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "typ",
+    "types"
+   ],
+   "B-types": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ"
+   ],
+   "B-immutable_id": [
+    "alg",
+    "aud",
+    "exp",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-namespace": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-header_strip": [
+    "alg",
+    "aud",
+    "exp",
+    "freshness",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "normalize_gw",
+    "overage_resolve",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-overage_resolve": [
+    "alg",
+    "aud",
+    "exp",
+    "freshness",
+    "header_strip",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "normalize_gw",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-freshness": [
+    "alg",
+    "aud",
+    "exp",
+    "header_strip",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "normalize_gw",
+    "overage_resolve",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-normalize_gw": [
+    "alg",
+    "aud",
+    "exp",
+    "freshness",
+    "header_strip",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "overage_resolve",
+    "required",
+    "typ",
+    "types"
+   ]
   },
-  {
-   "id": "B2",
-   "kind": "attack",
-   "target": "typ・aud",
-   "part": "Part 1 ID トークンとアクセストークン",
-   "desc": "ログインで得た ID トークンを API に送る",
-   "N": true,
-   "B": false,
-   "BE": false
+  "rows": [
+   {
+    "id": "B1",
+    "kind": "legit",
+    "target": "aud",
+    "part": "Part 1 検証の順序",
+    "desc": "社員が orders 宛ての Keycloak のアクセストークンで注文を読む",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": true,
+    "BE-overage_resolve": true,
+    "BE-freshness": true,
+    "BE-normalize_gw": true
+   },
+   {
+    "id": "B2",
+    "kind": "attack",
+    "target": "typ・aud",
+    "part": "Part 1 ID トークンとアクセストークン",
+    "desc": "ログインで得た ID トークンを API に送る",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B3",
+    "kind": "attack",
+    "target": "aud",
+    "part": "Part 6 下流ほど絞る",
+    "desc": "invoices 宛てのトークンを orders に送る（宛先の差し替え）",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": true,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B4",
+    "kind": "attack",
+    "target": "ヘッダーへの転記",
+    "part": "Part 6 ヘッダーへの転記",
+    "desc": "クライアントが X-User-Role: admins を付けて送る",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B5",
+    "kind": "attack",
+    "target": "ヘッダーへの転記",
+    "part": "Part 6 ヘッダーへの転記",
+    "desc": "アンダースコア版 X_User_Role: admins（CVE-2025-64484 の型）",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B6",
+    "kind": "attack",
+    "target": "ヘッダーの重複",
+    "part": "Part 6 ヘッダーへの転記",
+    "desc": "小文字の x-user-role を足して重複させ、値を連結させる（CVE-2026-26308 の型）",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B7",
+    "kind": "attack",
+    "target": "入口の迂回",
+    "part": "Part 6 検証の分担",
+    "desc": "入口を通らずサービスに直接、正しいトークンと偽のヘッダーを送る",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": true
+   },
+   {
+    "id": "B8",
+    "kind": "attack",
+    "target": "groups の超過",
+    "part": "Part 3 Entra ID",
+    "desc": "250 グループで groups が消えた一般社員が、管理操作を呼ぶ",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": true,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B9",
+    "kind": "legit",
+    "target": "groups の超過",
+    "part": "Part 3 Entra ID",
+    "desc": "250 グループで groups が消えた管理者が、管理操作を呼ぶ",
+    "N": true,
+    "B": false,
+    "BE": true,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": true,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": true,
+    "BE-overage_resolve": false,
+    "BE-freshness": true,
+    "BE-normalize_gw": true
+   },
+   {
+    "id": "B10",
+    "kind": "attack",
+    "target": "マルチテナントの iss",
+    "part": "Part 3 Entra ID",
+    "desc": "別の顧客テナントで発行された Entra のトークン（{tenantid} を何でも受ける実装）",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": true,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B11",
+    "kind": "attack",
+    "target": "属性の鮮度",
+    "part": "Part 8 寿命の間のクレーム",
+    "desc": "finance から sales に異動した直後に、古いトークンで経理台帳を読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": true,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B12",
+    "kind": "attack",
+    "target": "失効",
+    "part": "Part 8 失効の伝播",
+    "desc": "ログアウト（セッション失効）後に、残ったトークンで経理台帳を読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": true,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B13",
+    "kind": "attack",
+    "target": "不変の ID",
+    "part": "Part 3 Okta",
+    "desc": "Okta の AT の sub（ログイン名）を再利用した新しい社員が、前任者のデータを読む",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": true,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B14",
+    "kind": "legit",
+    "target": "不変の ID",
+    "part": "Part 3 Okta",
+    "desc": "Okta の利用者が自分のデータを読む（uid で照合）",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": true,
+    "BE-overage_resolve": true,
+    "BE-freshness": true,
+    "BE-normalize_gw": true
+   },
+   {
+    "id": "B15",
+    "kind": "attack",
+    "target": "必須クレーム",
+    "part": "Part 6 発行時フック",
+    "desc": "Okta のインラインフックが 3 秒で打ち切られ、部署のクレームなしで出たトークンで社内文書を読む（契約社員）",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": true,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B16",
+    "kind": "legit",
+    "target": "正規化",
+    "part": "Part 3 Cognito",
+    "desc": "Cognito のアクセストークン（aud なし、client_id あり）で注文を読む",
+    "N": true,
+    "B": false,
+    "BE": true,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": true,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": true,
+    "BE-overage_resolve": true,
+    "BE-freshness": true,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B17",
+    "kind": "attack",
+    "target": "種類（token_use）",
+    "part": "Part 3 Cognito",
+    "desc": "Cognito の ID トークン（token_use=id）を API に送る",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B18",
+    "kind": "attack",
+    "target": "書き手",
+    "part": "Part 4 書き手で分ける",
+    "desc": "利用者本人が書き換えられる custom:role=admins で管理操作を呼ぶ（Cognito）",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B19",
+    "kind": "attack",
+    "target": "必須クレーム",
+    "part": "Part 3 Cognito",
+    "desc": "発行前フックが cognito:groups を外したトークンで管理操作を呼ぶ",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B20",
+    "kind": "attack",
+    "target": "名前空間",
+    "part": "Part 3 Auth0",
+    "desc": "予約名 roles として足したクレームを Auth0 が黙って外し、既定の editor で編集する",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": false,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B21",
+    "kind": "legit",
+    "target": "名前空間",
+    "part": "Part 3 Auth0",
+    "desc": "Auth0 の閲覧者が注文を読む",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": false,
+    "BE-header_strip": true,
+    "BE-overage_resolve": true,
+    "BE-freshness": true,
+    "BE-normalize_gw": true
+   },
+   {
+    "id": "B22",
+    "kind": "attack",
+    "target": "型（大きな数値）",
+    "part": "Part 4 型",
+    "desc": "2^53 を超える数値の社員番号を JavaScript 流に読み、別の社員の給与明細を得る",
+    "N": true,
+    "B": false,
+    "BE": false,
+    "B-alg": false,
+    "B-iss": false,
+    "B-aud": false,
+    "B-exp": false,
+    "B-typ": false,
+    "B-required": false,
+    "B-types": true,
+    "B-immutable_id": false,
+    "B-namespace": false,
+    "BE-header_strip": false,
+    "BE-overage_resolve": false,
+    "BE-freshness": false,
+    "BE-normalize_gw": false
+   },
+   {
+    "id": "B23",
+    "kind": "attack",
+    "target": "送信者制約",
+    "part": "Part 9・6（見送りの代償）",
+    "desc": "漏れたトークンを別の端末からそのまま再送する（DPoP・mTLS を見送った場合）",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-header_strip": true,
+    "BE-overage_resolve": true,
+    "BE-freshness": true,
+    "BE-normalize_gw": true
+   }
+  ],
+  "scores": {
+   "N": {
+    "attacks": 18,
+    "attacks_succeeded": 18,
+    "legit": 5,
+    "false_rejects": 0
+   },
+   "B": {
+    "attacks": 18,
+    "attacks_succeeded": 7,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "BE": {
+    "attacks": 18,
+    "attacks_succeeded": 1,
+    "legit": 5,
+    "false_rejects": 0
+   },
+   "B-alg": {
+    "attacks": 18,
+    "attacks_succeeded": 7,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-iss": {
+    "attacks": 18,
+    "attacks_succeeded": 8,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-aud": {
+    "attacks": 18,
+    "attacks_succeeded": 8,
+    "legit": 5,
+    "false_rejects": 1
+   },
+   "B-exp": {
+    "attacks": 18,
+    "attacks_succeeded": 7,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-typ": {
+    "attacks": 18,
+    "attacks_succeeded": 7,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-required": {
+    "attacks": 18,
+    "attacks_succeeded": 9,
+    "legit": 5,
+    "false_rejects": 1
+   },
+   "B-types": {
+    "attacks": 18,
+    "attacks_succeeded": 8,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-immutable_id": {
+    "attacks": 18,
+    "attacks_succeeded": 8,
+    "legit": 5,
+    "false_rejects": 2
+   },
+   "B-namespace": {
+    "attacks": 18,
+    "attacks_succeeded": 7,
+    "legit": 5,
+    "false_rejects": 3
+   },
+   "BE-header_strip": {
+    "attacks": 18,
+    "attacks_succeeded": 1,
+    "legit": 5,
+    "false_rejects": 0
+   },
+   "BE-overage_resolve": {
+    "attacks": 18,
+    "attacks_succeeded": 1,
+    "legit": 5,
+    "false_rejects": 1
+   },
+   "BE-freshness": {
+    "attacks": 18,
+    "attacks_succeeded": 3,
+    "legit": 5,
+    "false_rejects": 0
+   },
+   "BE-normalize_gw": {
+    "attacks": 18,
+    "attacks_succeeded": 2,
+    "legit": 5,
+    "false_rejects": 1
+   }
   },
-  {
-   "id": "B3",
-   "kind": "attack",
-   "target": "aud",
-   "part": "Part 6 下流ほど絞る",
-   "desc": "invoices 宛てのトークンを orders に送る（宛先の差し替え）",
-   "N": true,
-   "B": false,
-   "BE": false
+  "ablation_B": {
+   "alg": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "iss": {
+    "reopened": [
+     "B10"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "aud": {
+    "reopened": [
+     "B3"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": [
+     "B16"
+    ]
+   },
+   "exp": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "typ": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "required": {
+    "reopened": [
+     "B8",
+     "B15"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": [
+     "B9"
+    ]
+   },
+   "types": {
+    "reopened": [
+     "B22"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "immutable_id": {
+    "reopened": [
+     "B13"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "namespace": {
+    "reopened": [],
+    "newly_rejected_legit": [
+     "B21"
+    ],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "B4",
-   "kind": "attack",
-   "target": "ヘッダーへの転記",
-   "part": "Part 6 ヘッダーへの転記",
-   "desc": "クライアントが X-User-Role: admin を付けて送る",
-   "N": true,
-   "B": false,
-   "BE": false
+  "blockers_B": {
+   "B2": [],
+   "B3": [
+    "aud"
+   ],
+   "B8": [
+    "required"
+   ],
+   "B10": [
+    "iss"
+   ],
+   "B13": [
+    "immutable_id"
+   ],
+   "B15": [
+    "required"
+   ],
+   "B17": [],
+   "B18": [],
+   "B19": [],
+   "B20": [],
+   "B22": [
+    "types"
+   ]
   },
-  {
-   "id": "B5",
-   "kind": "attack",
-   "target": "ヘッダーへの転記",
-   "part": "Part 6 ヘッダーへの転記",
-   "desc": "アンダースコア版 X_User_Role: admin を送る（CVE-2025-64484 と同じ型）",
-   "N": true,
-   "B": true,
-   "BE": false
+  "ablation_BE": {
+   "header_strip": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "overage_resolve": {
+    "reopened": [],
+    "newly_rejected_legit": [
+     "B9"
+    ],
+    "legit_only_without": []
+   },
+   "freshness": {
+    "reopened": [
+     "B11",
+     "B12"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "normalize_gw": {
+    "reopened": [
+     "B7"
+    ],
+    "newly_rejected_legit": [
+     "B16"
+    ],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "B6",
-   "kind": "attack",
-   "target": "groups の超過",
-   "part": "Part 3 Entra ID",
-   "desc": "250 グループに属し groups が消えた一般社員が、管理操作を呼ぶ",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "B7",
-   "kind": "legit",
-   "target": "groups の超過",
-   "part": "Part 3 Entra ID",
-   "desc": "250 グループに属し groups が消えた管理者が、管理操作を呼ぶ",
-   "N": true,
-   "B": false,
-   "BE": true
-  },
-  {
-   "id": "B8",
-   "kind": "attack",
-   "target": "属性の鮮度",
-   "part": "Part 8 寿命の間のクレーム",
-   "desc": "finance から sales に異動した直後に、古いトークンで経理台帳を読む",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "B9",
-   "kind": "attack",
-   "target": "失効",
-   "part": "Part 8 失効の伝播",
-   "desc": "ログアウト（セッション失効）後に、残ったトークンで経理台帳を読む",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "B10",
-   "kind": "attack",
-   "target": "不変の ID",
-   "part": "Part 3 Okta",
-   "desc": "Okta の AT の sub（ログイン名）を再利用した新しい社員が、前任者のデータを読む",
-   "N": true,
-   "B": false,
-   "BE": false
-  },
-  {
-   "id": "B12",
-   "kind": "attack",
-   "target": "送信者制約",
-   "part": "Part 9 JWE と SD-JWT／Part 6",
-   "desc": "漏れたトークンを別の端末からそのまま再送する（DPoP・mTLS を見送った場合）",
-   "N": true,
-   "B": true,
-   "BE": true
-  },
-  {
-   "id": "B11",
-   "kind": "legit",
-   "target": "正規化",
-   "part": "Part 3 Cognito",
-   "desc": "Cognito のアクセストークン（aud なし、client_id あり）で注文を読む",
-   "N": true,
-   "B": false,
-   "BE": true
+  "blockers_BE": {
+   "B2": [],
+   "B3": [],
+   "B4": [],
+   "B5": [],
+   "B6": [],
+   "B7": [
+    "normalize_gw"
+   ],
+   "B8": [],
+   "B10": [],
+   "B11": [
+    "freshness"
+   ],
+   "B12": [
+    "freshness"
+   ],
+   "B13": [],
+   "B15": [],
+   "B17": [],
+   "B18": [],
+   "B19": [],
+   "B20": [],
+   "B22": []
   }
- ],
- "C": [
-  {
-   "id": "C1",
-   "kind": "legit",
-   "target": "委任",
-   "part": "Part 10 エージェントの ID",
-   "desc": "利用者 u1 の代わりにエージェントが、自分の請求書を読む",
-   "N": true,
-   "B": true,
-   "BE": true
+ },
+ "C": {
+  "configs": {
+   "N": [],
+   "B": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE": [
+    "act_chain",
+    "alg",
+    "approval_bind",
+    "aud",
+    "aud_exchange",
+    "depth_rule",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "short_task",
+    "typ",
+    "types"
+   ],
+   "B-alg": [
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-iss": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-aud": [
+    "alg",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-exp": [
+    "alg",
+    "aud",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-typ": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "types"
+   ],
+   "B-required": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "typ",
+    "types"
+   ],
+   "B-types": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ"
+   ],
+   "B-immutable_id": [
+    "alg",
+    "aud",
+    "exp",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ],
+   "B-namespace": [
+    "alg",
+    "aud",
+    "exp",
+    "immutable_id",
+    "iss",
+    "required",
+    "typ",
+    "types"
+   ],
+   "BE-act_chain": [
+    "alg",
+    "approval_bind",
+    "aud",
+    "aud_exchange",
+    "depth_rule",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "short_task",
+    "typ",
+    "types"
+   ],
+   "BE-aud_exchange": [
+    "act_chain",
+    "alg",
+    "approval_bind",
+    "aud",
+    "depth_rule",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "short_task",
+    "typ",
+    "types"
+   ],
+   "BE-depth_rule": [
+    "act_chain",
+    "alg",
+    "approval_bind",
+    "aud",
+    "aud_exchange",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "short_task",
+    "typ",
+    "types"
+   ],
+   "BE-approval_bind": [
+    "act_chain",
+    "alg",
+    "aud",
+    "aud_exchange",
+    "depth_rule",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "short_task",
+    "typ",
+    "types"
+   ],
+   "BE-short_task": [
+    "act_chain",
+    "alg",
+    "approval_bind",
+    "aud",
+    "aud_exchange",
+    "depth_rule",
+    "exp",
+    "immutable_id",
+    "iss",
+    "namespace",
+    "required",
+    "typ",
+    "types"
+   ]
   },
-  {
-   "id": "C2",
-   "kind": "attack",
-   "target": "パススルー",
-   "part": "Part 10 MCP の認可",
-   "desc": "ツールサーバーが受け取った MCP 宛てのトークンを、そのまま上流に渡す",
-   "N": true,
-   "B": false,
-   "BE": false
+  "rows": [
+   {
+    "id": "C1",
+    "kind": "legit",
+    "target": "委任",
+    "part": "Part 10 エージェントの ID",
+    "desc": "利用者 u1 の代わりにエージェントが、ツール経由で自分の請求書を読む",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": true,
+    "BE-aud_exchange": true,
+    "BE-depth_rule": true,
+    "BE-approval_bind": true,
+    "BE-short_task": true
+   },
+   {
+    "id": "C2",
+    "kind": "attack",
+    "target": "パススルー",
+    "part": "Part 10 MCP の認可",
+    "desc": "ツールが受け取ったトークンを、そのまま上流に渡して読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C3",
+    "kind": "attack",
+    "target": "代理の混乱",
+    "part": "Part 5 代理の混乱",
+    "desc": "u1 に委任されたエージェントが、ツールに u2 の請求書を読ませる",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": true,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C4",
+    "kind": "attack",
+    "target": "act の読み違い",
+    "part": "Part 10 4 つの問い",
+    "desc": "過去の行為者（管理コンソール）の権限で、読み取り専用のエージェントが支払う",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": true,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C5",
+    "kind": "attack",
+    "target": "承認の照合（金額）",
+    "part": "Part 10 人の承認の証拠",
+    "desc": "120,000 円の承認で、990,000 円を支払う",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": true,
+    "BE-short_task": false
+   },
+   {
+    "id": "C6",
+    "kind": "attack",
+    "target": "承認の照合（相手先）",
+    "part": "Part 10 人の承認の証拠",
+    "desc": "承認の金額のまま、振込先を別の口座に変える",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": true,
+    "BE-short_task": false
+   },
+   {
+    "id": "C7",
+    "kind": "attack",
+    "target": "承認の偽造",
+    "part": "Part 10 人の承認の証拠",
+    "desc": "存在しない承認 ID を本文に書いて支払う",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": true,
+    "BE-short_task": false
+   },
+   {
+    "id": "C8",
+    "kind": "legit",
+    "target": "承認",
+    "part": "Part 10 人の承認の証拠",
+    "desc": "承認どおり 120,000 円を B-019 に支払う",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": true,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": true,
+    "BE-approval_bind": true,
+    "BE-short_task": true
+   },
+   {
+    "id": "C9",
+    "kind": "attack",
+    "target": "委任の取り消し",
+    "part": "Part 8・10",
+    "desc": "利用者が委任を取り消した後（発行から 9 分）に、エージェントが読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": true
+   },
+   {
+    "id": "C10",
+    "kind": "attack",
+    "target": "委任の深さ",
+    "part": "Part 10 委任の連鎖と深さ",
+    "desc": "5 段の委任の連鎖で読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": true,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C11",
+    "kind": "legit",
+    "target": "委任の深さ",
+    "part": "Part 10 委任の連鎖と深さ",
+    "desc": "2 段の委任の連鎖で読む",
+    "N": true,
+    "B": true,
+    "BE": true,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": true,
+    "BE-aud_exchange": true,
+    "BE-depth_rule": true,
+    "BE-approval_bind": true,
+    "BE-short_task": true
+   },
+   {
+    "id": "C12",
+    "kind": "attack",
+    "target": "なりすまし",
+    "part": "Part 10 エージェントの ID",
+    "desc": "エージェントが利用者自身のトークン（act なし）を借りて支払う",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C13",
+    "kind": "attack",
+    "target": "resource の欠落",
+    "part": "Part 10 MCP の認可",
+    "desc": "resource を付けずに得た広い宛先のトークンを、悪意ある MCP サーバー B が A に再送する",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": true,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   },
+   {
+    "id": "C14",
+    "kind": "attack",
+    "target": "範囲の拡大",
+    "part": "Part 10 ツールごとのスコープ",
+    "desc": "読む・払うだけのタスクで、ツールが返金の範囲を求めて返金する",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": false,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": true
+   },
+   {
+    "id": "C15",
+    "kind": "attack",
+    "target": "sub の差し替え",
+    "part": "Part 10 4 つの問い",
+    "desc": "ツールが交換で sub を u2 に差し替えて u2 の請求書を読む",
+    "N": true,
+    "B": true,
+    "BE": false,
+    "B-alg": true,
+    "B-iss": true,
+    "B-aud": true,
+    "B-exp": true,
+    "B-typ": true,
+    "B-required": true,
+    "B-types": true,
+    "B-immutable_id": true,
+    "B-namespace": true,
+    "BE-act_chain": false,
+    "BE-aud_exchange": true,
+    "BE-depth_rule": false,
+    "BE-approval_bind": false,
+    "BE-short_task": false
+   }
+  ],
+  "scores": {
+   "N": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "BE": {
+    "attacks": 12,
+    "attacks_succeeded": 0,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-alg": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-iss": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-aud": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-exp": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-typ": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-required": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-types": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-immutable_id": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "B-namespace": {
+    "attacks": 12,
+    "attacks_succeeded": 12,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "BE-act_chain": {
+    "attacks": 12,
+    "attacks_succeeded": 1,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "BE-aud_exchange": {
+    "attacks": 12,
+    "attacks_succeeded": 3,
+    "legit": 3,
+    "false_rejects": 1
+   },
+   "BE-depth_rule": {
+    "attacks": 12,
+    "attacks_succeeded": 1,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "BE-approval_bind": {
+    "attacks": 12,
+    "attacks_succeeded": 3,
+    "legit": 3,
+    "false_rejects": 0
+   },
+   "BE-short_task": {
+    "attacks": 12,
+    "attacks_succeeded": 2,
+    "legit": 3,
+    "false_rejects": 0
+   }
   },
-  {
-   "id": "C3",
-   "kind": "attack",
-   "target": "代理の混乱",
-   "part": "Part 5 代理の混乱",
-   "desc": "u1 に委任されたエージェントが、ツールに u2 の請求書を読ませる",
-   "N": true,
-   "B": true,
-   "BE": false
+  "ablation_B": {
+   "alg": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "iss": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "aud": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "exp": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "typ": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "required": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "types": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "immutable_id": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "namespace": {
+    "reopened": [],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "C4",
-   "kind": "attack",
-   "target": "act の読み違い",
-   "part": "Part 10 4 つの問い",
-   "desc": "過去の行為者（管理コンソール）の権限で、読み取り専用のエージェントが支払う（過去の act を今の行為者と読む）",
-   "N": true,
-   "B": true,
-   "BE": false
+  "blockers_B": {},
+  "ablation_BE": {
+   "act_chain": {
+    "reopened": [
+     "C4"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "aud_exchange": {
+    "reopened": [
+     "C3",
+     "C13",
+     "C15"
+    ],
+    "newly_rejected_legit": [
+     "C8"
+    ],
+    "legit_only_without": []
+   },
+   "depth_rule": {
+    "reopened": [
+     "C10"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "approval_bind": {
+    "reopened": [
+     "C5",
+     "C6",
+     "C7"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   },
+   "short_task": {
+    "reopened": [
+     "C9",
+     "C14"
+    ],
+    "newly_rejected_legit": [],
+    "legit_only_without": []
+   }
   },
-  {
-   "id": "C5",
-   "kind": "attack",
-   "target": "承認の照合",
-   "part": "Part 10 人の承認の証拠",
-   "desc": "120,000 円の承認で、990,000 円を支払う",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "C6",
-   "kind": "attack",
-   "target": "承認の偽造",
-   "part": "Part 10 人の承認の証拠",
-   "desc": "存在しない承認 ID を本文に書いて支払う",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "C7",
-   "kind": "legit",
-   "target": "承認",
-   "part": "Part 10 人の承認の証拠",
-   "desc": "承認どおり 120,000 円を支払う",
-   "N": true,
-   "B": true,
-   "BE": true
-  },
-  {
-   "id": "C8",
-   "kind": "attack",
-   "target": "委任の取り消し",
-   "part": "Part 10 ツールごとのスコープ",
-   "desc": "利用者が委任を取り消した 9 分後に、エージェントが読む",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "C9",
-   "kind": "attack",
-   "target": "委任の深さ",
-   "part": "Part 10 委任の連鎖と深さ",
-   "desc": "5 段の委任の連鎖で読む",
-   "N": true,
-   "B": true,
-   "BE": false
-  },
-  {
-   "id": "C10",
-   "kind": "legit",
-   "target": "委任の深さ",
-   "part": "Part 10 委任の連鎖と深さ",
-   "desc": "2 段の委任の連鎖で読む",
-   "N": true,
-   "B": true,
-   "BE": true
+  "blockers_BE": {
+   "C2": [],
+   "C3": [
+    "aud_exchange"
+   ],
+   "C4": [
+    "act_chain"
+   ],
+   "C5": [
+    "approval_bind"
+   ],
+   "C6": [
+    "approval_bind"
+   ],
+   "C7": [
+    "approval_bind"
+   ],
+   "C9": [
+    "short_task"
+   ],
+   "C10": [
+    "depth_rule"
+   ],
+   "C12": [],
+   "C13": [
+    "aud_exchange"
+   ],
+   "C14": [
+    "short_task"
+   ],
+   "C15": [
+    "aud_exchange"
+   ]
   }
- ]
+ }
 }

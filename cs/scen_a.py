@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Scenario A: multi-tenant SaaS (Keycloak realms t1 / t2, Postgres row-level security).
-
-N  : naive verifier, tenant from the X-Tenant header (falls back to the path), session-level SET on a pooled connection
-B  : common baseline (iss allow-list t1+t2, aud saas-api, typ at+jwt, tenant claim required as a string); tenant taken from the
-     token and compared with the path; queries add WHERE tenant_id by hand, no row-level security
-BE : baseline + emphasis "tenant isolation": tenant bound to the issuer realm (per-tenant keys), SET LOCAL per transaction,
-     row-level security on every query
-"""
+"""Scenario A: multi-tenant SaaS on Keycloak realms t1 / t2 with Postgres row-level security. Behaviour follows the element set."""
 import statistics
 import time
 
 import psycopg
 
 from . import infra
-from .common import Case, RemoteIssuer
-from .jwtlib import NS, STS, Baseline, CLOCK, Reject, get_path, naive_verify, size
+from .common import Case, RealClock, RemoteIssuer
+from .jwtlib import NS, STS, Issuer, get_path, size, Reject
+from .verify import Verifier
 
-TENANTS = ('t1', 't2')
+CLOCK = RealClock()
+PARTNER = Issuer('unused', 'partner-t2', kid='partner-t2')  # a signing key handed to t2's integration partner
 
 
 def setup_db():
@@ -43,100 +38,139 @@ def conn(role):
 
 
 class Api:
-    """One service instance per configuration; each keeps ONE pooled connection that is reused across requests."""
+    """One instance per configuration; each keeps ONE pooled connection reused across requests."""
 
-    def __init__(self, cfg, t1, t2):
-        self.cfg, self.realms = cfg, {t1.iss: 't1', t2.iss: 't2'}
-        self.keys = {t1.kid: t1.pub_pem, t2.kid: t2.pub_pem}
-        self.base = Baseline([t1, t2], 'saas-api', typ=('at+jwt',), required={NS + '|tenant_id': str}, clock=_REAL)
-        self.db = conn('app_norls' if cfg == 'B' else 'app_rls')
+    def __init__(self, f, t1, t2):
+        self.f = f
+        self.realm_of = {t1.iss: 't1', t2.iss: 't2'}
+        reg = {t1.iss: [t1], t2.iss: [t2, PARTNER]} if 'per_tenant_keys' in f else {t1.iss: [t1, t2, PARTNER], t2.iss: [t1, t2, PARTNER]}
+        self.v = Verifier(f, reg, audience='saas-api', typ=('at+jwt',), required={'sub': str, NS + '|tenant_id': str}, clock=CLOCK)
+        self.mode = 'local' if 'rls_local' in f else 'session' if 'rls_session' in f else 'none'
+        self.db = conn('app_norls' if self.mode == 'none' else 'app_rls')
 
     def _auth(self, token, path_tenant, headers):
-        if self.cfg == 'N':
-            c = naive_verify(token, self.keys)
-            return c, headers.get('X-Tenant') or path_tenant
-        c = self.base.verify(token)
-        tenant = get_path(c, NS + '|tenant_id')
-        if tenant != path_tenant:
+        c = self.v.verify(token)
+        f = self.f
+        t = get_path(c, NS + '|tenant_id') if 'namespace' in f else None
+        if t is None:  # without the namespace rule, or when the claim is missing and not required: fall back to the request
+            t = headers.get('X-Tenant') or path_tenant
+        elif t != path_tenant and not isinstance(t, list):
             raise Reject('tenant mismatch with path')
-        if self.cfg == 'BE' and self.realms.get(c['iss']) != tenant:  # emphasis: the tenant must match the issuer realm (per-tenant keys)
+        if 'tenant_iss_bind' in f and self.realm_of.get(c.get('iss')) != t:
             raise Reject('tenant claim does not match issuer')
-        return c, tenant
+        return c, t
 
-    def _query(self, tenant, sql, args=(), set_context=True):
-        if self.cfg == 'N':
-            if set_context:
-                self.db.execute('SELECT set_config(%s, %s, false)', ('app.tenant', tenant))  # session level: survives in the pool
-            return [r for r in self.db.execute(sql, args).fetchall()]
-        if self.cfg == 'B':
-            return [r for r in self.db.execute(sql, args).fetchall()]
-        with self.db.transaction():  # BE: the middleware always sets the tenant for this transaction only
-            self.db.execute('SELECT set_config(%s, %s, true)', ('app.tenant', tenant))
-            return [r for r in self.db.execute(sql, args).fetchall()]
+    def _run(self, tenant, sql, args, set_ctx=True):
+        if self.mode == 'session' and set_ctx:
+            self.db.execute('SELECT set_config(%s, %s, false)', ('app.tenant', tenant if isinstance(tenant, str) else tenant[0]))
+        if self.mode == 'local':
+            with self.db.transaction():
+                self.db.execute('SELECT set_config(%s, %s, true)', ('app.tenant', tenant if isinstance(tenant, str) else ''))
+                return self.db.execute(sql, args).fetchall()
+        return self.db.execute(sql, args).fetchall()
+
+    def _where(self, tenant):
+        if isinstance(tenant, list):  # an array claim slips into SQL as ANY(...)
+            return 'tenant_id = ANY(%s)', (tenant,)
+        return 'tenant_id = %s', (tenant,)
 
     def list(self, token, path_tenant, headers=None):
         c, t = self._auth(token, path_tenant, headers or {})
-        sql = 'SELECT id, tenant_id FROM invoices WHERE tenant_id = %s' if self.cfg == 'B' else 'SELECT id, tenant_id FROM invoices'
-        return self._query(t, sql, (t,) if self.cfg == 'B' else ())
+        w, a = self._where(t)
+        return self._run(t, f'SELECT id, tenant_id FROM invoices WHERE {w}', a)
 
-    def get(self, token, path_tenant, invoice_id, headers=None):
+    def get(self, token, path_tenant, inv, headers=None):
         c, t = self._auth(token, path_tenant, headers or {})
-        sql = 'SELECT id, tenant_id FROM invoices WHERE id = %s'  # the developer forgot the tenant condition (BOLA)
-        return self._query(t, sql, (invoice_id,))
+        if 'data_tenant_check' in self.f:
+            w, a = self._where(t)
+            return self._run(t, f'SELECT id, tenant_id FROM invoices WHERE id = %s AND {w}', (inv,) + a)
+        return self._run(t, 'SELECT id, tenant_id FROM invoices WHERE id = %s', (inv,))
 
     def report(self, token, path_tenant, headers=None):
-        """A newer endpoint whose author forgot both the WHERE clause and the context call."""
         c, t = self._auth(token, path_tenant, headers or {})
-        return self._query(t, 'SELECT id, tenant_id FROM invoices', (), set_context=False)
-
-
-class _Real:
-    def now(self):
-        return int(time.time())
-
-
-_REAL = _Real()
+        if 'data_tenant_check' in self.f:
+            w, a = self._where(t)
+            return self._run(t, f'SELECT id, tenant_id FROM invoices WHERE {w}', a, set_ctx=False)
+        return self._run(t, 'SELECT id, tenant_id FROM invoices', (), set_ctx=False)
 
 
 def leaked(rows, own):
     return any(r[1] != own for r in rows)
 
 
-def cases(apis, tok):
-    def legit_list(user_tenant):
-        def f(cfg):
-            rows = apis[cfg].list(tok[user_tenant], user_tenant)
-            return rows and not leaked(rows, user_tenant)
-        return f
+def cases(t1, t2):
+    apis = {}
 
-    def report_after_other(cfg):
-        apis[cfg].list(tok['t2'], 't2')  # bob's request leaves t2 in the pooled session (N)
-        return leaked(apis[cfg].report(tok['t1'], 't1'), 't1')
+    def api(f):
+        if f not in apis:
+            apis[f] = Api(f, t1, t2)
+        return apis[f]
+
+    tok = {}
+
+    def T(name):
+        if name not in tok:
+            spec = {'alice': ('t1', 'saas-web', 'alice'), 'bob': ('t2', 'saas-web', 'bob'), 'rogue': ('t2', 'rogue-web', 'bob'),
+                    'light': ('t1', 'saas-light', 'alice'), 'multi': ('t1', 'saas-multi', 'alice')}[name]
+            r = infra.token(*spec)
+            tok[name], tok[name + '_id'] = r['access_token'], r.get('id_token')
+        return tok[name]
+
+    def partner(iss, tenant):
+        p = Issuer(iss, 'partner-t2', kid='partner-t2')
+        return p.mint({'sub': 'svc-partner', 'aud': 'saas-api', NS: {'tenant_id': tenant}}, now=CLOCK.now())
+
+    def legit_list(user, t):
+        return lambda f: (lambda rows: bool(rows) and not leaked(rows, t))(api(f).list(T(user), t))
+
+    def report_after_bob(f):
+        api(f).list(T('bob'), 't2')
+        return leaked(api(f).report(T('alice'), 't1'), 't1')
+
+    def expired(f):
+        CLOCK.offset = 400
+        try:
+            return api(f).list(T('alice'), 't1')
+        finally:
+            CLOCK.offset = 0
 
     return [
-        Case('A1', 'legit', 'tenant', 'Part 5 マルチテナント', 't1 の利用者が自分のテナントの請求書を一覧する', legit_list('t1')),
-        Case('A2', 'legit', 'tenant', 'Part 5 マルチテナント', 't2 の利用者が自分のテナントの請求書を一覧する', legit_list('t2')),
-        Case('A3', 'attack', 'tenant の出どころ', 'Part 5 マルチテナント', 't2 のトークンで、パスとヘッダー X-Tenant を t1 にして一覧する',
-             lambda cfg: leaked(apis[cfg].list(tok['t2'], 't1', {'X-Tenant': 't1'}), 't2')),
-        Case('A4', 'attack', 'BOLA', 'Part 5 BOLA', 't1 の利用者が、t2 の請求書の ID を直接指定する（WHERE にテナントが無い）',
-             lambda cfg: leaked(apis[cfg].get(tok['t1'], 't1', 1), 't1')),
-        Case('A5', 'attack', '接続プール', 'Part 7 接続プール', '直前の t2 の要求の文脈が残った接続で、条件を書き忘れた集計 API を t1 が呼ぶ', report_after_other),
-        Case('A6', 'attack', 'テナント単位の鍵', 'Part 5 マルチテナント', 't2 の管理者が自分のレルムのマッパーで tenant_id=t1 を出させ、t1 を読む',
-             lambda cfg: leaked(apis[cfg].list(tok['rogue'], 't1'), 't2') or bool(apis[cfg].list(tok['rogue'], 't1'))),
+        Case('A1', 'legit', 'テナント', 'Part 5 マルチテナント', 't1 の利用者が自分のテナントの請求書を一覧する', legit_list('alice', 't1')),
+        Case('A2', 'legit', 'テナント', 'Part 5 マルチテナント', 't2 の利用者が自分のテナントの請求書を一覧する', legit_list('bob', 't2')),
+        Case('A3', 'legit', 'BOLA', 'Part 5 BOLA', 't1 の利用者が自分の請求書を ID で読む', lambda f: bool(api(f).get(T('alice'), 't1', 2))),
+        Case('A4', 'legit', '集計', 'Part 7 データ層', 't1 の利用者が集計 API で自分のテナントだけを得る',
+             lambda f: (lambda rows: bool(rows) and not leaked(rows, 't1'))(api(f).report(T('alice'), 't1'))),
+        Case('A5', 'attack', 'テナントの出どころ', 'Part 5 マルチテナント', 't2 のトークンで、パスとヘッダー X-Tenant を t1 にして一覧する',
+             lambda f: leaked(api(f).list(T('bob'), 't1', {'X-Tenant': 't1'}), 't2')),
+        Case('A6', 'attack', 'BOLA', 'Part 5 BOLA', 't1 の利用者が、t2 の請求書の ID を直接指定する', lambda f: leaked(api(f).get(T('alice'), 't1', 1), 't1')),
+        Case('A7', 'attack', '接続プール', 'Part 7 接続プール', '直前の t2 の要求の文脈が残った接続で、条件を書き忘れた集計 API を t1 が呼ぶ', report_after_bob),
+        Case('A8', 'attack', 'テナントと発行者', 'Part 5 マルチテナント', 't2 の管理者が自分のレルムのマッパーで tenant_id=t1 を出させ、t1 を読む（実際の Keycloak）',
+             lambda f: leaked(api(f).list(T('rogue'), 't1'), 't2')),
+        Case('A9', 'attack', 'テナント単位の鍵', 'Part 5（IR 8587 §5.2.1.2）', 't2 の連携先に渡した署名鍵で、iss=t1・tenant=t1 のトークンを作る',
+             lambda f: leaked(api(f).list(partner(t1.iss, 't1'), 't1'), 't2')),
+        Case('A10', 'attack', 'テナント単位の鍵', 'Part 5 マルチテナント', '同じ鍵で、iss=t2 のまま tenant=t1 を名乗る',
+             lambda f: leaked(api(f).list(partner(t2.iss, 't1'), 't1'), 't2')),
+        Case('A11', 'attack', '必須クレーム', 'Part 3 Keycloak（軽量アクセストークン）', '軽量アクセストークンで tenant が落ち、ヘッダー X-Tenant: t2 で既定を上書きする',
+             lambda f: leaked(api(f).list(T('light'), 't2', {'X-Tenant': 't2'}), 't1')),
+        Case('A12', 'attack', '型', 'Part 4 型', 'マッパーの設定誤りで tenant が配列 ["t1","t2"] になったトークンで一覧する',
+             lambda f: leaked(api(f).list(T('multi'), 't1'), 't1')),
+        Case('A13', 'attack', 'typ・aud', 'Part 1 ID トークンとアクセストークン', 'ログインで得た ID トークンを API に送る',
+             lambda f: (T('alice'), bool(api(f).list(tok['alice_id'], 't1')))[1]),
+        Case('A14', 'attack', 'exp', 'Part 1 検証の順序', '期限切れのトークン（発行から 400 秒後）で一覧する', lambda f: bool(expired(f))),
     ]
 
 
-# ------------------------------------------------------------------ 見送り: fine-grained permissions in the token vs PDP lookup
-def defer_fine_grained(reps=300):
+def defer_fine_grained(reps=2000):
     out = {'token_bytes': {}, 'check_us': {}}
     for n in (0, 20, 200, 1000):
-        claims = {'sub': 'alice', 'aud': 'saas-api', NS: {'tenant_id': 't1', 'invoice_ids': list(range(2, 2 + 2 * n, 2))}}
-        out['token_bytes'][n] = size(STS.mint(claims))
+        out['token_bytes'][n] = size(STS.mint({'sub': 'alice', 'aud': 'saas-api', NS: {'tenant_id': 't1', 'invoice_ids': list(range(2, 2 + 2 * n, 2))}}))
     ids = set(range(2, 2002, 2))
-    t0 = time.perf_counter()
+    lat = []
     for i in range(reps):
+        t = time.perf_counter()
         _ = (i * 2) in ids
-    out['check_us']['in_token'] = (time.perf_counter() - t0) / reps * 1e6
+        lat.append((time.perf_counter() - t) * 1e6)
+    out['check_us']['in_token_p50'] = statistics.median(lat)
     lat = []
     with conn('app_norls') as db:
         for i in range(reps):
@@ -146,7 +180,6 @@ def defer_fine_grained(reps=300):
     lat.sort()
     out['check_us']['pdp_db_p50'] = statistics.median(lat)
     out['check_us']['pdp_db_p95'] = lat[int(len(lat) * 0.95)]
-    # stale window after revoking one invoice permission: in-token lasts until exp; the PDP sees the change on the next request
     out['revoke_stale_s'] = {'in_token_max': 300, 'in_token_mean': 150, 'pdp': 0}
     return out
 
@@ -154,12 +187,6 @@ def defer_fine_grained(reps=300):
 def run():
     setup_db()
     t1, t2 = RemoteIssuer('t1'), RemoteIssuer('t2')
-    tok = {'t1': infra.token('t1', 'saas-web', 'alice')['access_token'], 't2': infra.token('t2', 'saas-web', 'bob')['access_token'],
-           'rogue': infra.token('t2', 'rogue-web', 'bob')['access_token']}
-    apis = {cfg: Api(cfg, t1, t2) for cfg in ('N', 'B', 'BE')}
-    sizes = {k: size(v) for k, v in tok.items()}
-    return cases(apis, tok), {'keycloak_token_bytes': sizes, 'defer_fine_grained': defer_fine_grained()}
-
-
-EMPHASIS_CODE = ['Api._auth (tenant bound to issuer)', 'Api._query (SET LOCAL + RLS)', 'setup_db policy']
-_ = CLOCK
+    sizes = {k: size(infra.token(*v)['access_token']) for k, v in
+             {'alice': ('t1', 'saas-web', 'alice'), 'light': ('t1', 'saas-light', 'alice')}.items()}
+    return cases(t1, t2), {'keycloak_token_bytes': sizes, 'defer_fine_grained': defer_fine_grained()}

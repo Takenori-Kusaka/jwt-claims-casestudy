@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
-"""Case registry, real-time clock for Keycloak tokens, remote issuers built from Keycloak JWKS."""
+"""Case registry, configurations as element sets, ablation analysis, remote issuers from Keycloak JWKS."""
 import json
 import time
 
-from jwt.algorithms import RSAAlgorithm
 from cryptography.hazmat.primitives import serialization
+from jwt.algorithms import RSAAlgorithm
 
 from . import infra
 from .jwtlib import Reject
 
-CONFIGS = ('N', 'B', 'BE')
 CONFIG_JA = {'N': '素朴（よくある誤り）', 'B': '共通の基準', 'BE': '共通の基準＋重点'}
 
 
 class RealClock:
+    def __init__(self):
+        self.offset = 0
+
     def now(self):
-        return int(time.time())
-
-
-REAL = RealClock()
+        return int(time.time()) + self.offset
 
 
 class RemoteIssuer:
@@ -36,26 +35,50 @@ class Case:
     def __init__(self, cid, kind, target, part, desc, fn):
         self.cid, self.kind, self.target, self.part, self.desc, self.fn = cid, kind, target, part, desc, fn
 
-    def run(self, cfg):
-        """Returns True when the request was ACCEPTED (attack succeeded / legitimate request served)."""
+    def run(self, flags):
+        """True when the request was ACCEPTED (attack succeeded / legitimate request served)."""
         try:
-            return bool(self.fn(cfg))
+            return bool(self.fn(frozenset(flags)))
         except Reject:
+            return False
+        except (KeyError, TypeError, ValueError):  # a consumer crashing on an unexpected claim shape = request not served
             return False
 
 
-def matrix(cases):
+def matrix(cases, cfgs):
     rows = []
     for c in cases:
-        r = {cfg: c.run(cfg) for cfg in CONFIGS}
-        rows.append(dict(id=c.cid, kind=c.kind, target=c.target, part=c.part, desc=c.desc, **r))
+        r = dict(id=c.cid, kind=c.kind, target=c.target, part=c.part, desc=c.desc)
+        for name, fl in cfgs.items():
+            r[name] = c.run(fl)
+        rows.append(r)
     return rows
 
 
-def score(rows):
+def score(rows, names):
     out = {}
-    for cfg in CONFIGS:
-        att = [r for r in rows if r['kind'] == 'attack']
-        leg = [r for r in rows if r['kind'] == 'legit']
-        out[cfg] = dict(attacks=len(att), attacks_succeeded=sum(r[cfg] for r in att), legit=len(leg), false_rejects=sum(not r[cfg] for r in leg))
+    att = [r for r in rows if r['kind'] == 'attack']
+    leg = [r for r in rows if r['kind'] == 'legit']
+    for n in names:
+        out[n] = dict(attacks=len(att), attacks_succeeded=sum(r[n] for r in att), legit=len(leg), false_rejects=sum(not r[n] for r in leg))
+    return out
+
+
+def blockers(rows, full, prefix):
+    """For each attack blocked in the full config: which single-element removals reopen it. Empty = blocked by several elements."""
+    cols = [k for k in rows[0] if k.startswith(prefix + '-') and k.count('-') == 1]
+    return {r['id']: [c[len(prefix) + 1:] for c in cols if r[c]] for r in rows if r['kind'] == 'attack' and not r[full]}
+
+
+def ablation(rows, full, prefix):
+    """For each element: attacks reopened (blocked in the full config, accepted without the element), legit requests newly
+    rejected, and legit requests that only work without the element (the element's false-reject cost)."""
+    out = {}
+    for name in [k for k in rows[0] if k.startswith(prefix + '-') and k.count('-') == 1]:
+        e = name[len(prefix) + 1:]
+        out[e] = {
+            'reopened': [r['id'] for r in rows if r['kind'] == 'attack' and not r[full] and r[name]],
+            'newly_rejected_legit': [r['id'] for r in rows if r['kind'] == 'legit' and r[full] and not r[name]],
+            'legit_only_without': [r['id'] for r in rows if r['kind'] == 'legit' and not r[full] and r[name]],
+        }
     return out

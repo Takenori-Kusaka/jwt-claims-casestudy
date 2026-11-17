@@ -76,7 +76,12 @@ class Issuer:
         if typ:
             h['typ'] = typ
         h.update(extra_headers or {})
-        return jwt.encode(body, self.key, algorithm='RS256', headers=h)
+        h['alg'] = 'RS256'
+        # signed by hand so that unusual claim types (numeric sub, huge integers) are kept exactly as given
+        hs = b64(json.dumps(h, separators=(',', ':')).encode())
+        ps = b64(json.dumps(body, separators=(',', ':'), ensure_ascii=False).encode())
+        sig = jwt.algorithms.RSAAlgorithm(jwt.algorithms.RSAAlgorithm.SHA256).sign(f'{hs}.{ps}'.encode(), self.key)
+        return f'{hs}.{ps}.{b64(sig)}'
 
 
 # ------------------------------------------------------------------ mock IdPs in their documented shapes (notes 02)

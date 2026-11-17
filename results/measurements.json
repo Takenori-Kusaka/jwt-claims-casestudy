@@ -1,9 +1,8 @@
 {
  "A": {
   "keycloak_token_bytes": {
-   "t1": 1378,
-   "t2": 1367,
-   "rogue": 1369
+   "alice": 1398,
+   "light": 761
   },
   "defer_fine_grained": {
    "token_bytes": {
@@ -13,9 +12,9 @@
     "1000": 6563
    },
    "check_us": {
-    "in_token": 0.048333313316106796,
-    "pdp_db_p50": 585.2499743923545,
-    "pdp_db_p95": 757.6000061817467
+    "in_token_p50": 0.100000761449337,
+    "pdp_db_p50": 548.3999848365784,
+    "pdp_db_p95": 692.5000343471766
    },
    "revoke_stale_s": {
     "in_token_max": 300,
@@ -26,135 +25,556 @@
  },
  "B": {
   "defer_crypto": {
+   "reps": 2000,
    "bytes": {
     "jws": 670,
     "jwe_nested": 1345,
-    "dpop_proof": 496
+    "dpop_proof": 498
    },
-   "us_p50": {
-    "verify_jws": 86.14998660050333,
-    "jwe_encrypt": 155.699992319569,
-    "jwe_decrypt": 653.750030323863,
-    "dpop_create": 103.29997166991234,
-    "dpop_verify": 175.74999947100878
+   "us": {
+    "verify_jws": {
+     "p50": 82.99999171867967,
+     "p95": 104.8000412993133
+    },
+    "jwe_encrypt": {
+     "p50": 141.60003047436476,
+     "p95": 202.49997032806277
+    },
+    "jwe_decrypt": {
+     "p50": 628.2999529503286,
+     "p95": 898.8000336103141
+    },
+    "dpop_create": {
+     "p50": 99.0999978967011,
+     "p95": 153.4000039100647
+    },
+    "dpop_verify": {
+     "p50": 97.29998419061303,
+     "p95": 142.39997835829854
+    }
    }
   },
   "freshness": {
-   "introspection_ms_p50": 14.112050004769117,
-   "directory_lookup_ms_p50": 71.13595001283102,
-   "stale_window_s": {
-    "self_contained_lifetime_300": {
-     "max": 300,
-     "mean": 150
-    },
-    "self_contained_lifetime_3600": {
-     "max": 3600,
-     "mean": 1800
-    },
-    "lookup_or_introspection": 0
-   }
+   "reps": 200,
+   "introspection_ms": {
+    "p50": 8.889899996574968,
+    "p95": 31.78650001063943
+   },
+   "directory_lookup_ms": {
+    "p50": 50.73570000240579,
+    "p95": 75.60089998878539
+   },
+   "note": "directory lookup includes fetching an admin token per call"
   },
   "token_bytes": {
    "keycloak_at": 1423,
-   "internal_at": 903,
-   "entra_overage": 1042,
-   "entra_150_groups": 8650
+   "internal_at": 967,
+   "entra_150_groups": 8650,
+   "entra_overage": 1042
   }
  },
  "C": {
   "keycloak_exchange": {
+   "reps": 200,
    "status": 200,
-   "ms_p50": 20.874449983239174,
+   "ms_p50": 9.674350032582879,
+   "ms_p95": 31.305400014389306,
    "aud": "invoices",
    "azp": "mcp-tools",
-   "has_act": false
-  },
-  "sts_exchange": {
-   "per_task_two_hops_us_p50": 1230.1999959163368,
-   "p95": 1811.699999962002,
-   "revocation_window_s": {
-    "N_B_lifetime_3600": {
-     "max": 3600
+   "has_act": false,
+   "subject_aud": [
+    "mcp-tools",
+    "account"
+   ],
+   "probes": {
+    "narrow_to_invoices": {
+     "status": 200,
+     "aud": "invoices",
+     "scope": "aud-invoices email profile",
+     "error": null
     },
-    "BE_per_task_300_and_recheck": {
-     "max": 300,
-     "at_next_exchange": 0
+    "audience_not_in_scope": {
+     "status": 400,
+     "aud": null,
+     "scope": null,
+     "error": "Requested audience not available: invoices"
+    },
+    "audience_not_configured": {
+     "status": 400,
+     "aud": null,
+     "scope": null,
+     "error": "Audience not found"
+    },
+    "scope_not_granted": {
+     "status": 200,
+     "aud": [
+      "orders",
+      "account"
+     ],
+     "scope": "aud-orders email profile",
+     "error": null
+    },
+    "no_audience_no_scope": {
+     "status": 200,
+     "aud": "account",
+     "scope": "email profile",
+     "error": null
     }
    }
+  },
+  "sts_exchange": {
+   "reps": 2000,
+   "per_task_two_hops_us_p50": 1182.0000072475523,
+   "p95": 1547.6999687962234
   }
  },
- "change": {
-  "string→array": {
-   "consumers": 6,
-   "broken_without_parser": 3,
-   "silently_wrong": 0,
-   "broken_list": [
-    "split",
-    "list",
-    "strict"
-   ],
-   "caught_by_contract_tests_before_release": 3,
-   "broken_with_common_parser": 0
+ "keycloak": {
+  "full_scope": {
+   "fs-on": {
+    "realm_roles": [
+     "approver",
+     "default-roles-t1",
+     "offline_access",
+     "tenant-admin",
+     "uma_authorization"
+    ],
+    "tenant_admin_leaks": true
+   },
+   "fs-off": {
+    "realm_roles": [],
+    "tenant_admin_leaks": false
+   }
   },
-  "top level→namespace object": {
-   "consumers": 6,
-   "broken_without_parser": 6,
-   "silently_wrong": 2,
-   "broken_list": [
-    "split",
-    "list",
-    "header",
-    "contains",
-    "strict",
-    "optional"
+  "lightweight": {
+   "full_claims": [
+    "acr",
+    "aud",
+    "azp",
+    "email",
+    "email_verified",
+    "exp",
+    "family_name",
+    "given_name",
+    "https://claims.example.com/",
+    "iat",
+    "iss",
+    "jti",
+    "name",
+    "preferred_username",
+    "realm_access",
+    "resource_access",
+    "scope",
+    "sid",
+    "sub",
+    "typ"
    ],
-   "caught_by_contract_tests_before_release": 6,
-   "broken_with_common_parser": 0
+   "light_claims": [
+    "azp",
+    "exp",
+    "iat",
+    "iss",
+    "jti",
+    "scope",
+    "sid",
+    "typ"
+   ],
+   "missing_in_light": [
+    "acr",
+    "aud",
+    "email",
+    "email_verified",
+    "family_name",
+    "given_name",
+    "https://claims.example.com/",
+    "name",
+    "preferred_username",
+    "realm_access",
+    "resource_access",
+    "sub"
+   ],
+   "tenant_in_light": false,
+   "aud_in_light": false,
+   "sub_in_light": false
   },
-  "rename roles→role": {
-   "consumers": 6,
-   "broken_without_parser": 6,
-   "silently_wrong": 2,
-   "broken_list": [
-    "split",
-    "list",
-    "header",
-    "contains",
-    "strict",
-    "optional"
+  "unmanaged_attribute": {
+   "ENABLED": {
+    "stored": true,
+    "http_error": null
+   },
+   "DISABLED(default)": {
+    "stored": false,
+    "http_error": null
+   }
+  },
+  "organizations": {
+   "organization_claim": [
+    "acme"
    ],
-   "caught_by_contract_tests_before_release": 6,
-   "broken_with_common_parser": 0
+   "type": "list"
+  },
+  "groups_size": {
+   "0": {
+    "full_bytes": 1394,
+    "light_bytes": 759
+   },
+   "10": {
+    "full_bytes": 1769,
+    "light_bytes": 759
+   },
+   "50": {
+    "full_bytes": 3209,
+    "light_bytes": 759
+   },
+   "100": {
+    "full_bytes": 5009,
+    "light_bytes": 759
+   },
+   "200": {
+    "full_bytes": 8609,
+    "light_bytes": 759
+   }
+  },
+  "refresh_reevaluation": {
+   "issued": {
+    "department": "sales",
+    "auditor": false
+   },
+   "after_refresh": {
+    "department": "finance",
+    "auditor": true
+   },
+   "after_relogin": {
+    "department": "finance",
+    "auditor": true
+   },
+   "refresh_token_rotated": true
+  },
+  "logout_introspection": {
+   "reps": 20,
+   "introspection_active_by_client": {
+    "orders": true,
+    "portal": false,
+    "mcp-tools": false
+   },
+   "all_inactive_on_first_check": true,
+   "ms_until_inactive_max": 26.839700003620237,
+   "jwt_seconds_left_min": 299
   }
  },
  "perf": {
-  "verify_N": {
-   "p50_us": 84.30000161752105,
-   "p95_us": 137.49999925494194
+  "verify_naive": {
+   "reps": 5000,
+   "p50_us": 82.30004459619522,
+   "p95_us": 138.2000045850873,
+   "p99_us": 164.70003174617887
   },
-  "verify_B": {
-   "p50_us": 85.70001227781177,
-   "p95_us": 141.7000312358141
+  "verify_baseline": {
+   "reps": 5000,
+   "p50_us": 84.20000085607171,
+   "p95_us": 108.40001050382853,
+   "p99_us": 136.10004680231214
   },
   "gateway_exchange_entra_to_internal": {
-   "p50_us": 694.4499909877777,
-   "p95_us": 1041.4999560452998
+   "reps": 2000,
+   "p50_us": 682.4000156484544,
+   "p95_us": 1026.9000194966793,
+   "p99_us": 1123.199996072799
   }
  },
- "loc": {
-  "A テナント分離（発行者とテナントの照合・SET LOCAL・RLS）": 9,
-  "B 正規化の入口（IdP ごとの検証・組織の名前空間・内部トークン）": 29,
-  "B 鮮度（重要な判断で属性とセッションを引き直す）": 8,
-  "C 委任（交換・act の連鎖・承認の照合・深さ・取り消し）": 27,
-  "共通の基準（検証部品）": 31
- },
- "variants": {
-  "C: 深さの組織規則を見送る → C9（5 段の連鎖）": true,
-  "B: 送信者制約（DPoP）を見送る → 盗まれたトークンの再送": true
- },
  "env": {
-  "keycloak_boot_s": 38,
-  "container_mem": "cs-pg 30.73MiB / 11.68GiB\ncs-kc 744.4MiB / 11.68GiB",
-  "run_s": 62
+  "cpu": "AMD Ryzen 7 3700X 8-Core Processor",
+  "os": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.6",
+  "pyjwt": "2.10.1",
+  "keycloak": "quay.io/keycloak/keycloak:26.8.0",
+  "postgres": "postgres:16-alpine",
+  "keycloak_boot_s": 32,
+  "container_mem": "cs-pg 30.81MiB / 11.68GiB\ncs-kc 773.7MiB / 11.68GiB",
+  "run_s": 157
+ },
+ "change": {
+  "roles: 空白区切り → 配列": {
+   "consumers": 9,
+   "crash": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "silently_wrong": [],
+   "broken": 6,
+   "caught_by_contract_tests": 6,
+   "broken_but_not_caught": [],
+   "common_parser": "ok"
+  },
+  "roles: 空白区切り → カンマ区切り": {
+   "consumers": 9,
+   "crash": [],
+   "silently_wrong": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "SQL の RLS（JSON の文字列比較）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "broken": 7,
+   "caught_by_contract_tests": 0,
+   "broken_but_not_caught": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "SQL の RLS（JSON の文字列比較）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "common_parser": "ok"
+  },
+  "employee_id: 文字列 → 2^53 超の数値": {
+   "consumers": 9,
+   "crash": [
+    "Go（厳密な型）"
+   ],
+   "silently_wrong": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Kubernetes の claimMappings",
+    "sub をキーにする旧システム"
+   ],
+   "broken": 5,
+   "caught_by_contract_tests": 3,
+   "broken_but_not_caught": [
+    "Kubernetes の claimMappings",
+    "sub をキーにする旧システム"
+   ],
+   "common_parser": "ok"
+  },
+  "tenant: 大文字に変わる（T1）": {
+   "consumers": 9,
+   "crash": [],
+   "silently_wrong": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "SQL の RLS（JSON の文字列比較）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "broken": 9,
+   "caught_by_contract_tests": 5,
+   "broken_but_not_caught": [
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "Kubernetes の claimMappings",
+    "sub をキーにする旧システム"
+   ],
+   "common_parser": "ok"
+  },
+  "roles: 組織の URL 名前空間へ移す": {
+   "consumers": 9,
+   "crash": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Kubernetes の claimMappings",
+    "sub をキーにする旧システム"
+   ],
+   "silently_wrong": [
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "SQL の RLS（JSON の文字列比較）",
+    "Java（寛容な変換）"
+   ],
+   "broken": 9,
+   "caught_by_contract_tests": 9,
+   "broken_but_not_caught": [],
+   "common_parser": "ok"
+  },
+  "roles: 名前を role に変える": {
+   "consumers": 9,
+   "crash": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Kubernetes の claimMappings",
+    "sub をキーにする旧システム"
+   ],
+   "silently_wrong": [
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "SQL の RLS（JSON の文字列比較）",
+    "Java（寛容な変換）"
+   ],
+   "broken": 9,
+   "caught_by_contract_tests": 9,
+   "broken_but_not_caught": [],
+   "common_parser": "ok"
+  },
+  "mfa: 無い（=false）から null に": {
+   "consumers": 9,
+   "crash": [],
+   "silently_wrong": [
+    "JavaScript（数値は double）",
+    "CEL の規則"
+   ],
+   "broken": 2,
+   "caught_by_contract_tests": 2,
+   "broken_but_not_caught": [],
+   "common_parser": "ok"
+  },
+  "mfa: 真偽値を文字列 \"false\" に": {
+   "consumers": 9,
+   "crash": [
+    "Go（厳密な型）"
+   ],
+   "silently_wrong": [
+    "Python",
+    "JavaScript（数値は double）"
+   ],
+   "broken": 3,
+   "caught_by_contract_tests": 3,
+   "broken_but_not_caught": [],
+   "common_parser": "crash"
+  },
+  "制限のクレーム ip_allow を追加": {
+   "consumers": 9,
+   "crash": [],
+   "silently_wrong": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "SQL の RLS（JSON の文字列比較）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "broken": 9,
+   "caught_by_contract_tests": 0,
+   "broken_but_not_caught": [
+    "Python",
+    "JavaScript（数値は double）",
+    "Go（厳密な型）",
+    "Envoy（claim_name でヘッダーへ）",
+    "CEL の規則",
+    "SQL の RLS（JSON の文字列比較）",
+    "Kubernetes の claimMappings",
+    "Java（寛容な変換）",
+    "sub をキーにする旧システム"
+   ],
+   "common_parser": "ok"
+  },
+  "sub: ログイン名 → 不変の UUID（user_id は残す）": {
+   "consumers": 9,
+   "crash": [
+    "sub をキーにする旧システム"
+   ],
+   "silently_wrong": [],
+   "broken": 1,
+   "caught_by_contract_tests": 1,
+   "broken_but_not_caught": [],
+   "common_parser": "ok"
+  }
+ },
+ "lifetime": {
+  "1min/self": {
+   "stale_window_s_mean": 58.6056502929517,
+   "stale_window_s_p95": 122.39722137268154,
+   "stale_decisions_after_change": 984,
+   "stale_critical_decisions": 55,
+   "as_calls_per_hour": 61000
+  },
+  "1min/crit": {
+   "stale_window_s_mean": 55.826680506695766,
+   "stale_window_s_p95": 121.97324655731813,
+   "stale_decisions_after_change": 929,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 67109
+  },
+  "1min/always": {
+   "stale_window_s_mean": 29.719069659931883,
+   "stale_window_s_p95": 90.51792743375108,
+   "stale_decisions_after_change": 0,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 181249
+  },
+  "5min/self": {
+   "stale_window_s_mean": 177.12567372310625,
+   "stale_window_s_p95": 313.2539060987265,
+   "stale_decisions_after_change": 4950,
+   "stale_critical_decisions": 258,
+   "as_calls_per_hour": 13000
+  },
+  "5min/crit": {
+   "stale_window_s_mean": 148.54409700305973,
+   "stale_window_s_p95": 301.5394905015014,
+   "stale_decisions_after_change": 4692,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 19109
+  },
+  "5min/always": {
+   "stale_window_s_mean": 29.719069659931883,
+   "stale_window_s_p95": 90.51792743375108,
+   "stale_decisions_after_change": 0,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 133249
+  },
+  "15min/self": {
+   "stale_window_s_mean": 452.3656398730149,
+   "stale_window_s_p95": 872.0333334093921,
+   "stale_decisions_after_change": 14358,
+   "stale_critical_decisions": 777,
+   "as_calls_per_hour": 5000
+  },
+  "15min/crit": {
+   "stale_window_s_mean": 283.6153957697087,
+   "stale_window_s_p95": 747.0416503772726,
+   "stale_decisions_after_change": 13581,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 11109
+  },
+  "15min/always": {
+   "stale_window_s_mean": 29.719069659931883,
+   "stale_window_s_p95": 90.51792743375108,
+   "stale_decisions_after_change": 0,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 125249
+  },
+  "60min/self": {
+   "stale_window_s_mean": 1231.2023920501347,
+   "stale_window_s_p95": 2861.2827261157936,
+   "stale_decisions_after_change": 40883,
+   "stale_critical_decisions": 2096,
+   "as_calls_per_hour": 2000
+  },
+  "60min/crit": {
+   "stale_window_s_mean": 430.44915986336196,
+   "stale_window_s_p95": 1266.704437530645,
+   "stale_decisions_after_change": 38787,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 8109
+  },
+  "60min/always": {
+   "stale_window_s_mean": 29.719069659931883,
+   "stale_window_s_p95": 90.51792743375108,
+   "stale_decisions_after_change": 0,
+   "stale_critical_decisions": 0,
+   "as_calls_per_hour": 122249
+  },
+  "model": {
+   "users": 1000,
+   "hours": 1,
+   "requests_per_min_per_user": 2.0,
+   "critical_share": 0.05,
+   "seed": 20261117
+  }
  }
 }
