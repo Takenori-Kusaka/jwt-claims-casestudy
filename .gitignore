@@ -2,3 +2,8 @@
 __pycache__/
 keys/
 *.pyc
+deck/node_modules/
+deck/qa/
+deck/make.sh
+deck/*.pptx
+research/deck_text.md

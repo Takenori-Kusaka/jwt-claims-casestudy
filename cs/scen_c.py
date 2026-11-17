@@ -78,7 +78,7 @@ class TokenService:
             rec = APPROVALS.get(approval)
             if not rec or rec['owner'] != c['sub']:
                 raise Reject('no approval record')
-            claims['authorization_details'] = [{'type': 'https://claims.example.com/rar/payment', 'actions': ['pay'], 'locations': [rec['invoice']],
+            claims['authorization_details'] = [{'type': 'https://claims.example.com/rar/payment', 'actions': ['pay'], 'identifier': rec['invoice'],
                                                 'instructedAmount': {'currency': 'JPY', 'amount': str(rec['amount'])}, 'creditorAccount': rec['creditor']}]
         return STS.mint(claims, lifetime=300 if 'short_task' in self.f else 3600)
 
@@ -131,7 +131,7 @@ class Resource:
                 raise Reject('approval id required')
             return True  # the approval id in the request body is trusted as is
         ad = [d for d in c.get('authorization_details', []) if d.get('type') == 'https://claims.example.com/rar/payment']
-        if not any(inv in d.get('locations', []) and d['instructedAmount']['amount'] == str(amount) and d.get('creditorAccount') == creditor for d in ad):
+        if not any(d.get('identifier') == inv and d['instructedAmount']['amount'] == str(amount) and d.get('creditorAccount') == creditor for d in ad):
             raise Reject('payment not covered by the approved authorization_details')
         return True
 
@@ -172,7 +172,7 @@ def cases():
         reset()
         tok = STS.mint({'sub': 'u1', 'aud': ['invoices'], 'client_id': 'agent:viewer', 'act': chain('console:admin', 'agent:viewer'), 'scope': BROAD_SCOPE,
                         NS: {'tenant_id': 'corp', 'user_id': 'u1'}, 'authorization_details': [
-                            {'type': 'https://claims.example.com/rar/payment', 'actions': ['pay'], 'locations': ['inv-1'],
+                            {'type': 'https://claims.example.com/rar/payment', 'actions': ['pay'], 'identifier': 'inv-1',
                              'instructedAmount': {'currency': 'JPY', 'amount': '120000'}, 'creditorAccount': 'B-019'}]})
         return Resource(f).pay(tok, 'agent:viewer', 'inv-1', 120000, 'B-019', body_approval='ap-311')
 

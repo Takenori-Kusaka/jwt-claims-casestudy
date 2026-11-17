@@ -2,7 +2,8 @@
 
 「JWT クレーム設計ガイド」の対になる実測です。どの組織でも外せない**共通の基準**が何を防ぎ、題材ごとの**重点**が何を足し、**見送り**が何を残すかを、攻撃と正規の要求、要素を 1 つずつ外す**除去実験**、大きさ、遅延、反映までの時間、変更で壊れる受け手の数で測ります。LLM は使わず、同じ手順で何度でも同じ判定になります（時刻は仮想の時計で進めます。試算は乱数の種を固定）。
 
-- ガイド（前提編、149 枚）: https://takenori-kusaka.github.io/jwt-claims-guide/ （[リポジトリ](https://github.com/Takenori-Kusaka/jwt-claims-guide)）
+- ガイド（前提編、152 枚）: https://takenori-kusaka.github.io/jwt-claims-guide/ （[リポジトリ](https://github.com/Takenori-Kusaka/jwt-claims-guide)）
+- ケーススタディのスライド（49 枚）: https://takenori-kusaka.github.io/jwt-claims-casestudy/ （[PDF](slides/JWT_クレーム設計ケーススタディ.pdf)、[ファクトチェックの記録](research/reviews/factcheck-2026-11-18.md)）
 - 付録：JWT クレーム一覧（xlsx、805 行）: [catalog/jwt-claims-catalog.xlsx](catalog/jwt-claims-catalog.xlsx)
 
 ## 付録：JWT クレーム一覧（xlsx）
@@ -48,7 +49,7 @@ IANA の JWT クレーム登録簿の全件、標準と草案、5 つの IdP（E
 - **Keycloak 26.8 の実際の挙動**：Full Scope Allowed のオン・オフ、軽量アクセストークンで落ちるクレーム、定義していない利用者属性、Organizations のクレーム、グループ数とトークンの大きさ、リフレッシュ・再ログインでの再評価、ログアウト後のイントロスペクション、標準トークン交換での宛先と範囲の絞り込み・拡大。
 - **寿命の試算**：アクセストークンの寿命 1・5・15・60 分 × 3 方式（自己完結のみ／重要な操作だけ問い合わせ／毎回問い合わせ）で、古い情報での判断の件数と認可サーバーへの呼び出し数。
 - **共有クレームの変更**：9 つの受け手（Python、JavaScript、Go、Envoy、CEL、SQL の RLS、Kubernetes の claimMappings、Java、sub をキーにする旧システム）× 10 の変更で、壊れる・黙って誤る・契約テストで検出・共通の部品で吸収できるかを数える。
-- **時間**：検証と交換は 5,000 回、暗号化・DPoP は 2,000 回、Keycloak の交換は 200 回の p50・p95。環境（CPU、Python、PyJWT、Keycloak）は結果に記録。
+- **時間**：検証は 5,000 回、入口での交換は 2,000 回、暗号化・DPoP は 2,000 回、Keycloak の交換は 200 回の p50・p95。環境（CPU、Python、PyJWT、Keycloak）は結果に記録。
 
 ## 実行
 

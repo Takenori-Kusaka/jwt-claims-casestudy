@@ -8,7 +8,7 @@ B = 'https://www.rfc-editor.org/rfc/rfc7515#section-4.1'
 # id, name, purpose, source, url, decision kind, use_or_loss, revisit
 HDR = [
     ('HDR-01', 'typ（ヘッダー）', 'JWS 全体の種類。アクセストークンは at+jwt（RFC 9068 §2.1）。ID トークンなど別の目的のトークンを受け入れないために照合する。', 'RFC 7515 §4.1.9・RFC 9068 §2.1・RFC 8725 §3.11', 'https://www.rfc-editor.org/rfc/rfc9068#section-2.1',
-     '必須（共通基準）', '内部トークンは at+jwt だけを受ける。入口は IdP ごとに決めた値で照合する（Entra＝JWT、Okta＝application/okta-internal-at+jwt、Cognito＝token_use、Keycloak＝クライアント設定 access.token.header.type.rfc9068 を有効にして at+jwt）。ID トークンの流用（G11・B2）を防ぐ。', '見直さない（共通の基準。IdP が typ の値を変えたら、入口の照合値だけを更新する）'),
+     '必須（共通基準）', '内部トークンは at+jwt だけを受ける。入口は IdP ごとに決めた値で照合する（Entra＝JWT。Okta＝カスタム認可サーバーの AT を受ける（org 認可サーバーの AT は Okta 以外が検証しない。Okta「Validate Access Tokens」）。模擬の typ は application/okta-internal-at+jwt としたが、この値は公式文書で未確認。Auth0＝RFC 9068 プロファイルを選んだ場合に at+jwt（既定の Auth0 プロファイルは JWT）。Cognito＝token_use。Keycloak＝既定ではなく、クライアント設定 access.token.header.type.rfc9068 を有効にした場合に at+jwt）。ID トークンの流用（G11・B2）を防ぐ。', '見直さない（共通の基準。IdP が typ の値を変えたら、入口の照合値だけを更新する）'),
     ('HDR-02', 'alg（ヘッダー）', '署名のアルゴリズム。受け手は値を信用せず、自分の許可リストと照合するだけ。', 'RFC 7515 §4.1.1・RFC 8725 §3.1', B,
      '必須（共通基準）', '許可リスト（RS256）と照合し、鍵ごとにアルゴリズムを 1 つに固定する。none とアルゴリズム混同（G1・G2）を防ぐ。', '署名アルゴリズムを移行するとき（例：RS256 → ES256）、許可リストを並行期間だけ 2 つにする'),
     ('HDR-03', 'kid（ヘッダー）', '署名に使った鍵のヒント。事前に取得した発行者の鍵の一覧の中だけで探す。', 'RFC 7515 §4.1.4・RFC 8725 §3.10', B,

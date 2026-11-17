@@ -172,7 +172,7 @@ def write_summary(res, x):
         L.append(f"| {k_} | {v_['broken']} | {len(v_['silently_wrong'])} | {v_['caught_by_contract_tests']} | {'、'.join(v_['broken_but_not_caught']) or '—'} | "
                  f"{'正しく処理' if v_['common_parser'] == 'ok' else '拒否（fail closed）' if v_['common_parser'] == 'crash' else '誤り'} |")
     p = x['perf']
-    L += ['', '## 時間（' + str(p['verify_naive']['reps']) + ' 回）', '',
+    L += ['', '## 時間（検証は ' + str(p['verify_naive']['reps']) + ' 回、入口での交換は ' + str(p['gateway_exchange_entra_to_internal']['reps']) + ' 回）', '',
           f"- 検証（素朴）p50 {p['verify_naive']['p50_us']:.1f} µs／p95 {p['verify_naive']['p95_us']:.1f} µs、検証（共通の基準）p50 {p['verify_baseline']['p50_us']:.1f} µs／p95 {p['verify_baseline']['p95_us']:.1f} µs",
           f"- 入口での交換（Entra 形式 → 内部トークン）p50 {p['gateway_exchange_entra_to_internal']['p50_us']:.0f} µs／p95 {p['gateway_exchange_entra_to_internal']['p95_us']:.0f} µs",
           f"- トークンの大きさ：Keycloak の AT {b['token_bytes']['keycloak_at']} B、内部トークン {b['token_bytes']['internal_at']} B、Entra 形式 150 グループ {b['token_bytes']['entra_150_groups']} B、超過で groups が消えたもの {b['token_bytes']['entra_overage']} B",
