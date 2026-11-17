@@ -1,0 +1,420 @@
+{
+ "G": [
+  {
+   "id": "G0",
+   "kind": "legit",
+   "target": "正規のトークン",
+   "part": "Part 1",
+   "desc": "発行者が署名した正しいトークン",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "G1",
+   "kind": "attack",
+   "target": "alg",
+   "part": "Part 1 危険なヘッダー",
+   "desc": "alg を none にして署名なしで送る",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G2",
+   "kind": "attack",
+   "target": "alg",
+   "part": "Part 1 危険なヘッダー",
+   "desc": "RS256 を HS256 に変え、公開鍵を HMAC の秘密として署名する",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G3",
+   "kind": "attack",
+   "target": "kid",
+   "part": "Part 1 危険なヘッダー",
+   "desc": "kid にパスを入れて空の鍵を読ませ、空の秘密で署名する",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G4",
+   "kind": "attack",
+   "target": "jku",
+   "part": "Part 1 危険なヘッダー",
+   "desc": "jku で攻撃者の鍵の場所を指し、自分の鍵で署名する",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G5",
+   "kind": "attack",
+   "target": "jwk",
+   "part": "Part 1 危険なヘッダー",
+   "desc": "ヘッダーに自分の公開鍵を埋め込み、自分で署名する",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G6",
+   "kind": "attack",
+   "target": "exp",
+   "part": "Part 1 検証の順序",
+   "desc": "exp の無いトークン（期限のない合鍵）",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G7",
+   "kind": "attack",
+   "target": "exp",
+   "part": "Part 1 検証の順序",
+   "desc": "1 日前に期限が切れたトークン",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G8",
+   "kind": "attack",
+   "target": "aud",
+   "part": "Part 1 ID トークンとアクセストークン",
+   "desc": "別のサービス宛て（invoices）のトークンを orders に送る",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G9",
+   "kind": "attack",
+   "target": "iss",
+   "part": "Part 1 攻撃の型",
+   "desc": "鍵を読み込んであった別の発行者が、正しい署名で発行したトークン",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G10",
+   "kind": "attack",
+   "target": "typ",
+   "part": "Part 1 ID トークンとアクセストークン",
+   "desc": "同じ発行者の ID トークン（typ JWT）を API に送る",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G11",
+   "kind": "attack",
+   "target": "必須クレーム",
+   "part": "Part 4 前方互換",
+   "desc": "テナントのクレームが無いトークン（発行時フックの失敗など）",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "G12",
+   "kind": "attack",
+   "target": "型",
+   "part": "Part 4 型",
+   "desc": "テナントのクレームが配列（型の揺れ）",
+   "N": true,
+   "B": false,
+   "BE": false
+  }
+ ],
+ "A": [
+  {
+   "id": "A1",
+   "kind": "legit",
+   "target": "tenant",
+   "part": "Part 5 マルチテナント",
+   "desc": "t1 の利用者が自分のテナントの請求書を一覧する",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "A2",
+   "kind": "legit",
+   "target": "tenant",
+   "part": "Part 5 マルチテナント",
+   "desc": "t2 の利用者が自分のテナントの請求書を一覧する",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "A3",
+   "kind": "attack",
+   "target": "tenant の出どころ",
+   "part": "Part 5 マルチテナント",
+   "desc": "t2 のトークンで、パスとヘッダー X-Tenant を t1 にして一覧する",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "A4",
+   "kind": "attack",
+   "target": "BOLA",
+   "part": "Part 5 BOLA",
+   "desc": "t1 の利用者が、t2 の請求書の ID を直接指定する（WHERE にテナントが無い）",
+   "N": false,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "A5",
+   "kind": "attack",
+   "target": "接続プール",
+   "part": "Part 7 接続プール",
+   "desc": "直前の t2 の要求の文脈が残った接続で、条件を書き忘れた集計 API を t1 が呼ぶ",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "A6",
+   "kind": "attack",
+   "target": "テナント単位の鍵",
+   "part": "Part 5 マルチテナント",
+   "desc": "t2 の管理者が自分のレルムのマッパーで tenant_id=t1 を出させ、t1 を読む",
+   "N": true,
+   "B": true,
+   "BE": false
+  }
+ ],
+ "B": [
+  {
+   "id": "B1",
+   "kind": "legit",
+   "target": "aud",
+   "part": "Part 1 検証の順序",
+   "desc": "社員が orders 宛てのアクセストークンで注文を読む",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "B2",
+   "kind": "attack",
+   "target": "typ・aud",
+   "part": "Part 1 ID トークンとアクセストークン",
+   "desc": "ログインで得た ID トークンを API に送る",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "B3",
+   "kind": "attack",
+   "target": "aud",
+   "part": "Part 6 下流ほど絞る",
+   "desc": "invoices 宛てのトークンを orders に送る（宛先の差し替え）",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "B4",
+   "kind": "attack",
+   "target": "ヘッダーへの転記",
+   "part": "Part 6 ヘッダーへの転記",
+   "desc": "クライアントが X-User-Role: admin を付けて送る",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "B5",
+   "kind": "attack",
+   "target": "ヘッダーへの転記",
+   "part": "Part 6 ヘッダーへの転記",
+   "desc": "アンダースコア版 X_User_Role: admin を送る（CVE-2025-64484 と同じ型）",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "B6",
+   "kind": "attack",
+   "target": "groups の超過",
+   "part": "Part 3 Entra ID",
+   "desc": "250 グループに属し groups が消えた一般社員が、管理操作を呼ぶ",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "B7",
+   "kind": "legit",
+   "target": "groups の超過",
+   "part": "Part 3 Entra ID",
+   "desc": "250 グループに属し groups が消えた管理者が、管理操作を呼ぶ",
+   "N": true,
+   "B": false,
+   "BE": true
+  },
+  {
+   "id": "B8",
+   "kind": "attack",
+   "target": "属性の鮮度",
+   "part": "Part 8 寿命の間のクレーム",
+   "desc": "finance から sales に異動した直後に、古いトークンで経理台帳を読む",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "B9",
+   "kind": "attack",
+   "target": "失効",
+   "part": "Part 8 失効の伝播",
+   "desc": "ログアウト（セッション失効）後に、残ったトークンで経理台帳を読む",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "B10",
+   "kind": "attack",
+   "target": "不変の ID",
+   "part": "Part 3 Okta",
+   "desc": "Okta の AT の sub（ログイン名）を再利用した新しい社員が、前任者のデータを読む",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "B12",
+   "kind": "attack",
+   "target": "送信者制約",
+   "part": "Part 9 JWE と SD-JWT／Part 6",
+   "desc": "漏れたトークンを別の端末からそのまま再送する（DPoP・mTLS を見送った場合）",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "B11",
+   "kind": "legit",
+   "target": "正規化",
+   "part": "Part 3 Cognito",
+   "desc": "Cognito のアクセストークン（aud なし、client_id あり）で注文を読む",
+   "N": true,
+   "B": false,
+   "BE": true
+  }
+ ],
+ "C": [
+  {
+   "id": "C1",
+   "kind": "legit",
+   "target": "委任",
+   "part": "Part 10 エージェントの ID",
+   "desc": "利用者 u1 の代わりにエージェントが、自分の請求書を読む",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "C2",
+   "kind": "attack",
+   "target": "パススルー",
+   "part": "Part 10 MCP の認可",
+   "desc": "ツールサーバーが受け取った MCP 宛てのトークンを、そのまま上流に渡す",
+   "N": true,
+   "B": false,
+   "BE": false
+  },
+  {
+   "id": "C3",
+   "kind": "attack",
+   "target": "代理の混乱",
+   "part": "Part 5 代理の混乱",
+   "desc": "u1 に委任されたエージェントが、ツールに u2 の請求書を読ませる",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C4",
+   "kind": "attack",
+   "target": "act の読み違い",
+   "part": "Part 10 4 つの問い",
+   "desc": "過去の行為者（管理コンソール）の権限で、読み取り専用のエージェントが支払う（過去の act を今の行為者と読む）",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C5",
+   "kind": "attack",
+   "target": "承認の照合",
+   "part": "Part 10 人の承認の証拠",
+   "desc": "120,000 円の承認で、990,000 円を支払う",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C6",
+   "kind": "attack",
+   "target": "承認の偽造",
+   "part": "Part 10 人の承認の証拠",
+   "desc": "存在しない承認 ID を本文に書いて支払う",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C7",
+   "kind": "legit",
+   "target": "承認",
+   "part": "Part 10 人の承認の証拠",
+   "desc": "承認どおり 120,000 円を支払う",
+   "N": true,
+   "B": true,
+   "BE": true
+  },
+  {
+   "id": "C8",
+   "kind": "attack",
+   "target": "委任の取り消し",
+   "part": "Part 10 ツールごとのスコープ",
+   "desc": "利用者が委任を取り消した 9 分後に、エージェントが読む",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C9",
+   "kind": "attack",
+   "target": "委任の深さ",
+   "part": "Part 10 委任の連鎖と深さ",
+   "desc": "5 段の委任の連鎖で読む",
+   "N": true,
+   "B": true,
+   "BE": false
+  },
+  {
+   "id": "C10",
+   "kind": "legit",
+   "target": "委任の深さ",
+   "part": "Part 10 委任の連鎖と深さ",
+   "desc": "2 段の委任の連鎖で読む",
+   "N": true,
+   "B": true,
+   "BE": true
+  }
+ ]
+}

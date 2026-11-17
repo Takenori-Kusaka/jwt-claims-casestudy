@@ -1,0 +1,82 @@
+{
+ "G": {
+  "N": {
+   "attacks": 12,
+   "attacks_succeeded": 12,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "B": {
+   "attacks": 12,
+   "attacks_succeeded": 0,
+   "legit": 1,
+   "false_rejects": 0
+  },
+  "BE": {
+   "attacks": 12,
+   "attacks_succeeded": 0,
+   "legit": 1,
+   "false_rejects": 0
+  }
+ },
+ "A": {
+  "N": {
+   "attacks": 4,
+   "attacks_succeeded": 3,
+   "legit": 2,
+   "false_rejects": 0
+  },
+  "B": {
+   "attacks": 4,
+   "attacks_succeeded": 3,
+   "legit": 2,
+   "false_rejects": 0
+  },
+  "BE": {
+   "attacks": 4,
+   "attacks_succeeded": 0,
+   "legit": 2,
+   "false_rejects": 0
+  }
+ },
+ "B": {
+  "N": {
+   "attacks": 9,
+   "attacks_succeeded": 9,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B": {
+   "attacks": 9,
+   "attacks_succeeded": 4,
+   "legit": 3,
+   "false_rejects": 2
+  },
+  "BE": {
+   "attacks": 9,
+   "attacks_succeeded": 1,
+   "legit": 3,
+   "false_rejects": 0
+  }
+ },
+ "C": {
+  "N": {
+   "attacks": 7,
+   "attacks_succeeded": 7,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "B": {
+   "attacks": 7,
+   "attacks_succeeded": 6,
+   "legit": 3,
+   "false_rejects": 0
+  },
+  "BE": {
+   "attacks": 7,
+   "attacks_succeeded": 0,
+   "legit": 3,
+   "false_rejects": 0
+  }
+ }
+}

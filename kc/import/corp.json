@@ -1,0 +1,204 @@
+{
+ "realm": "corp",
+ "enabled": true,
+ "accessTokenLifespan": 300,
+ "ssoSessionIdleTimeout": 1800,
+ "revokeRefreshToken": true,
+ "roles": {
+  "realm": [
+   {
+    "name": "approver"
+   }
+  ]
+ },
+ "clients": [
+  {
+   "clientId": "portal",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "portal-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "department",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-usermodel-attribute-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "user.attribute": "department",
+      "claim.name": "https://claims\\.example\\.com/.department",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "corp",
+      "jsonType.label": "String"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "orders",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "orders-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": false,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": []
+  },
+  {
+   "clientId": "invoices",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "invoices-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": false,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": []
+  },
+  {
+   "clientId": "mcp-tools",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "mcp-tools-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": true,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "true"
+   },
+   "protocolMappers": [
+    {
+     "name": "department",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-usermodel-attribute-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "user.attribute": "department",
+      "claim.name": "https://claims\\.example\\.com/.department",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "corp",
+      "jsonType.label": "String"
+     }
+    }
+   ]
+  }
+ ],
+ "users": [
+  {
+   "username": "carol",
+   "enabled": true,
+   "email": "carol@example.com",
+   "emailVerified": true,
+   "firstName": "carol",
+   "lastName": "Test",
+   "credentials": [
+    {
+     "type": "password",
+     "value": "Passw0rd!",
+     "temporary": false
+    }
+   ],
+   "realmRoles": [
+    "approver",
+    "default-roles-corp"
+   ],
+   "attributes": {
+    "department": [
+     "sales"
+    ]
+   }
+  },
+  {
+   "username": "dave",
+   "enabled": true,
+   "email": "dave@example.com",
+   "emailVerified": true,
+   "firstName": "dave",
+   "lastName": "Test",
+   "credentials": [
+    {
+     "type": "password",
+     "value": "Passw0rd!",
+     "temporary": false
+    }
+   ],
+   "realmRoles": [
+    "default-roles-corp"
+   ],
+   "attributes": {
+    "department": [
+     "finance"
+    ]
+   }
+  }
+ ],
+ "components": {
+  "org.keycloak.userprofile.UserProfileProvider": [
+   {
+    "providerId": "declarative-user-profile",
+    "subComponents": {},
+    "config": {
+     "kc.user.profile.config": [
+      "{\"unmanagedAttributePolicy\": \"ENABLED\", \"attributes\": [{\"name\": \"username\", \"displayName\": \"username\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"email\", \"displayName\": \"email\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"firstName\", \"displayName\": \"first\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"lastName\", \"displayName\": \"last\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}]}"
+     ]
+    }
+   }
+  ]
+ }
+}

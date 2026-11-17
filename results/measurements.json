@@ -1,0 +1,160 @@
+{
+ "A": {
+  "keycloak_token_bytes": {
+   "t1": 1378,
+   "t2": 1367,
+   "rogue": 1369
+  },
+  "defer_fine_grained": {
+   "token_bytes": {
+    "0": 634,
+    "20": 707,
+    "200": 1629,
+    "1000": 6563
+   },
+   "check_us": {
+    "in_token": 0.048333313316106796,
+    "pdp_db_p50": 585.2499743923545,
+    "pdp_db_p95": 757.6000061817467
+   },
+   "revoke_stale_s": {
+    "in_token_max": 300,
+    "in_token_mean": 150,
+    "pdp": 0
+   }
+  }
+ },
+ "B": {
+  "defer_crypto": {
+   "bytes": {
+    "jws": 670,
+    "jwe_nested": 1345,
+    "dpop_proof": 496
+   },
+   "us_p50": {
+    "verify_jws": 86.14998660050333,
+    "jwe_encrypt": 155.699992319569,
+    "jwe_decrypt": 653.750030323863,
+    "dpop_create": 103.29997166991234,
+    "dpop_verify": 175.74999947100878
+   }
+  },
+  "freshness": {
+   "introspection_ms_p50": 14.112050004769117,
+   "directory_lookup_ms_p50": 71.13595001283102,
+   "stale_window_s": {
+    "self_contained_lifetime_300": {
+     "max": 300,
+     "mean": 150
+    },
+    "self_contained_lifetime_3600": {
+     "max": 3600,
+     "mean": 1800
+    },
+    "lookup_or_introspection": 0
+   }
+  },
+  "token_bytes": {
+   "keycloak_at": 1423,
+   "internal_at": 903,
+   "entra_overage": 1042,
+   "entra_150_groups": 8650
+  }
+ },
+ "C": {
+  "keycloak_exchange": {
+   "status": 200,
+   "ms_p50": 20.874449983239174,
+   "aud": "invoices",
+   "azp": "mcp-tools",
+   "has_act": false
+  },
+  "sts_exchange": {
+   "per_task_two_hops_us_p50": 1230.1999959163368,
+   "p95": 1811.699999962002,
+   "revocation_window_s": {
+    "N_B_lifetime_3600": {
+     "max": 3600
+    },
+    "BE_per_task_300_and_recheck": {
+     "max": 300,
+     "at_next_exchange": 0
+    }
+   }
+  }
+ },
+ "change": {
+  "string→array": {
+   "consumers": 6,
+   "broken_without_parser": 3,
+   "silently_wrong": 0,
+   "broken_list": [
+    "split",
+    "list",
+    "strict"
+   ],
+   "caught_by_contract_tests_before_release": 3,
+   "broken_with_common_parser": 0
+  },
+  "top level→namespace object": {
+   "consumers": 6,
+   "broken_without_parser": 6,
+   "silently_wrong": 2,
+   "broken_list": [
+    "split",
+    "list",
+    "header",
+    "contains",
+    "strict",
+    "optional"
+   ],
+   "caught_by_contract_tests_before_release": 6,
+   "broken_with_common_parser": 0
+  },
+  "rename roles→role": {
+   "consumers": 6,
+   "broken_without_parser": 6,
+   "silently_wrong": 2,
+   "broken_list": [
+    "split",
+    "list",
+    "header",
+    "contains",
+    "strict",
+    "optional"
+   ],
+   "caught_by_contract_tests_before_release": 6,
+   "broken_with_common_parser": 0
+  }
+ },
+ "perf": {
+  "verify_N": {
+   "p50_us": 84.30000161752105,
+   "p95_us": 137.49999925494194
+  },
+  "verify_B": {
+   "p50_us": 85.70001227781177,
+   "p95_us": 141.7000312358141
+  },
+  "gateway_exchange_entra_to_internal": {
+   "p50_us": 694.4499909877777,
+   "p95_us": 1041.4999560452998
+  }
+ },
+ "loc": {
+  "A テナント分離（発行者とテナントの照合・SET LOCAL・RLS）": 9,
+  "B 正規化の入口（IdP ごとの検証・組織の名前空間・内部トークン）": 29,
+  "B 鮮度（重要な判断で属性とセッションを引き直す）": 8,
+  "C 委任（交換・act の連鎖・承認の照合・深さ・取り消し）": 27,
+  "共通の基準（検証部品）": 31
+ },
+ "variants": {
+  "C: 深さの組織規則を見送る → C9（5 段の連鎖）": true,
+  "B: 送信者制約（DPoP）を見送る → 盗まれたトークンの再送": true
+ },
+ "env": {
+  "keycloak_boot_s": 38,
+  "container_mem": "cs-pg 30.73MiB / 11.68GiB\ncs-kc 744.4MiB / 11.68GiB",
+  "run_s": 62
+ }
+}

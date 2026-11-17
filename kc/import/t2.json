@@ -1,0 +1,157 @@
+{
+ "realm": "t2",
+ "enabled": true,
+ "accessTokenLifespan": 300,
+ "ssoSessionIdleTimeout": 1800,
+ "revokeRefreshToken": true,
+ "roles": {
+  "realm": [
+   {
+    "name": "approver"
+   }
+  ]
+ },
+ "clients": [
+  {
+   "clientId": "saas-web",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "saas-web-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t2",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    }
+   ]
+  },
+  {
+   "clientId": "saas-api",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "saas-api-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": false,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": []
+  },
+  {
+   "clientId": "rogue-web",
+   "enabled": true,
+   "publicClient": false,
+   "secret": "rogue-web-secret",
+   "standardFlowEnabled": false,
+   "directAccessGrantsEnabled": true,
+   "serviceAccountsEnabled": false,
+   "protocol": "openid-connect",
+   "fullScopeAllowed": true,
+   "attributes": {
+    "access.token.header.type.rfc9068": "true",
+    "standard.token.exchange.enabled": "false"
+   },
+   "protocolMappers": [
+    {
+     "name": "tenant",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-hardcoded-claim-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "claim.name": "https://claims\\.example\\.com/.tenant_id",
+      "claim.value": "t1",
+      "jsonType.label": "String"
+     }
+    },
+    {
+     "name": "aud-saas-api",
+     "protocol": "openid-connect",
+     "protocolMapper": "oidc-audience-mapper",
+     "consentRequired": false,
+     "config": {
+      "access.token.claim": "true",
+      "id.token.claim": "false",
+      "userinfo.token.claim": "false",
+      "introspection.token.claim": "true",
+      "included.client.audience": "saas-api"
+     }
+    }
+   ]
+  }
+ ],
+ "users": [
+  {
+   "username": "bob",
+   "enabled": true,
+   "email": "bob@example.com",
+   "emailVerified": true,
+   "firstName": "bob",
+   "lastName": "Test",
+   "credentials": [
+    {
+     "type": "password",
+     "value": "Passw0rd!",
+     "temporary": false
+    }
+   ],
+   "realmRoles": [
+    "approver",
+    "default-roles-t2"
+   ],
+   "attributes": {}
+  }
+ ],
+ "components": {
+  "org.keycloak.userprofile.UserProfileProvider": [
+   {
+    "providerId": "declarative-user-profile",
+    "subComponents": {},
+    "config": {
+     "kc.user.profile.config": [
+      "{\"unmanagedAttributePolicy\": \"ENABLED\", \"attributes\": [{\"name\": \"username\", \"displayName\": \"username\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"email\", \"displayName\": \"email\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"firstName\", \"displayName\": \"first\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}, {\"name\": \"lastName\", \"displayName\": \"last\", \"permissions\": {\"view\": [\"admin\", \"user\"], \"edit\": [\"admin\"]}, \"multivalued\": false}]}"
+     ]
+    }
+   }
+  ]
+ }
+}
