@@ -3,7 +3,7 @@
 「JWT クレーム設計ガイド」の対になる実測です。どの組織でも外せない**共通の基準**が何を防ぎ、題材ごとの**重点**が何を足し、**見送り**が何を残すかを、攻撃と正規の要求、要素を 1 つずつ外す**除去実験**、大きさ、遅延、反映までの時間、変更で壊れる受け手の数で測ります。LLM は使わず、同じ手順で何度でも同じ判定になります（時刻は仮想の時計で進めます。試算は乱数の種を固定）。
 
 - ガイド（前提編、152 枚）: https://takenori-kusaka.github.io/jwt-claims-guide/ （[リポジトリ](https://github.com/Takenori-Kusaka/jwt-claims-guide)）
-- ケーススタディのスライド（49 枚）: https://takenori-kusaka.github.io/jwt-claims-casestudy/ （[PDF](slides/JWT_クレーム設計ケーススタディ.pdf)、[ファクトチェックの記録](research/reviews/factcheck-2026-11-18.md)）
+- ケーススタディのスライド（49 枚）: https://takenori-kusaka.github.io/jwt-claims-casestudy/ （[Docswell](https://www.docswell.com/s/takenori_kusaka/KJWMVQ-jwt-claims-casestudy)、[PDF](slides/JWT_クレーム設計ケーススタディ.pdf)、[ファクトチェックの記録](research/reviews/factcheck-2026-11-18.md)）
 - 付録：JWT クレーム一覧（xlsx、805 行）: [catalog/jwt-claims-catalog.xlsx](catalog/jwt-claims-catalog.xlsx)
 
 ## 付録：JWT クレーム一覧（xlsx）
